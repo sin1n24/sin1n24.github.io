@@ -1,67 +1,380 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>自己紹介ページ</title>
-	<style>
-		body {
-			font-family: 'Segoe UI', 'Hiragino Sans', 'Meiryo', sans-serif;
-			background: #f7f7fa;
-			color: #222;
-			margin: 0;
-			padding: 0;
-		}
-		.container {
-			max-width: 600px;
-			margin: 40px auto;
-			background: #fff;
-			border-radius: 12px;
-			box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-			padding: 32px 24px;
-		}
-		h1 {
-			color: #3a6ea5;
-			margin-bottom: 8px;
-		}
-		.profile-img {
-			width: 120px;
-			height: 120px;
-			border-radius: 50%;
-			object-fit: cover;
-			margin-bottom: 16px;
-			border: 3px solid #e0e7ef;
-		}
-		.sns {
-			margin-top: 24px;
-		}
-		.sns a {
-			margin-right: 16px;
-			color: #3a6ea5;
-			text-decoration: none;
-			font-weight: bold;
-		}
-		.sns a:hover {
-			text-decoration: underline;
-		}
-	</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sin1's Studio | Robotics & Engineering</title>
+    <style>
+        :root {
+            --bg-color: #0b0c10;
+            --card-bg: #1f2833;
+            --text-main: #c5c6c7;
+            --accent: #66fcf1;
+            --accent-dim: #45a29e;
+            --font-main: 'Helvetica Neue', Arial, sans-serif;
+            --font-code: 'Courier New', Courier, monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Utility */
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        .section-title {
+            font-family: var(--font-code);
+            font-size: 0.9rem;
+            color: var(--accent);
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            display: inline-block;
+            border-bottom: 1px solid var(--accent-dim);
+            padding-bottom: 5px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            mix-blend-mode: difference;
+        }
+        .logo { font-weight: bold; font-size: 1.2rem; letter-spacing: 1px; }
+        nav ul { display: flex; gap: 30px; }
+        nav a { font-size: 0.9rem; opacity: 0.7; }
+        nav a:hover { opacity: 1; color: var(--accent); }
+
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        #canvas-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+        }
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+        }
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .hero-subtitle {
+            font-family: var(--font-code);
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: var(--accent-dim);
+        }
+
+        /* Projects Section */
+        #projects { padding: 100px 0; }
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        .project-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 20px;
+            transition: transform 0.4s ease;
+            cursor: pointer;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-dim);
+        }
+        .card-img {
+            width: 100%;
+            height: 200px;
+            background-color: #2c3e50; /* 画像がない時のダミー色 */
+            margin-bottom: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        /* ダミー画像の文字 */
+        .card-img::after {
+            content: 'Project Image';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(255,255,255,0.2);
+            font-family: var(--font-code);
+            font-size: 0.8rem;
+        }
+        /* 画像を差し替える場合はここをimgタグにします */
+        
+        .card-title { font-size: 1.2rem; margin-bottom: 10px; }
+        .card-desc { font-size: 0.9rem; color: #888; margin-bottom: 15px; }
+        .tags { display: flex; gap: 10px; flex-wrap: wrap; }
+        .tag {
+            font-family: var(--font-code);
+            font-size: 0.7rem;
+            border: 1px solid #444;
+            padding: 2px 8px;
+            color: var(--accent);
+        }
+
+        /* Tech Stack */
+        #stack { padding: 50px 0 100px; }
+        .stack-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            opacity: 0.8;
+        }
+        .stack-item {
+            font-size: 1.5rem; /* 本来はSVGアイコン推奨 */
+            font-weight: bold;
+            color: #555;
+            transition: 0.3s;
+        }
+        .stack-item:hover { color: var(--accent); }
+
+        /* Footer / Contact */
+        footer {
+            padding: 50px 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+        }
+        .footer-text { margin-bottom: 20px; font-size: 0.9rem; }
+        .social-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 30px; }
+        .btn-contact {
+            display: inline-block;
+            padding: 10px 30px;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-family: var(--font-code);
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .btn-contact:hover {
+            background: var(--accent);
+            color: var(--bg-color);
+        }
+        .copyright { font-size: 0.7rem; color: #444; margin-top: 40px; }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2rem; }
+            header { padding: 20px; }
+            nav { display: none; } /* スマホでは簡易的に非表示 */
+        }
+    </style>
 </head>
 <body>
-	<div class="container">
-		<img src="https://avatars.githubusercontent.com/u/9919?v=4" alt="プロフィール画像" class="profile-img">
-		<h1>sin1</h1>
-		<p>メカ屋の筈だけど色々やるよ</p>
 
-		<h2>製作物</h2>
-		<ul>
-			<li>Links：リンク機構シミュレータ、設計補助ソフト</li>
-		</ul>
+    <header>
+        <div class="logo">sin1's studio</div>
+        <nav>
+            <ul>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#stack">Tech</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-		<div class="sns">
-			<span>▶ SNS：</span>
-			<a href="https://x.com/sin1west" target="_blank">Twitter</a>
-			<a href="https://sin1n24.hatenablog.com/" target="_blank">Blog</a>
-		</div>
-	</div>
+    <div id="hero">
+        <canvas id="canvas-bg"></canvas>
+        <div class="hero-content">
+            <h1 class="hero-title">Engineering Ideas<br>into Reality.</h1>
+            <p class="hero-subtitle">Prototyping / Robotics / Web Development</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <section id="projects">
+            <span class="section-title">01. Selected Works</span>
+            <div class="project-grid">
+                <article class="project-card fade-in" onclick="window.open('https://sin1n24.hatenablog.com/', '_blank')">
+                    <div class="card-img" style="background: #222;">
+                        </div>
+                    <h3 class="card-title">Links Web Simulator</h3>
+                    <p class="card-desc">かわロボの挙動をWebブラウザ上で再現。AIを活用し、レガシーコードを現代的なWebスタックへ移植。</p>
+                    <div class="tags">
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">Physics</span>
+                        <span class="tag">Vue.js</span>
+                    </div>
+                </article>
+
+                <article class="project-card fade-in" onclick="window.open('https://sin1n24.hatenablog.com/', '_blank')">
+                    <div class="card-img" style="background: #252525;">
+                         </div>
+                    <h3 class="card-title">Mini Kawarobo Platform</h3>
+                    <p class="card-desc">M5Stack Atomを搭載した教育・競技用ロボットキット。3Dプリント部品と汎用サーボで構成。</p>
+                    <div class="tags">
+                        <span class="tag">Fusion360</span>
+                        <span class="tag">M5Stack</span>
+                        <span class="tag">C++</span>
+                    </div>
+                </article>
+
+                <article class="project-card fade-in" onclick="window.open('https://sin1n24.hatenablog.com/', '_blank')">
+                    <div class="card-img" style="background: #282828;">
+                         </div>
+                    <h3 class="card-title">Project Leopard</h3>
+                    <p class="card-desc">かわロボ競技大会出場機体。独自のリンク機構設計とカスタム制御基板の実装。</p>
+                    <div class="tags">
+                        <span class="tag">Robotics</span>
+                        <span class="tag">KiCad</span>
+                        <span class="tag">Mechanism</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="stack" class="fade-in">
+            <span class="section-title">02. Technical Stack</span>
+            <div class="stack-list">
+                <span class="stack-item">ROS2</span>
+                <span class="stack-item">Python</span>
+                <span class="stack-item">C++</span>
+                <span class="stack-item">TypeScript</span>
+                <span class="stack-item">Fusion360</span>
+                <span class="stack-item">KiCad</span>
+                <span class="stack-item">M5Stack</span>
+                <span class="stack-item">Docker</span>
+            </div>
+        </section>
+
+        <footer id="contact" class="fade-in">
+            <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Interested in collaborating?</h2>
+            <p class="footer-text">プロトタイピングから技術相談まで、<br>お手伝いできることがあればお気軽にご連絡ください。</p>
+            <div class="social-links">
+                <a href="https://sin1n24.hatenablog.com/" target="_blank">Blog</a>
+                <a href="#">GitHub</a>
+                <a href="#">X (Twitter)</a>
+            </div>
+            <a href="mailto:your-email@example.com" class="btn-contact">Get In Touch</a>
+            <p class="copyright">&copy; 2025 sin1's studio. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // --- 1. Canvas Animation (Background Network) ---
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5; // ゆっくり動く
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+            draw() {
+                ctx.fillStyle = '#66fcf1'; // Accent Color
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = window.innerWidth > 768 ? 60 : 30; // 画面サイズで数を調整
+            for (let i = 0; i < count; i++) particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // Draw Connections
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                // 近くのパーティクル同士を線で結ぶ（リンク機構・ネットワークのイメージ）
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 150) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(102, 252, 241, ${1 - distance/150})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        initParticles();
+        animate();
+
+
+        // --- 2. Scroll Reveal Animation ---
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>

@@ -9,18 +9,6 @@
 	  gtag('js', new Date());
 	
 	  gtag('config', 'G-4JC7QXZTBT');
-		
-	    document.getElementById('email-link').addEventListener('click', function(e) {
-	        e.preventDefault(); // デフォルトの#への移動をキャンセル
-	        
-	        // アドレスを分割して保持（ボット対策）
-	        const user = 'sin1';
-	        const domain = 'sin1.studio';
-	        
-	        // クリックされた瞬間に結合してメーラーを起動
-	        const address = user + '@' + domain;
-	        window.location.href = 'mailto:' + address;
-	    });
 	</script>
 	
     <meta charset="UTF-8">
@@ -445,6 +433,19 @@
         }, observerOptions);
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // --- 3. Email Link Obfuscation ---
+	    document.getElementById('email-link').addEventListener('click', function(e) {
+	        e.preventDefault(); // Stop default anchor behavior
+
+	        // Obfuscated parts of the email address
+	        const user = 'sin1';
+	        const domain = 'sin1.studio';
+
+	        // Combine and trigger mail client on click
+	        const address = user + '@' + domain;
+	        window.location.href = 'mailto:' + address;
+	    });
     </script>
 </body>
 </html>

@@ -1,0 +1,27 @@
+// Inlined CSS for above-the-fold content
+a {
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  text-decoration: none !important;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  background-color: currentColor;
+  color: #fff !important;
+}
+
+section {
+  margin-bottom: 3rem;
+}

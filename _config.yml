@@ -13,4 +13,15 @@ author:
   social:
     x: sin1west
 
-google_analytics: G-4JC7QXZTBT
+menu:
+  - title: Projects
+    url: /index.html#製作物
+  - title: Planning
+    url: /index.html#企画
+  - title: Tech
+    url: /index.html#technical-stack
+
+hydejack:
+  dark_mode:
+    dynamic: true
+    icon: true

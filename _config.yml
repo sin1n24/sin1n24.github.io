@@ -3,7 +3,7 @@ plugins:
   - jekyll-remote-theme
   - jekyll-include-cache
 
-title: sin1's Studio
+title: sin1's studio
 description: Prototyping / Robotics / Web Development
 lang: ja
 
@@ -11,15 +11,13 @@ author:
   name: sin1
   email: sin1@sin1.studio
   social:
-    x: sin1west
+    x: https://x.com/sin1west
 
 menu:
   - title: Projects
     url: /index.html#製作物
   - title: Planning
     url: /index.html#企画
-  - title: Tech
-    url: /index.html#technical-stack
 
 hydejack:
   dark_mode:

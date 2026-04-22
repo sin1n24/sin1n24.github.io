@@ -59,17 +59,7 @@ title: Engineering Ideas into Reality.
 
 [ProtoPediaで見る](https://protopedia.net/prototype/5154){: .btn }
 
+
 ---
 
-## Technical Stack
-
-- C++
-- Fusion
-- M5Stack
-- Unity
-- Android
-- Mechanism
-- Robotics
-- DxLib
-- Jules
-- Inverse Kinematics
+![ロゴ](./img/sss_logo_16x9.png)

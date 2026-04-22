@@ -19,6 +19,9 @@ menu:
   - title: Planning
     url: /index.html#企画
 
+    
+favicon_ico: /img/favicon.ico
+
 hydejack:
   dark_mode:
     dynamic: true

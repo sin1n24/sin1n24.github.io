@@ -15,11 +15,11 @@ author:
   name: sin1
   email: sin1@sin1.studio
   social:
-    x: https://x.com/sin1west
+    twitter: https://x.com/sin1west 
     github: https://github.com/sin1n24
     youtube: https://www.youtube.com/@sin1n24
     email: mailto:sin1@sin1.studio
-    blog: https://sin1n24.hatenablog.com/
+    rss: https://sin1n24.hatenablog.com/
 
 menu:
   - title: Projects
@@ -35,7 +35,7 @@ hydejack:
   dark_mode:
     dynamic: true
     icon: true
-    
+
 exclude:
   - Gemfile
   - Gemfile.lock

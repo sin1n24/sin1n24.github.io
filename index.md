@@ -6,7 +6,7 @@ title: Engineering Ideas into Reality.
 ## 製作物
 
 ### [【ソフトウエア】Links](https://sin1n24.hatenablog.com/entry/2025/12/15/222244){: .btn }
-![Links](img/1_Links.png)
+![Links](img/1_Links.jpg)
 リンク機構シミュレータ、かわロボ設計補助ソフト。AI活用し、ウェブアプリ移植途中。
 `DxLib` `C++` `Jules` `Inverse Kinematics`
 
@@ -15,7 +15,7 @@ title: Engineering Ideas into Reality.
 ---
 
 ### [【ロボット】Leopard](https://sin1n24.hatenablog.com/entry/2023/09/05/233955){: .btn }
-![Leopard](img/2_Leopard.png)
+![Leopard](img/2_Leopard.jpg)
 かわさきロボット競技大会出場機体。独自のリンク機構設計と制御基板。
 `Robotics` `ESP32` `EasyEDA` `Mechanism`
 
@@ -24,7 +24,7 @@ title: Engineering Ideas into Reality.
 ---
 
 ### [【ロボ＆VRソフト】VR遠隔操縦システム](https://docs.google.com/presentation/d/102zdY-PNOnPTbznJMxDMi7jyg4cydIe-_hQr4PIHcWo/edit?usp=sharing){: .btn }
-![VR遠隔操縦システム](img/3_LeopardVR.png)
+![VR遠隔操縦システム](img/3_LeopardVR.jpg)
 自作ロボットに搭乗する代わりにthetaとVRゴーグルで乗ってるつもりに。
 `Robotics` `Mechanism` `Unity`
 
@@ -44,7 +44,7 @@ title: Engineering Ideas into Reality.
 ## 企画
 
 ### [かわロボアドベントカレンダー](https://sin1n24.hatenablog.com/entry/2025/12/25/233111){: .btn }
-![かわロボアドベントカレンダー](img/5_KawaRoboAdCal.png)
+![かわロボアドベントカレンダー](img/5_KawaRoboAdCal.jpg)
 クリスマス前に皆でかわロボの記事を書く恒例イベント（毎年開催）。技術交流会も計画中。
 `Adventor`
 
@@ -53,7 +53,7 @@ title: Engineering Ideas into Reality.
 ---
 
 ### [ミニかわロボ](https://protopedia.net/prototype/5154){: .btn }
-![ミニかわロボ](img/6_MiniKawaRobo.png)
+![ミニかわロボ](img/6_MiniKawaRobo.jpg)
 手のひらサイズの格闘対戦ロボット競技規格。ミニ大会随時開催中。
 `Fusion` `M5Stack` `C++`
 
@@ -62,4 +62,4 @@ title: Engineering Ideas into Reality.
 
 ---
 
-![ロゴ](./img/sss_logo_16x9.png)
+![ロゴ](./img/sss_logo_3x1.png)

@@ -4,14 +4,22 @@ plugins:
   - jekyll-include-cache
 
 title: sin1's studio
-description: Prototyping / Robotics / Web Development
+description: ロボットつくるよ
 lang: ja
+
+url: "https://sin1.studio"
+baseurl: ""
+theme_color: "#5a5fff"
 
 author:
   name: sin1
   email: sin1@sin1.studio
   social:
     x: https://x.com/sin1west
+    github: https://github.com/sin1n24
+    youtube: https://www.youtube.com/@sin1n24
+    email: mailto:sin1@sin1.studio
+    blog: https://sin1n24.hatenablog.com/
 
 menu:
   - title: Projects
@@ -20,9 +28,16 @@ menu:
     url: /index.html#企画
 
     
-favicon_ico: /img/favicon.ico
+favicon: /img/favicon.ico
+accent_image: /img/bg-image.jpg
 
 hydejack:
   dark_mode:
     dynamic: true
     icon: true
+    
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - node_modules/

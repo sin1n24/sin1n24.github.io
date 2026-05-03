@@ -17,9 +17,20 @@ author:
   social:
     twitter: https://x.com/sin1west 
     github: https://github.com/sin1n24
-    youtube: https://www.youtube.com/@sin1n24
+    YouTube: https://www.youtube.com/@sin1n24
     email: mailto:sin1@sin1.studio
-    rss: https://sin1n24.hatenablog.com/
+    Blog: https://sin1n24.hatenablog.com/
+
+data_social:
+  twitter:
+    name: X
+    icon: icon-twitter  # Hydejack v9.2.1では、これが自動的に「𝕏」マークになります
+  youtube:
+    name: YouTube
+    icon: icon-youtube
+  blog:
+    name: Blog
+    icon: icon-rss      # 専用アイコンがないので電波マーク(RSS)で代用します
 
 menu:
   - title: Projects

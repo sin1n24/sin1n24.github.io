@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Engineering Ideas into Reality.
+cover: true
 ---
 
 ## 製作物

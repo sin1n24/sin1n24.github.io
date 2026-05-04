@@ -75,15 +75,15 @@ section {
 // サイトタイトルだけにフォントを適用
 .site-title {
   // ステップ1で選んだフォント名に変更してください
-  font-family: 'Orbitron', sans-serif; 
+  font-family: 'Sawarabi Mincho';
   
   // 必要に応じて微調整
-  font-weight: 700;       // 太さ
+  font-weight: 800;       // 太さ
   letter-spacing: 0.05em; // 文字間隔
   text-transform: none;   // 勝手に大文字にならないようにする（必要に応じて）
 }
 
 // モバイル表示時のヘッダータイトルも変える場合
 .nav-header .site-title {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Sawarabi Mincho';
 }

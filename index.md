@@ -15,6 +15,15 @@ cover: true
 
 ---
 
+### [【ハードウエア】小型ジョイスティックコントローラ](https://sin1n24.hatenablog.com/entry/2025/01/24/005304){: .btn }
+![小型ジョイスティックコントローラ](img/8_JoystickController.jpg)
+M5のATOMとStickに対応した最大3ボタン2軸ジョイスティックの小型コントローラ基板。ケースやグリップの3Dモデルも公開中。
+`M5Stack` `AtomS3` `Joystick` `Robotics`
+
+[詳細を見る](https://sin1n24.hatenablog.com/entry/2025/01/24/005304){: .btn }
+
+---
+
 ### [【ロボット】Leopard](https://sin1n24.hatenablog.com/entry/2023/09/05/233955){: .btn }
 ![Leopard](img/2_Leopard.jpg)
 かわさきロボット競技大会出場機体。独自のリンク機構設計と制御基板。

@@ -30,6 +30,8 @@ data_social:
     icon: icon-rss      # 専用アイコンがないので電波マーク(RSS)で代用します
 
 menu:
+  - title: 新着情報
+    url: /index.html#新着情報
   - title: ロボット
     url: /index.html#ロボット
   - title: ハードウエア

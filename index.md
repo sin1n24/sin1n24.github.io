@@ -4,6 +4,12 @@ title: sin1's studio
 cover: true
 ---
 
+## 新着情報
++ 【26/04/27】 26/05/06 [生成AIなんでも展示会 Vol.5](https://www.genai-expo.com/)に出展します！
++ 【26/04/19】 26/5/30-31 国内最大級の3DプリンタのイベントJRRFに出展＆ミニ大会を開催します！詳細は[こちら](https://sin1n24.hatenablog.com/entry/2026/03/24/223605)
+
+### [Leopard](https://sin1n24.hatenablog.com/entry/2023/09/05/233955){: .btn }
+
 ## ロボット
 
 ### [Leopard](https://sin1n24.hatenablog.com/entry/2023/09/05/233955){: .btn }

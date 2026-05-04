@@ -12,7 +12,7 @@ Hydejack（Jekyllテーマ）を使用して構築された、個人のポート
 | **Leopard** | かわさきロボット競技大会出場ロボット | `Robotics`, `ESP32`, `EasyEDA`, `Mechanism` |
 | **VR遠隔操縦システム** | thetaとVRゴーグルによるロボット搭乗体験 | `Unity`, `Robotics`, `Mechanism` |
 | **かわロボVR** | 物理演算を伴うVR空間内ロボット操縦練習ソフト | `Unity`, `Android`, `Mechanism` |
-| **ORBITAL_DRIFT** | 高速軌道アクションゲーム | `Vanilla JS`, `Canvas 2D` |
+| **ORBITAL_DRIFT** | アクションミニゲーム（最初に作ったゲームをAIで再現） | `Vanilla JS`, `Canvas 2D` |
 
 ## 📅 企画・イベント
 

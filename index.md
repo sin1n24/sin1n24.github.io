@@ -44,7 +44,7 @@ cover: true
 
 ### [【ソフトウエア】ORBITAL_DRIFT](https://sin1.studio/ORBITAL_DRIFT/){: .btn }
 ![ORBITAL_DRIFT](img/7_OrbitalDrift.png)
-高速軌道アクションゲーム。エネルギーを管理し、惑星の追撃を振り切れ。
+アクションミニゲーム（最初に作ったゲームをAIで再現）
 `Vanilla JS` `Canvas 2D` `Game`
 
 [詳細を見る](https://sin1.studio/ORBITAL_DRIFT/){: .btn }

@@ -9,11 +9,11 @@ lang: ja
 
 url: "https://sin1.studio"
 baseurl: ""
-theme_color: "#5a5fff"
+theme_color: "#1111ff"
 
 author:
   name: sin1
-  email: sin1@sin1.studio
+  email: sin1+hp@sin1.studio
   social:
     twitter: https://x.com/sin1west 
     github: https://github.com/sin1n24
@@ -22,9 +22,6 @@ author:
     Blog: https://sin1n24.hatenablog.com/
 
 data_social:
-  twitter:
-    name: X
-    icon: icon-twitter  # Hydejack v9.2.1では、これが自動的に「𝕏」マークになります
   youtube:
     name: YouTube
     icon: icon-youtube

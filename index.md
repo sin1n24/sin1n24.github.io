@@ -88,12 +88,13 @@ M5StickC Plus/Atom/Capsule各シリーズに対応したサーボ接続基板。
 
 ---
 
-### [ミニかわロボ](https://protopedia.net/prototype/5154){: .btn }
+### [ミニかわロボ](https://sin1.studio/MiniKawaRobo/){: .btn }
 ![ミニかわロボ](img/6_MiniKawaRobo.jpg)
+
 手のひらサイズの格闘対戦ロボット競技規格。ミニ大会随時開催中。
 `Fusion` `M5Stack` `C++`
 
-[ProtoPediaで見る](https://protopedia.net/prototype/5154){: .btn }
+[詳細を見る](https://sin1.studio/MiniKawaRobo/){: .btn }
 
 ---
 

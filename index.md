@@ -42,6 +42,15 @@ cover: true
 
 ---
 
+### [【ハードウエア】M5Stack向 サーボ接続基板](https://sin1n24.hatenablog.com/entry/2024/01/03/010304){: .btn }
+![M5Stack向 サーボ接続基板](img/8_ServoBoard.png)
+M5StickC Plus/Atom/Capsule各シリーズに対応したサーボ接続基板。スイッチサイエンスで委託販売中。
+`M5Stack` `Hardware` `KiCad` `Servo`
+
+[詳細を見る](https://sin1n24.hatenablog.com/entry/2024/01/03/010304){: .btn }
+
+---
+
 ### [【ソフトウエア】ORBITAL_DRIFT](https://sin1.studio/ORBITAL_DRIFT/){: .btn }
 ![ORBITAL_DRIFT](img/7_OrbitalDrift.png)
 アクションミニゲーム（最初に作ったゲームをAIで再現）

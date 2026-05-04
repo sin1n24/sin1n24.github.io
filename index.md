@@ -16,8 +16,8 @@ cover: true
 ---
 
 ### [【ハードウエア】小型ジョイスティックコントローラ](https://sin1n24.hatenablog.com/entry/2025/01/24/005304){: .btn }
-![小型ジョイスティックコントローラ](img/8_JoystickController.jpg)
-M5のATOMとStickに対応した最大3ボタン2軸ジョイスティックの小型コントローラ基板。ケースやグリップの3Dモデルも公開中。
+![小型ジョイスティックコントローラ](img/9_JoystickController.jpg)
+M5ATOMとStickに対応した最大3ボタン2軸ジョイスティックの小型コントローラ。スイッチサイエンスで委託販売中。
 `M5Stack` `AtomS3` `Joystick` `Robotics`
 
 [詳細を見る](https://sin1n24.hatenablog.com/entry/2025/01/24/005304){: .btn }

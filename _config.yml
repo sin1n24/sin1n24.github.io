@@ -38,7 +38,6 @@ menu:
     
 favicon: /img/favicon.ico
 accent_image: /img/bg-image.jpg
-logo: /img/sss_logo.png
 
 hydejack:
   dark_mode:

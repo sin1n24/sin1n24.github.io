@@ -10,17 +10,26 @@ a {
 }
 
 .btn {
+  // 1. ボタンの基本色を変数として定義する（例として黒っぽく設定）
+  --btn-color: #333; 
+
   display: inline-block;
   padding: 0.5rem 1rem;
   margin: 0.5rem 0;
-  border: 1px solid currentColor;
+  
+  // 2. 文字色と枠線に上で作った変数を適用
+  color: var(--btn-color);
+  border: 1px solid var(--btn-color);
+  
   border-radius: 4px;
   text-decoration: none !important;
   transition: all 0.2s ease;
 
   &:hover {
-    background-color: currentColor;
-    // ダークモード・ライトモードの両方で背景色と同化しないよう変数を活用
+    // 3. 背景色には currentColor ではなく、変数を指定する
+    background-color: var(--btn-color); 
+    
+    // 文字色は白（またはbodyの背景色）に変更
     color: var(--body-bg, #fff) !important;
   }
 }

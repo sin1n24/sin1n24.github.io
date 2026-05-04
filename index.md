@@ -4,26 +4,6 @@ title: sin1's studio
 cover: true
 ---
 
-## ハードウエア
-
-### [小型ジョイスティックコントローラ](https://sin1n24.hatenablog.com/entry/2025/01/24/005304){: .btn }
-![小型ジョイスティックコントローラ](img/9_JoystickController.jpg)
-M5ATOMとStickに対応した最大3ボタン2軸ジョイスティックの小型コントローラ。スイッチサイエンスで委託販売中。
-`M5Stack` `AtomS3` `Joystick` `Robotics`
-
-[詳細を見る](https://sin1n24.hatenablog.com/entry/2025/01/24/005304){: .btn }
-
----
-
-### [M5Stack向 サーボ接続基板](https://sin1n24.hatenablog.com/entry/2024/01/03/010304){: .btn }
-![M5Stack向 サーボ接続基板](img/8_ServoBoard.png)
-M5StickC Plus/Atom/Capsule各シリーズに対応したサーボ接続基板。スイッチサイエンスで委託販売中。
-`M5Stack` `Hardware` `Eagle` `Servo`
-
-[詳細を見る](https://sin1n24.hatenablog.com/entry/2024/01/03/010304){: .btn }
-
----
-
 ## ロボット
 
 ### [Leopard](https://sin1n24.hatenablog.com/entry/2023/09/05/233955){: .btn }
@@ -41,6 +21,26 @@ M5StickC Plus/Atom/Capsule各シリーズに対応したサーボ接続基板。
 `Robotics` `Mechanism` `Unity`
 
 [スライドを見る](https://docs.google.com/presentation/d/102zdY-PNOnPTbznJMxDMi7jyg4cydIe-_hQr4PIHcWo/edit?usp=sharing){: .btn }
+
+---
+
+## ハードウエア
+
+### [小型ジョイスティックコントローラ](https://sin1n24.hatenablog.com/entry/2025/01/24/005304){: .btn }
+![小型ジョイスティックコントローラ](img/9_JoystickController.jpg)
+M5ATOMとStickに対応した最大3ボタン2軸ジョイスティックの小型コントローラ。スイッチサイエンスで委託販売中。
+`M5Stack` `AtomS3` `Joystick` `Robotics`
+
+[詳細を見る](https://sin1n24.hatenablog.com/entry/2025/01/24/005304){: .btn }
+
+---
+
+### [M5Stack向 サーボ接続基板](https://sin1n24.hatenablog.com/entry/2024/01/03/010304){: .btn }
+![M5Stack向 サーボ接続基板](img/8_ServoBoard.png)
+M5StickC Plus/Atom/Capsule各シリーズに対応したサーボ接続基板。スイッチサイエンスで委託販売中。
+`M5Stack` `Hardware` `Eagle` `Servo`
+
+[詳細を見る](https://sin1n24.hatenablog.com/entry/2024/01/03/010304){: .btn }
 
 ---
 

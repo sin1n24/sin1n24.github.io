@@ -4,6 +4,8 @@ title: Engineering Ideas into Reality.
 cover: true
 ---
 
+# sin1's studio
+
 ## 製作物
 
 ### [【ソフトウエア】Links](https://sin1n24.hatenablog.com/entry/2025/12/15/222244){: .btn }
@@ -87,8 +89,12 @@ M5StickC Plus/Atom/Capsule各シリーズに対応したサーボ接続基板。
 
 [ProtoPediaで見る](https://protopedia.net/prototype/5154){: .btn }
 
-<p align="right"><small>その他：<a href="https://protopedia.net/prototyper/sin1">ProtoPedia</a></small></p>
-
 ---
 
+[その他](https://protopedia.net/prototyper/sin1){: .btn }
+
+---
+・
+・
+・
 ![ロゴ](./img/sss_logo_3x1.png){: width="300px" .center-img }

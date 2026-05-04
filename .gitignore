@@ -1,0 +1,14 @@
+# Jekyll������������J�p�t�H���_�i��΂�Git�Ɋ܂߂Ȃ��j
+_site/
+
+# Jekyll�̃L���b�V���t�H���_�i�r���h�����������邽�߂̈ꎞ�f�[�^�j
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+
+# Bundler�iRuby�j�̃��[�J���ݒ�
+.bundle/
+vendor/
+
+# Node.js�i�����g���Ă���΁j
+node_modules/

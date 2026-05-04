@@ -71,19 +71,17 @@ section {
     animation-delay: #{$i * 0.1}s; 
   }
 }
-
-// サイトタイトルだけにフォントを適用
-.site-title {
-  // ステップ1で選んだフォント名に変更してください
-  font-family: 'Sawarabi Mincho';
-  
-  // 必要に応じて微調整
-  font-weight: 800;       // 太さ
-  letter-spacing: 0.05em; // 文字間隔
-  text-transform: none;   // 勝手に大文字にならないようにする（必要に応じて）
-}
-
-// モバイル表示時のヘッダータイトルも変える場合
+// サイドバーやモバイルヘッダーのタイトルを強制的に上書きする
+.sidebar h1,
+.sidebar h1 a,
+#sidebar h1,
+#sidebar h1 a,
+.site-title,
 .nav-header .site-title {
-  font-family: 'Sawarabi Mincho';
+  font-family: 'Sawarabi Mincho', serif !important;
+  
+  // 必要に応じて微調整（!importantをつけて確実に効かせます）
+  font-weight: 800 !important;       // 太さ
+  letter-spacing: 0.05em !important; // 文字間隔
+  text-transform: none !important;   // 勝手に大文字にならないようにする
 }

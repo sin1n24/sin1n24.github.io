@@ -1,10 +1,12 @@
 // Inlined CSS for above-the-fold content
+
+// 1. 基本的なリンクのスタイル（SCSSのネストを使って整理）
 a {
   transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
-}
-
-a:hover {
-  text-decoration: underline;
+  
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .btn {
@@ -16,10 +18,10 @@ a:hover {
   text-decoration: none !important;
   transition: all 0.2s ease;
 
-  // SCSSのネストを利用してスッキリ記述
   &:hover {
     background-color: currentColor;
-    color: #fff !important;
+    // ダークモード・ライトモードの両方で背景色と同化しないよう変数を活用
+    color: var(--body-bg, #fff) !important;
   }
 }
 
@@ -28,24 +30,23 @@ section {
 }
 
 // ==========================================
-// 追加分：ホバーエフェクトとフェードインアニメーション
+// ホバーエフェクトとフェードインアニメーション
 // ==========================================
 
-// 1. 画像のホバーアニメーション（ふわっと浮き上がる）
+// 画像のホバーアニメーション
 .project-img {
   transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
-  border-radius: 8px; // 角を少し丸めてモダンな印象に
+  border-radius: 8px;
   display: block;
   margin-bottom: 1em;
 
-  // ホバー時の処理
   &:hover {
     transform: translateY(-5px) scale(1.02);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
   }
 }
 
-// 2. フェードインアニメーションのキーフレーム定義
+// フェードインアニメーションのキーフレーム定義
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -57,31 +58,65 @@ section {
   }
 }
 
-// 3. 各プロジェクト項目にフェードインを適用
+// 各プロジェクト項目にフェードインを適用
 .fade-in-up {
   animation: fadeInUp 0.6s ease-out forwards;
-  opacity: 0; // アニメーション開始前は見えないようにする
+  opacity: 0;
 }
 
-// 4. ディレイクラスの自動生成（SCSSのforループを使用）
-// .delay-1 から .delay-5 までを自動で生成します（0.1s ～ 0.5s遅延）
-// もし項目が増えたら、through の後の数字（5）を増やせばOKです。
+// ディレイクラスの自動生成
 @for $i from 1 through 5 {
   .delay-#{$i} { 
     animation-delay: #{$i * 0.1}s; 
   }
 }
-// サイドバーやモバイルヘッダーのタイトルを強制的に上書きする
-.sidebar h1,
-.sidebar h1 a,
-#sidebar h1,
-#sidebar h1 a,
-.site-title,
-.nav-header .site-title {
-  font-family: 'Sawarabi Mincho', serif !important;
-  
-  // 必要に応じて微調整（!importantをつけて確実に効かせます）
-  font-weight: 800 !important;       // 太さ
-  letter-spacing: 0.05em !important; // 文字間隔
-  text-transform: none !important;   // 勝手に大文字にならないようにする
+
+// 画像を中央寄せするためのクラス
+.center-img {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
+
+// 【アップデート】アクセシビリティ対応（アニメーションを減らす設定のユーザー用）
+@media (prefers-reduced-motion: reduce) {
+  .project-img {
+    transition: none;
+    &:hover {
+      transform: none;
+      box-shadow: none;
+    }
+  }
+  .fade-in-up {
+    animation: none;
+    opacity: 1; // 最初から表示しておく
+  }
+}
+
+/* ==========================================
+   サイトタイトル（ロゴ）のフォント指定
+========================================== */
+
+// デスクトップのサイドバータイトル、およびモバイルのヘッダータイトルを狙い撃ち
+.sidebar-about > .sidebar-title > h2,
+.sidebar-title h2,
+.nav-title,
+.site-title {
+  
+  --font-family-heading: 'Sawarabi Mincho', serif;
+  --font-weight-heading: 900;
+
+  font-family: var(--font-family-heading) !important;
+  font-weight: var(--font-weight-heading) !important;
+  
+  letter-spacing: 0.05em;
+  text-transform: none;
+}
+
+/* ==========================================
+   （オプション）記事末尾のDingbat（四角マーク）
+========================================== */
+// 不要な場合はコメントアウト（//）を外して有効化してください
+// .dingbat {
+//   display: none !important;
+// }

@@ -30,14 +30,15 @@ data_social:
     icon: icon-rss      # 専用アイコンがないので電波マーク(RSS)で代用します
 
 menu:
-  - title: Projects
+  - title: 製作物
     url: /index.html#製作物
-  - title: Planning
+  - title: 企画
     url: /index.html#企画
 
     
 favicon: /img/favicon.ico
 accent_image: /img/bg-image.jpg
+logo: /img/sss_logo.png
 
 hydejack:
   dark_mode:
@@ -49,3 +50,6 @@ exclude:
   - Gemfile.lock
   - README.md
   - node_modules/
+  - _site/
+  
+copyright: "© 2025 sin1. All rights reserved."

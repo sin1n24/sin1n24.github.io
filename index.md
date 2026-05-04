@@ -70,6 +70,11 @@ cover: true
 [ProtoPediaで見る](https://protopedia.net/prototype/5154){: .btn }
 
 
+
+
+
+
+
 ---
 
-![ロゴ](./img/sss_logo_3x1.png)
+![ロゴ](./img/sss_logo_3x1.png){: width="300px" .center-img }

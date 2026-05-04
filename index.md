@@ -87,11 +87,7 @@ M5StickC Plus/Atom/Capsule各シリーズに対応したサーボ接続基板。
 
 [ProtoPediaで見る](https://protopedia.net/prototype/5154){: .btn }
 
-
-
-
-
-
+<p align="right"><small>その他：<a href="https://protopedia.net/prototyper/sin1">ProtoPedia</a></small></p>
 
 ---
 

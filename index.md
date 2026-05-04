@@ -41,6 +41,15 @@ title: Engineering Ideas into Reality.
 
 ---
 
+### [【ソフトウエア】ORBITAL_DRIFT](https://sin1.studio/ORBITAL_DRIFT/){: .btn }
+![ORBITAL_DRIFT](img/7_OrbitalDrift.png)
+高速軌道アクションゲーム。エネルギーを管理し、惑星の追撃を振り切れ。
+`Vanilla JS` `Canvas 2D` `Game`
+
+[詳細を見る](https://sin1.studio/ORBITAL_DRIFT/){: .btn }
+
+---
+
 ## 企画
 
 ### [かわロボアドベントカレンダー](https://sin1n24.hatenablog.com/entry/2025/12/25/233111){: .btn }

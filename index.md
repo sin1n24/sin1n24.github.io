@@ -2,10 +2,11 @@
 layout: page
 title: sin1's studio
 cover: true
-image: img/OGP.jpg
+image: img/ogp.jpg
 ---
 
 ## 新着情報
++ 【26/05/05】 ブログ記事[「ウェブサイトを作成しました。」](/blog/)を公開しました。
 + 【26/04/27】 26/05/06 [生成AIなんでも展示会 Vol.5](https://www.genai-expo.com/)に出展します！
 + 【26/04/19】 26/5/30-31 国内最大級の3Dプリンタのイベント[JRRF](https://japanreprapfestival.com/)に出展＆[ミニ大会](https://sin1n24.hatenablog.com/entry/2026/03/24/223605)を開催します！
 

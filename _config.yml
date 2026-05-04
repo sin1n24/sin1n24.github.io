@@ -40,6 +40,8 @@ menu:
     url: /index.html#ソフトウエア
   - title: 企画
     url: /index.html#企画
+  - title: Blog
+    url: /blog/
 
     
 favicon: /img/favicon.ico

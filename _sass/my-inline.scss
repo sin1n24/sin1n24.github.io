@@ -110,7 +110,7 @@ section {
 .sidebar-title h2,
 .site-title,
 .nav-title,
-//.post-title, 
+.post-title,
 .page-title {  /* ← ここに .page-title を確実に含めます */
   
   --font-family-heading: 'Sawarabi Mincho', serif;
@@ -124,8 +124,8 @@ section {
 }
 
 .post-title{
-  font-size: 2rem; /* デフォルトより小さめの設定。お好みで数値を調整してください */
-  line-height: 1.3;
+  font-size: 2rem !important; /* デフォルトより小さめの設定。お好みで数値を調整してください */
+  line-height: 1.3 !important;
 }
 /* ==========================================
    （オプション）記事末尾のDingbat（四角マーク）

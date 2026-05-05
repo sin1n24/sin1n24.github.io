@@ -2,7 +2,6 @@ remote_theme: hydecorp/hydejack@v9.2.1
 plugins:
   - jekyll-remote-theme
   - jekyll-include-cache
-  - jekyll-seo-tag
   - jekyll-paginate
 
 future: true
@@ -16,10 +15,6 @@ lang: ja
 url: "https://sin1.studio"
 baseurl: ""
 theme_color: "#1111aa"
-
-# Twitterカードの連携用
-twitter:
-  username: "sin1west"
 
 author:
   name: sin1
@@ -55,9 +50,6 @@ menu:
 
 favicon: /img/favicon.ico
 accent_image: /img/bg-image.jpg
-
-# サイト全体のデフォルトOGP画像
-image: "https://sin1.studio/img/ogp.jpg"
 
 hydejack:
   dark_mode:

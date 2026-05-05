@@ -56,7 +56,7 @@ menu:
 favicon: /img/favicon.ico
 accent_image: /img/bg-image.jpg
 
-image: /img/ogp.jpg
+image: "https://sin1.studio/img/ogp.jpg"
 
 hydejack:
   dark_mode:

@@ -2,9 +2,10 @@ remote_theme: hydecorp/hydejack@v9.2.1
 plugins:
   - jekyll-remote-theme
   - jekyll-include-cache
-#  - jekyll-paginate
+  - jekyll-paginate
 
 future: true
+paginate: 10
 
 title: sin1's studio
 description: ロボットつくるよ

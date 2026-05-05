@@ -2,7 +2,7 @@
 layout: page
 title: sin1's studio
 cover: true
-image: img/ogp.jpg
+image: /img/ogp.jpg
 ---
 
 ## 新着情報

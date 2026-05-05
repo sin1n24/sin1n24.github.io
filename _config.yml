@@ -53,10 +53,10 @@ favicon: /img/favicon.ico
 accent_image: /img/bg-image.jpg
 
 hydejack:
+  date_format: "%Y年%m月%d日"
   dark_mode:
     dynamic: true
     icon: true
-    date_format: "%Y年%m月%d日"
 
 exclude:
   - Gemfile

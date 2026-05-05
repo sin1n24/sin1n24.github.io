@@ -51,6 +51,8 @@ menu:
 favicon: /img/favicon.ico
 accent_image: /img/bg-image.jpg
 
+image: /img/ogp.jpg
+
 hydejack:
   dark_mode:
     dynamic: true

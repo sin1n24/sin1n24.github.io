@@ -7,9 +7,10 @@ plugins:
 
 future: true
 paginate: 10
+paginate_path: "/blog/page:num/" # ←【追加】/blog/ の中で正しくページ送りさせるために必須です
 
-title: sin1's studio
-description: ロボットつくるよ
+title: "sin1's studio" # ←【修正】記号（'）が含まれるため、全体をダブルクォーテーションで囲みました
+description: "ロボットつくるよ"
 lang: ja
 
 url: "https://sin1.studio"
@@ -18,7 +19,7 @@ theme_color: "#1111aa"
 
 # Twitterカードの連携用
 twitter:
-  username: "sin1west" # ＠は不要です
+  username: "sin1west"
 
 author:
   name: sin1
@@ -36,7 +37,7 @@ data_social:
     icon: icon-youtube
   blog:
     name: Blog
-    icon: icon-rss      # 専用アイコンがないので電波マーク(RSS)で代用します
+    icon: icon-rss
 
 menu:
   - title: 新着情報
@@ -52,10 +53,10 @@ menu:
   - title: Blog
     url: /blog/
 
-    
 favicon: /img/favicon.ico
 accent_image: /img/bg-image.jpg
 
+# サイト全体のデフォルトOGP画像
 image: "https://sin1.studio/img/ogp.jpg"
 
 hydejack:

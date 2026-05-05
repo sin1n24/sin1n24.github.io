@@ -1,8 +1,6 @@
 ---
 layout: blog
 title: Blog
-description: "日々の技術メモやデザインについて書いています。"
+description: "準備中です。。"
 permalink: /blog/
 ---
-
-準備中です。

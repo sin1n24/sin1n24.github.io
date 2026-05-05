@@ -52,10 +52,8 @@ menu:
 favicon: /img/favicon.ico
 accent_image: /img/bg-image.jpg
 
-date_formats:
-  default: "%Y-%m-%d
-
 hydejack:
+  date_format: "%y年%m月%d日"
   dark_mode:
     dynamic: true
     icon: true

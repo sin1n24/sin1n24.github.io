@@ -1,4 +1,4 @@
-# Engineering Ideas into Reality.
+# sin1's studio
 
 [**🌐 公開ウェブサイトを表示**](https://sin1.studio/)
 

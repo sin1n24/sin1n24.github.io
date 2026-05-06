@@ -1,0 +1,15 @@
+name: Auto Approve Jules PRs
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  auto-approve:
+    runs-on: ubuntu-latest
+    # PRの作成者がJulesのアカウントである場合のみ実行
+    if: github.event.pull_request.user.login == 'jules-bot[bot]' # ※実際のアカウント名に合わせて変更してください
+    steps:
+      - uses: hmarr/auto-approve-action@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}

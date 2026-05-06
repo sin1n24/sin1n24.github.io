@@ -13,3 +13,10 @@ jobs:
       - uses: hmarr/auto-approve-action@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          
+# 承認したあと、そのPRの「自動マージ」を有効化するステップ
+      - name: Enable auto-merge for Jules PRs
+        run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GITHUB_TOKEN: ${{ secrets.MY_PAT }} # 前回のPATが必要です

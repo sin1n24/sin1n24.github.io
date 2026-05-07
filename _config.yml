@@ -11,7 +11,7 @@ paginate_path: "/blog/page:num/"
 
 title: "sin1's studio"
 # 【修正】ウェブサイト向けの説明文（jekyll-seo-tagが構造化データやOGPに利用します）
-description: "ロボット制作、プロトタイピング、Web開発を中心に、アイデアを形にするエンジニアリング・プロジェクトを公開している sin1's studio です。"
+description: "ロボットつくるよ"
 lang: ja
 
 url: "https://sin1.studio"

@@ -3,13 +3,15 @@ plugins:
   - jekyll-remote-theme
   - jekyll-include-cache
   - jekyll-paginate
+  - jekyll-seo-tag # ←【追加】SEOプラグインを明示的に有効化
 
 future: true
 paginate: 10
-paginate_path: "/blog/page:num/" # ←【追加】/blog/ の中で正しくページ送りさせるために必須です
+paginate_path: "/blog/page:num/"
 
-title: "sin1's studio" # ←【修正】記号（'）が含まれるため、全体をダブルクォーテーションで囲みました
-description: "ロボットつくるよ"
+title: "sin1's studio"
+# 【修正】ウェブサイト向けの説明文（jekyll-seo-tagが構造化データやOGPに利用します）
+description: "ロボット制作、プロトタイピング、Web開発を中心に、アイデアを形にするエンジニアリング・プロジェクトを公開している sin1's studio です。"
 lang: ja
 
 url: "https://sin1.studio"
@@ -17,15 +19,31 @@ baseurl: ""
 theme_color: "#1111aa"
 permalink: /blog/:title/
 
+# 【追加】jekyll-seo-tag用のデフォルトOGP画像とロゴ設定
+image: "/img/ogp.jpg" # my-head.html からこちらに移動
+logo: "/img/logo.png" # 実際のロゴのパスがあれば指定してください
+
 author:
-  name: sin1
-  email: sin1+hp@sin1.studio
+  name: "sin1"
+  email: "sin1+hp@sin1.studio"
+  twitter: "sin1west" # 【追加】jekyll-seo-tag用（@なしのIDのみを指定）
+  
+  # ↓これ以下はHydejackのメニュー・フッターアイコン表示用です
   social:
-    twitter: https://x.com/sin1west 
-    github: https://github.com/sin1n24
-    YouTube: https://www.youtube.com/@sin1n24
-    email: mailto:sin1@sin1.studio
-    Blog: https://sin1n24.hatenablog.com/
+    twitter: "https://x.com/sin1west"
+    github: "https://github.com/sin1n24"
+    YouTube: "https://www.youtube.com/@sin1n24"
+    email: "mailto:sin1@sin1.studio"
+    Blog: "https://sin1n24.hatenablog.com/"
+
+# 【追加】jekyll-seo-tagの構造化データ（sameAs）用のリンク設定
+social:
+  name: "sin1's studio"
+  links:
+    - https://x.com/sin1west
+    - https://github.com/sin1n24
+    - https://www.youtube.com/@sin1n24
+    - https://sin1n24.hatenablog.com/
 
 data_social:
   youtube:

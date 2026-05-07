@@ -19,8 +19,6 @@ baseurl: ""
 theme_color: "#1111aa"
 permalink: /blog/:title/
 
-# 【追加】jekyll-seo-tag用のデフォルトOGP画像とロゴ設定
-image: "/img/ogp.jpg" # my-head.html からこちらに移動
 logo: "/img/logo.png" # 実際のロゴのパスがあれば指定してください
 
 author:

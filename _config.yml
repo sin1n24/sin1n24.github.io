@@ -73,6 +73,8 @@ hydejack:
   dark_mode:
     dynamic: true
     icon: true
+  offline:
+    enabled: false
 
 exclude:
   - Gemfile

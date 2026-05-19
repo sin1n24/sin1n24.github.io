@@ -66,6 +66,7 @@ menu:
     url: /blog/
 
 favicon: /img/favicon.ico
+apple_touch_icon: /img/favicon.ico
 accent_image: /img/bg-image.jpg
 
 hydejack:

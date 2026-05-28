@@ -31,6 +31,7 @@ author:
     twitter: "https://x.com/sin1west"
     github: "https://github.com/sin1n24"
     YouTube: "https://www.youtube.com/@sin1n24"
+    MakerWorld: "https://makerworld.com/en/@sin1west"
     email: "mailto:sin1@sin1.studio"
     Blog: "https://sin1n24.hatenablog.com/"
 
@@ -41,12 +42,16 @@ social:
     - https://x.com/sin1west
     - https://github.com/sin1n24
     - https://www.youtube.com/@sin1n24
+    - https://makerworld.com/en/@sin1west
     - https://sin1n24.hatenablog.com/
 
 data_social:
   youtube:
     name: YouTube
     icon: icon-youtube
+  makerworld:
+    name: MakerWorld
+    icon: icon-makerworld
   blog:
     name: Blog
     icon: icon-rss

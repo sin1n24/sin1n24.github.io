@@ -143,6 +143,21 @@ section {
 }
 
 /* ==========================================
+   Blog ソーシャルアイコン（icomoonフォント外のカスタムアイコン）
+   currentColorを使うのでダークモードでも色が追従します
+========================================== */
+.icon-blog::before {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  background-color: currentColor;
+  -webkit-mask: url("/img/icon-blog.png") center / contain no-repeat;
+          mask: url("/img/icon-blog.png") center / contain no-repeat;
+}
+
+/* ==========================================
    （オプション）記事末尾のDingbat（四角マーク）
 ========================================== */
 // 不要な場合はコメントアウト（//）を外して有効化してください

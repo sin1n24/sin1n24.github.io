@@ -54,7 +54,7 @@ data_social:
     icon: icon-makerworld
   blog:
     name: Blog
-    icon: icon-rss
+    icon: icon-blog
 
 menu:
   - title: 新着情報

@@ -5,6 +5,7 @@ cover: true
 ---
 
 ## 新着情報
++ 【26/05/30-31】 [JRRF 2026](https://japanreprapfestival.com/)に出展＆ミニ大会開催しました！報告は[こちら](https://sin1n24.hatenablog.com/entry/2026/06/13/045210)から。
 + 【26/05/22】 [MakerWorld](https://makerworld.com/en/@sin1west)で3Dモデルを公開中という作品紹介を追加
 + 【26/05/14】 ESP-NOWワイヤレスカメラロボット「[RobotS3RCam](https://github.com/sin1n24/RobotS3RCam)」を公開しました！
 + 【26/05/11】 26/05/09-10 [つくろがや！](https://tsukurogaya.nagoya/)に出展しました！報告は[こちら](https://x.com/sin1west/status/2052669653626094036)から。

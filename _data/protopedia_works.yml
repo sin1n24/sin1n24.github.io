@@ -4,38 +4,38 @@
   description: "5バーリンク機構で動かすLEDとカメラで文字を描く光描画マシン。DigiKey Make ONE 2026出品作。"
   tags: ["M5Stack", "ESP32", "Mechanism", "FastLED"]
 
-- title: "QRガンマン ~QRコード早撃スキャン競技~"
+- title: "QRガンマン"
   url: "https://protopedia.net/prototype/6869"
-  image: ""
+  image: "https://protopedia.net/pic/0be2859b-d286-49f9-8040-a37b65e9263d.png"
   description: "画面に表示されたQRコードをスマホで素早くスキャンして速度を競う対戦ゲーム。"
-  tags: ["Game", "QR", "Node.js"]
+  tags: ["Game", "QR", "M5Stack"]
 
-- title: "オープン対戦ロボット規格「ミニかわロボ」"
+- title: "ミニかわロボ"
   url: "https://protopedia.net/prototype/5154"
-  image: ""
-  description: "手のひらサイズの格闘対戦ロボット競技規格。誰でも参加できるオープン規格。"
+  image: "https://protopedia.net/pic/c2d2af4b-5eaa-4585-aeae-6918c9cec8f9.jpg"
+  description: "手のひらサイズの格闘対戦ロボット競技規格。Mouser Make Awards 2024・M5Stack Japan 2024出品。"
   tags: ["Robotics", "M5Stack", "3D Print"]
 
 - title: "小型コントローラ for M5ATOM/Stick"
   url: "https://protopedia.net/prototype/4371"
-  image: ""
+  image: "https://protopedia.net/pic/82e2a403-5832-401e-992b-784fb8d3ef15.jpg"
   description: "M5ATOMとStickに対応した最大3ボタン2軸ジョイスティックの小型コントローラ。委託販売中。"
   tags: ["M5Stack", "Hardware", "Joystick"]
 
 - title: "宅配ボックス通知システム"
   url: "https://protopedia.net/prototype/3289"
-  image: ""
-  description: "宅配ボックスに荷物が届いたらLINEで通知するIoTシステム。"
-  tags: ["ESP32", "LINE", "IoT"]
+  image: "https://protopedia.net/pic/e5a0ed0b-df4d-4024-9656-6981afe1901b.png"
+  description: "宅配ボックスに荷物が届いたらLINEで通知するIoTシステム。M5Stack Creativity Contest 2022出品。"
+  tags: ["M5Stack", "LINE", "IoT"]
 
 - title: "今話しかけてOKですLED"
   url: "https://protopedia.net/prototype/2481"
-  image: ""
-  description: "在席・会話可否をLEDで周囲に伝えるデスクデバイス。"
-  tags: ["M5Stack", "LED", "IoT"]
+  image: "https://protopedia.net/pic/97f3eb73-e395-46ca-99c4-9bda4ac9e1d7.jpg"
+  description: "JINS MEMEの集中度を取得しLEDで在席・会話可否を周囲に伝えるデスクデバイス。"
+  tags: ["M5Stack", "LED", "JINS MEME"]
 
 - title: "スマホをタップしてくれるロボット"
   url: "https://protopedia.net/prototype/1909"
-  image: ""
+  image: "https://protopedia.net/pic/e1eced48-c589-4b1c-83c9-5f2347fac6bc.jpg"
   description: "スマホの画面を自動でタップしてくれる小型ロボット。"
   tags: ["Robotics", "M5Stack", "Automation"]

@@ -59,10 +59,6 @@ data_social:
 menu:
   - title: 新着情報
     url: /index.html#新着情報
-  - title: 作品
-    url: /index.html#作品（コンテスト・展示）
-  - title: ソフト
-    url: /index.html#ソフト・サービス
   - title: ロボット
     url: /index.html#ロボット
   - title: ハードウエア
@@ -71,6 +67,10 @@ menu:
     url: /index.html#ソフトウエア
   - title: 企画
     url: /index.html#企画
+  - title: 作品
+    url: /index.html#作品（コンテスト・展示）
+  - title: Github
+    url: /index.html#Github
   - title: Blog
     url: /blog/
 

@@ -1,0 +1,41 @@
+- title: "LumiGlyph（ルミィグリフ）"
+  url: "https://protopedia.net/prototype/8594"
+  image: "https://protopedia.net/pic/48130f07-2499-4ecc-a35f-5acb89c9c18b.png"
+  description: "5バーリンク機構で動かすLEDとカメラで文字を描く光描画マシン。DigiKey Make ONE 2026出品作。"
+  tags: ["M5Stack", "ESP32", "Mechanism", "FastLED"]
+
+- title: "QRガンマン ~QRコード早撃スキャン競技~"
+  url: "https://protopedia.net/prototype/6869"
+  image: ""
+  description: "画面に表示されたQRコードをスマホで素早くスキャンして速度を競う対戦ゲーム。"
+  tags: ["Game", "QR", "Node.js"]
+
+- title: "オープン対戦ロボット規格「ミニかわロボ」"
+  url: "https://protopedia.net/prototype/5154"
+  image: ""
+  description: "手のひらサイズの格闘対戦ロボット競技規格。誰でも参加できるオープン規格。"
+  tags: ["Robotics", "M5Stack", "3D Print"]
+
+- title: "小型コントローラ for M5ATOM/Stick"
+  url: "https://protopedia.net/prototype/4371"
+  image: ""
+  description: "M5ATOMとStickに対応した最大3ボタン2軸ジョイスティックの小型コントローラ。委託販売中。"
+  tags: ["M5Stack", "Hardware", "Joystick"]
+
+- title: "宅配ボックス通知システム"
+  url: "https://protopedia.net/prototype/3289"
+  image: ""
+  description: "宅配ボックスに荷物が届いたらLINEで通知するIoTシステム。"
+  tags: ["ESP32", "LINE", "IoT"]
+
+- title: "今話しかけてOKですLED"
+  url: "https://protopedia.net/prototype/2481"
+  image: ""
+  description: "在席・会話可否をLEDで周囲に伝えるデスクデバイス。"
+  tags: ["M5Stack", "LED", "IoT"]
+
+- title: "スマホをタップしてくれるロボット"
+  url: "https://protopedia.net/prototype/1909"
+  image: ""
+  description: "スマホの画面を自動でタップしてくれる小型ロボット。"
+  tags: ["Robotics", "M5Stack", "Automation"]

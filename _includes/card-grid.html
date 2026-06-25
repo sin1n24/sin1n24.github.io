@@ -1,0 +1,22 @@
+<div class="card-grid">
+  {%- for item in include.items -%}
+  <a class="card" href="{{ item.url }}" target="_blank" rel="noopener noreferrer">
+    {%- if item.image and item.image != "" -%}
+    <img class="card-img" src="{{ item.image }}" alt="{{ item.title }}" loading="lazy">
+    {%- else -%}
+    <div class="card-img-placeholder"></div>
+    {%- endif -%}
+    <div class="card-body">
+      <h4 class="card-title">{{ item.title }}</h4>
+      {%- if item.description and item.description != "" -%}
+      <p class="card-desc">{{ item.description }}</p>
+      {%- endif -%}
+      {%- if item.tags and item.tags.size > 0 -%}
+      <div class="card-tags">
+        {%- for tag in item.tags -%}<span class="tag">{{ tag }}</span>{%- endfor -%}
+      </div>
+      {%- endif -%}
+    </div>
+  </a>
+  {%- endfor -%}
+</div>

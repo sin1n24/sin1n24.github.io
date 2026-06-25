@@ -1,0 +1,55 @@
+- title: "QRevolver"
+  url: "https://qrevolver.onrender.com/"
+  github_url: "https://github.com/sin1n24/QRevolver"
+  image: ""
+  description: "QRコードを表示してスキャン速度を競うWeb対戦ゲーム。月別ランキング付き。"
+  tags: ["JavaScript", "Node.js", "Game"]
+
+- title: "ORBITAL_DRIFT"
+  url: "https://sin1.studio/ORBITAL_DRIFT/"
+  github_url: "https://github.com/sin1n24/ORBITAL_DRIFT"
+  image: ""
+  description: "高専時代に最初に作ったアクションミニゲームをAIで再現。ブラウザで遊べます。"
+  tags: ["Vanilla JS", "Canvas 2D", "Game"]
+
+- title: "AvaGotchi"
+  url: "https://sin1.studio/AvaGotchi/"
+  github_url: "https://github.com/sin1n24/AvaGotchi"
+  image: ""
+  description: "M5Stack Grayで動くたまごっち風ペットゲーム。ESP-NOWですれ違い通信対応。"
+  tags: ["C++", "M5Stack", "ESP-NOW"]
+
+- title: "SmartBadge"
+  url: "https://sin1.studio/SmartBadge/"
+  github_url: "https://github.com/sin1n24/SmartBadge"
+  image: ""
+  description: "Web上で動くスマートバッジ表示ツール。"
+  tags: ["HTML", "JavaScript"]
+
+- title: "Hand2Servo"
+  url: "https://sin1n24.github.io/Hand2Servo/"
+  github_url: "https://github.com/sin1n24/Hand2Servo"
+  image: ""
+  description: "ブラウザでサーボを手動制御するWebツール。"
+  tags: ["JavaScript", "Servo"]
+
+- title: "serval"
+  url: "https://sin1.studio/serval/"
+  github_url: "https://github.com/sin1n24/serval"
+  image: ""
+  description: "ロボット大会向けトーナメント管理Webアプリ。対戦表・勝敗記録・スクリーン表示。"
+  tags: ["HTML", "JavaScript", "GAS"]
+
+- title: "lucky-number-slot"
+  url: "https://github.com/sin1n24/lucky-number-slot"
+  github_url: "https://github.com/sin1n24/lucky-number-slot"
+  image: ""
+  description: "語呂合わせ占いスロットゲーム。"
+  tags: ["HTML", "JavaScript"]
+
+- title: "KR-clearchecker"
+  url: "https://github.com/sin1n24/KR-clearchecker"
+  github_url: "https://github.com/sin1n24/KR-clearchecker"
+  image: ""
+  description: "かわロボ競技のクリア判定チェッカー。"
+  tags: ["HTML", "JavaScript"]

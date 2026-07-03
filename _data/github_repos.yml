@@ -48,6 +48,14 @@
   tags:
   - C++
   updated_at: '2026-06-21'
+- title: Simba
+  url: http://sin1.studio/Simba/
+  github_url: https://github.com/sin1n24/Simba
+  image: ''
+  description: かわロボVR(2018)のブラウザ版練習シミュレータ。Three.js+Rapier、ゲームパッド/タッチ操作対応。
+  tags:
+  - TypeScript
+  updated_at: '2026-07-03'
 - title: Links
   url: https://sin1.studio/Links/
   github_url: https://github.com/sin1n24/Links
@@ -55,7 +63,7 @@
   description: ''
   tags:
   - JavaScript
-  updated_at: '2026-07-02'
+  updated_at: '2026-07-03'
 - title: lucky-number-slot
   url: https://github.com/sin1n24/lucky-number-slot
   github_url: https://github.com/sin1n24/lucky-number-slot

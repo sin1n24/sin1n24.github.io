@@ -1,0 +1,84 @@
+---
+// 上部固定ナビ。スクロールで透過→不透過、現在地ハイライト、モバイルはハンバーガー。
+const navItems = [
+  { label: '新着情報', href: '/#新着情報' },
+  { label: 'ロボット', href: '/#ロボット' },
+  { label: 'ハードウエア', href: '/#ハードウエア' },
+  { label: 'ソフトウエア', href: '/#ソフトウエア' },
+  { label: '企画', href: '/#企画' },
+  { label: '作品', href: '/#作品（コンテスト・展示）' },
+  { label: 'Github', href: '/#Github' },
+  { label: 'お仕事', href: '/#お仕事' },
+  { label: 'Store', href: '/store/' },
+  { label: 'Blog', href: '/blog/' },
+];
+---
+
+<header class="site-nav" id="site-nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="/">sin1's studio</a>
+
+    <button class="nav-toggle" id="nav-toggle" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav-links" id="nav-links">
+      {navItems.map((item) => (
+        <li><a href={item.href}>{item.label}</a></li>
+      ))}
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-toggle" id="theme-toggle" aria-label="ダークモード切り替え">
+        <span id="theme-toggle-icon">🌙</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  // ナビの背景切り替え・モバイルメニュー・現在地ハイライト
+  const nav = document.getElementById('site-nav');
+  const onScroll = () => {
+    if (window.scrollY > 24) {
+      nav?.classList.add('scrolled');
+    } else {
+      nav?.classList.remove('scrolled');
+    }
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const toggle = document.getElementById('nav-toggle');
+  const links = document.getElementById('nav-links');
+  toggle?.addEventListener('click', () => {
+    const isOpen = links?.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(!!isOpen));
+  });
+  links?.querySelectorAll('a').forEach((a) => {
+    a.addEventListener('click', () => {
+      links.classList.remove('open');
+      toggle?.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // 現在表示中セクションのハイライト（トップページのみ意味を持つ）
+  const sections = Array.from(document.querySelectorAll('main [id]'));
+  const navAnchors = Array.from(links?.querySelectorAll('a') ?? []);
+  if (sections.length && navAnchors.length) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const id = entry.target.getAttribute('id');
+          navAnchors.forEach((a) => {
+            const href = a.getAttribute('href') || '';
+            a.classList.toggle('active', href === `/#${id}`);
+          });
+        });
+      },
+      { rootMargin: '-45% 0px -50% 0px' }
+    );
+    sections.forEach((s) => observer.observe(s));
+  }
+</script>

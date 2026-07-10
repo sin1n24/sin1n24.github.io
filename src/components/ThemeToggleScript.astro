@@ -1,0 +1,44 @@
+---
+// data-theme属性の初期化(FOUC防止のためBase.astroの<head>先頭でインラインscriptとして使う)
+// と、トグルボタンの挙動をまとめて提供する。
+---
+
+<script is:inline>
+  (function () {
+    try {
+      var stored = localStorage.getItem('theme');
+      if (stored === 'dark' || stored === 'light') {
+        document.documentElement.setAttribute('data-theme', stored);
+      }
+    } catch (e) {
+      /* localStorage無効環境は自動(prefers-color-scheme)にフォールバック */
+    }
+  })();
+</script>
+
+<script>
+  function currentTheme() {
+    const attr = document.documentElement.getAttribute('data-theme');
+    if (attr === 'dark' || attr === 'light') return attr;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function applyIcon() {
+    const icon = document.getElementById('theme-toggle-icon');
+    if (!icon) return;
+    icon.textContent = currentTheme() === 'dark' ? '☀️' : '🌙';
+  }
+
+  applyIcon();
+
+  document.getElementById('theme-toggle')?.addEventListener('click', () => {
+    const next = currentTheme() === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try {
+      localStorage.setItem('theme', next);
+    } catch (e) {
+      /* noop */
+    }
+    applyIcon();
+  });
+</script>

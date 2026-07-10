@@ -1,0 +1,19 @@
+---
+import { SITE, SOCIAL_LINKS } from '../data/site';
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <img class="footer-logo" src="/img/sss_logo_3x1.png" alt="sin1's studio ロゴ" loading="lazy" />
+
+    <nav class="footer-social" aria-label="ソーシャルリンク">
+      {SOCIAL_LINKS.map((link) => (
+        <a href={link.url} target={link.url.startsWith('mailto:') ? undefined : '_blank'} rel="noopener noreferrer">
+          {link.name}
+        </a>
+      ))}
+    </nav>
+
+    <p class="footer-copyright">{SITE.copyright}</p>
+  </div>
+</footer>

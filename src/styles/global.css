@@ -1,0 +1,935 @@
+/* ==========================================================
+   sin1's studio - グローバルスタイル
+   現行Jekyll版のトークン（紺#1111aa・Sawarabi Mincho・カードデザイン）を
+   踏襲しつつ、Astro向けに素のCSSで再構築。
+   ========================================================== */
+
+:root {
+  /* --- カラートークン（ライト） --- */
+  --color-accent: #1111aa;
+  --color-accent-rgb: 17, 17, 170;
+  --tag-bg: rgba(17, 17, 170, 0.08);
+  --tag-color: #1111aa;
+
+  --body-bg: #fdfdfc;
+  --body-bg-elevated: #ffffff;
+  --body-color: #1c1c22;
+  --body-color-muted: rgba(28, 28, 34, 0.68);
+  --border-color: rgba(20, 20, 30, 0.12);
+  --nav-bg: rgba(253, 253, 252, 0.85);
+  --card-shadow: 0 8px 20px rgba(20, 20, 30, 0.08);
+
+  /* --- フォント --- */
+  --font-heading: 'Sawarabi Mincho', serif;
+  --font-body: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN',
+    'Hiragino Sans', Meiryo, sans-serif;
+
+  --nav-height: 64px;
+  --max-width: 1080px;
+}
+
+:root[data-theme='dark'] {
+  --color-accent: #9090ff;
+  --color-accent-rgb: 144, 144, 255;
+  --tag-bg: rgba(120, 120, 255, 0.15);
+  --tag-color: #9090ff;
+
+  --body-bg: #14141a;
+  --body-bg-elevated: #1c1c24;
+  --body-color: #ececf2;
+  --body-color-muted: rgba(236, 236, 242, 0.68);
+  --border-color: rgba(255, 255, 255, 0.12);
+  --nav-bg: rgba(20, 20, 26, 0.82);
+  --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* prefers-color-scheme をデフォルトとして採用。手動トグルで data-theme="light" が
+   明示された場合はそちらを優先する。 */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --color-accent: #9090ff;
+    --color-accent-rgb: 144, 144, 255;
+    --tag-bg: rgba(120, 120, 255, 0.15);
+    --tag-color: #9090ff;
+
+    --body-bg: #14141a;
+    --body-bg-elevated: #1c1c24;
+    --body-color: #ececf2;
+    --body-color-muted: rgba(236, 236, 242, 0.68);
+    --border-color: rgba(255, 255, 255, 0.12);
+    --nav-bg: rgba(20, 20, 26, 0.82);
+    --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-height) + 12px);
+}
+
+body {
+  margin: 0;
+  background: var(--body-bg);
+  color: var(--body-color);
+  font-family: var(--font-body);
+  line-height: 1.8;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--color-accent);
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+section {
+  padding: 4.5rem 0;
+}
+
+section + section {
+  border-top: 1px solid var(--border-color);
+}
+
+.section-lead {
+  color: var(--body-color-muted);
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+}
+
+/* --- 見出し（下線が伸びるアニメーション付き） --- */
+.section-heading {
+  font-size: 1.7rem;
+  margin: 0 0 0.6rem;
+  display: inline-block;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.section-heading::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 100%;
+  background: var(--color-accent);
+  border-radius: 2px;
+}
+
+.js .section-heading::after {
+  width: 0;
+  transition: width 0.7s ease-out;
+}
+
+.js .section-heading.visible::after {
+  width: 100%;
+}
+
+/* --- ボタン --- */
+.btn {
+  display: inline-block;
+  padding: 0.55rem 1.2rem;
+  margin: 0.35rem 0.5rem 0.35rem 0;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  border-radius: 6px;
+  text-decoration: none !important;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  background-color: var(--color-accent);
+  color: var(--body-bg) !important;
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  color: #fff !important;
+}
+
+.btn-primary:hover {
+  opacity: 0.85;
+  background-color: var(--color-accent);
+  color: #fff !important;
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+/* ==========================================================
+   ナビゲーション
+   ========================================================== */
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-height);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.site-nav.scrolled {
+  background: var(--nav-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom-color: var(--border-color);
+}
+
+.nav-inner {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.nav-brand {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--body-color);
+  text-decoration: none;
+  font-size: 1.05rem;
+  white-space: nowrap;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: var(--body-color);
+  text-decoration: none;
+  font-size: 0.85rem;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  opacity: 1;
+  color: var(--color-accent);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--body-color);
+  font-size: 1rem;
+  line-height: 1;
+  flex: none;
+}
+
+.theme-toggle:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+  padding: 6px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--body-color);
+  border-radius: 2px;
+}
+
+@media (max-width: 760px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    background: var(--body-bg-elevated);
+    border-bottom: 1px solid var(--border-color);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1.5rem 1.5rem;
+    gap: 0.9rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .nav-links.open {
+    max-height: 80vh;
+  }
+}
+
+/* ==========================================================
+   ヒーロー
+   ========================================================== */
+.hero {
+  position: relative;
+  min-height: min(100svh, 720px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: #fff;
+  text-align: center;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: var(--hero-image, url('/img/bg-image.jpg'));
+  background-size: cover;
+  background-position: center;
+  transform: scale(1);
+}
+
+.js .hero-bg {
+  animation: hero-kenburns 22s ease-out forwards;
+}
+
+@keyframes hero-kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(var(--color-accent-rgb), 0.78) 0%,
+    rgba(10, 10, 30, 0.55) 55%,
+    rgba(10, 10, 20, 0.72) 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 0 1.5rem;
+  max-width: 720px;
+}
+
+.hero-logo {
+  width: 88px;
+  height: 88px;
+  margin: 0 auto 1.25rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 10px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+.hero-title {
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  margin: 0 0 0.6rem;
+  color: #fff;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
+}
+
+.hero-tagline {
+  font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+  margin: 0 0 2rem;
+  opacity: 0.95;
+  font-family: var(--font-heading);
+  letter-spacing: 0.08em;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-cta .btn {
+  border-color: rgba(255, 255, 255, 0.85);
+  color: #fff;
+  padding: 0.7rem 1.5rem;
+}
+
+.hero-cta .btn:hover {
+  background: #fff;
+  color: var(--color-accent) !important;
+}
+
+.hero-cta .btn-primary {
+  background: #fff;
+  color: var(--color-accent) !important;
+  border-color: #fff;
+}
+
+.hero-cta .btn-primary:hover {
+  opacity: 0.9;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 1.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  width: 26px;
+  height: 42px;
+  border: 2px solid rgba(255, 255, 255, 0.75);
+  border-radius: 14px;
+}
+
+.hero-scroll::before {
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  width: 4px;
+  height: 8px;
+  background: #fff;
+  border-radius: 2px;
+  transform: translateX(-50%);
+}
+
+.js .hero-scroll::before {
+  animation: hero-scroll-dot 1.8s ease-in-out infinite;
+}
+
+@keyframes hero-scroll-dot {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, 12px);
+    opacity: 0.3;
+  }
+}
+
+/* ヒーローのステージング(fade-up)は .js 環境のみ初期非表示にする */
+.js .hero-stage {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: hero-fade-up 0.8s ease-out forwards;
+}
+
+.js .hero-stage[data-stage='1'] {
+  animation-delay: 0.1s;
+}
+.js .hero-stage[data-stage='2'] {
+  animation-delay: 0.28s;
+}
+.js .hero-stage[data-stage='3'] {
+  animation-delay: 0.46s;
+}
+
+@keyframes hero-fade-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================
+   スクロールリビール
+   ========================================================== */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.js .reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================
+   タイムライン（新着情報）
+   ========================================================== */
+.timeline {
+  position: relative;
+  margin: 0;
+  padding: 0 0 0 1.5rem;
+  border-left: 2px solid var(--border-color);
+  list-style: none;
+}
+
+.timeline-item {
+  position: relative;
+  padding: 0 0 1.6rem 1.25rem;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: calc(-1.5rem - 6px);
+  top: 0.35rem;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--body-bg);
+  border: 2px solid var(--color-accent);
+}
+
+.timeline-date {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--color-accent);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.03em;
+}
+
+.timeline-item p {
+  margin: 0;
+}
+
+/* ==========================================================
+   カードグリッド
+   ========================================================== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.card-grid.compact {
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 0.85rem;
+}
+
+.card {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none !important;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  background: var(--body-bg-elevated);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--card-shadow);
+}
+
+.card-img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  margin: 0;
+  transition: transform 0.3s ease-out;
+}
+
+.card:hover .card-img {
+  transform: scale(1.02);
+}
+
+.card-grid.compact .card-img {
+  height: 108px;
+}
+
+.card-img-placeholder {
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(135deg, rgba(var(--color-accent-rgb), 0.1) 0%, rgba(var(--color-accent-rgb), 0.02) 100%);
+}
+
+.card-body {
+  padding: 0.85rem 1rem 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-grid.compact .card-body {
+  padding: 0.6rem 0.7rem 0.7rem;
+}
+
+.card-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 0.4rem;
+  line-height: 1.4;
+  letter-spacing: 0.03em;
+}
+
+.card-grid.compact .card-title {
+  font-size: 0.82rem;
+}
+
+.card-desc {
+  font-size: 0.85rem;
+  color: var(--body-color-muted);
+  margin: 0 0 0.6rem;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.card-grid.compact .card-desc {
+  font-size: 0.73rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: auto;
+}
+
+.card-actions {
+  margin-top: 0.7rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tag {
+  font-size: 0.68rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  background: var(--tag-bg);
+  color: var(--tag-color);
+  white-space: nowrap;
+}
+
+/* カードのスタッガー用（reveal併用時） */
+.card-grid .reveal:nth-child(1) { transition-delay: 0s; }
+.card-grid .reveal:nth-child(2) { transition-delay: 0.06s; }
+.card-grid .reveal:nth-child(3) { transition-delay: 0.12s; }
+.card-grid .reveal:nth-child(4) { transition-delay: 0.18s; }
+.card-grid .reveal:nth-child(5) { transition-delay: 0.24s; }
+.card-grid .reveal:nth-child(n + 6) { transition-delay: 0.3s; }
+
+/* ==========================================================
+   Store ページ
+   ========================================================== */
+.product-card {
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--body-bg-elevated);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--card-shadow);
+}
+
+.product-card img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+}
+
+.product-body {
+  padding: 1.2rem 1.3rem 1.4rem;
+}
+
+.product-price {
+  font-size: 0.85rem;
+  color: var(--body-color-muted);
+  margin: 0.6rem 0 0.2rem;
+}
+
+.product-lot {
+  font-size: 0.85rem;
+  color: var(--body-color-muted);
+  margin: 0 0 0.8rem;
+}
+
+.quote-steps {
+  counter-reset: step;
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.quote-steps li {
+  position: relative;
+  padding: 1.1rem 1.1rem 1.1rem 3rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--body-bg-elevated);
+}
+
+.quote-steps li::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 0.9rem;
+  top: 1rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* ==========================================================
+   フッター
+   ========================================================== */
+.site-footer {
+  padding: 3rem 0 2.5rem;
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+}
+
+.footer-logo {
+  max-width: 220px;
+  margin: 0 auto 1.2rem;
+  opacity: 0.9;
+}
+
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+}
+
+.footer-social a {
+  color: var(--body-color);
+  text-decoration: none;
+  font-size: 0.85rem;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  padding: 0.4rem 1rem;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.footer-social a:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.footer-copyright {
+  font-size: 0.78rem;
+  color: var(--body-color-muted);
+}
+
+/* ==========================================================
+   ブログ
+   ========================================================== */
+.blog-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.blog-list li {
+  padding: 1.3rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.blog-list a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.blog-list .post-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  margin: 0 0 0.35rem;
+}
+
+.blog-list .post-date {
+  font-size: 0.8rem;
+  color: var(--body-color-muted);
+}
+
+.post-header {
+  padding: 7rem 0 1rem;
+}
+
+.post-title-main {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  margin: 0 0 0.5rem;
+}
+
+.post-date-main {
+  color: var(--body-color-muted);
+  font-size: 0.9rem;
+}
+
+.post-body {
+  padding-bottom: 3rem;
+}
+
+.post-body :is(h2, h3) {
+  font-family: var(--font-heading);
+  margin-top: 2.2rem;
+}
+
+.post-body img {
+  border-radius: 8px;
+  margin: 1.2rem 0;
+}
+
+.post-back {
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+/* ==========================================================
+   その他ページ共通
+   ========================================================== */
+.page-header {
+  padding: 7.5rem 0 1rem;
+  text-align: center;
+}
+
+.page-lead {
+  color: var(--body-color-muted);
+  max-width: 640px;
+  margin: 0.5rem auto 0;
+}
+
+.not-found {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1.5rem;
+}
+
+/* ==========================================================
+   アクセシビリティ: reduced-motion
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .js .reveal,
+  .js .section-heading::after,
+  .js .hero-stage,
+  .js .hero-bg,
+  .js .hero-scroll::before {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    width: 100% !important;
+  }
+
+  .card,
+  .card-img,
+  .product-card {
+    transition: none;
+  }
+
+  .card:hover,
+  .product-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .card:hover .card-img {
+    transform: none;
+  }
+}
+
+@media (max-width: 600px) {
+  section {
+    padding: 3rem 0;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+    align-items: center;
+  }
+}

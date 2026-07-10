@@ -1,0 +1,33 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<Base title="Blog" description="sin1's studio の活動報告・技術記事一覧。">
+  <header class="page-header container">
+    <h1 class="section-heading reveal">Blog</h1>
+  </header>
+  <section>
+    <div class="container">
+      <ul class="blog-list">
+        {posts.map((post) => {
+          const y = post.data.date.getFullYear();
+          const m = String(post.data.date.getMonth() + 1).padStart(2, '0');
+          const d = String(post.data.date.getDate()).padStart(2, '0');
+          return (
+            <li class="reveal">
+              <a href={`/blog/${post.id}/`}>
+                <p class="post-title">{post.data.title}</p>
+                <p class="post-date">{`${y}年${m}月${d}日`}</p>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </section>
+</Base>

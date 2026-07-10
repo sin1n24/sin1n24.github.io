@@ -895,7 +895,6 @@ section + section {
   }
 
   .js .reveal,
-  .js .section-heading::after,
   .js .hero-stage,
   .js .hero-bg,
   .js .hero-scroll::before {
@@ -903,6 +902,10 @@ section + section {
     transition: none !important;
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  .js .section-heading::after {
+    transition: none !important;
     width: 100% !important;
   }
 

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sin1.studio/sitemap-index.xml

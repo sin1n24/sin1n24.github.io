@@ -304,11 +304,13 @@ section + section {
 }
 
 @media (max-width: 760px) {
-  .nav-toggle {
+  /* JSが動く場合のみハンバーガー化する。JS無効時は.nav-linksを
+     通常のflex-wrapのまま表示し、リンクが恒久的に隠れないようにする。 */
+  .js .nav-toggle {
     display: flex;
   }
 
-  .nav-links {
+  .js .nav-links {
     position: fixed;
     top: var(--nav-height);
     left: 0;
@@ -324,7 +326,7 @@ section + section {
     transition: max-height 0.3s ease;
   }
 
-  .nav-links.open {
+  .js .nav-links.open {
     max-height: 80vh;
   }
 }

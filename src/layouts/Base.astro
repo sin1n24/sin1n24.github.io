@@ -10,6 +10,7 @@ interface Props {
   description?: string;
   image?: string;
   preloadImage?: string;
+  hasHero?: boolean;
 }
 
 const {
@@ -17,6 +18,7 @@ const {
   description = SITE.description,
   image = `${SITE.url}/img/ogp.jpg`,
   preloadImage,
+  hasHero = false,
 } = Astro.props;
 
 const pageTitle = title ? `${title} | ${SITE.title}` : SITE.title;
@@ -111,7 +113,7 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url).toString();
       document.documentElement.classList.add('js');
     </script>
   </head>
-  <body>
+  <body class:list={[{ 'has-hero': hasHero }]}>
     <Nav />
     <main>
       <slot />

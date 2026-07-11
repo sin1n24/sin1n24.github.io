@@ -312,6 +312,50 @@ section + section {
   border-radius: 2px;
 }
 
+/* ヒーローのあるページ(トップ)で、ナビがまだヒーロー上(未スクロール)にいる間は
+   紺グラデーション背景に対して黒文字が読みにくくなるため、白系に固定する。
+   スクロールして.scrolled(不透明背景)になったら通常のテーマ配色に戻る。 */
+.has-hero .site-nav:not(.scrolled) .nav-brand {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.has-hero .site-nav:not(.scrolled) .nav-links a {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.has-hero .site-nav:not(.scrolled) .nav-links a:hover,
+.has-hero .site-nav:not(.scrolled) .nav-links a.active {
+  color: #fff;
+  opacity: 1;
+}
+
+.has-hero .site-nav:not(.scrolled) .theme-toggle {
+  color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.has-hero .site-nav:not(.scrolled) .theme-toggle:hover {
+  color: #fff;
+  border-color: #fff;
+}
+
+.has-hero .site-nav:not(.scrolled) .nav-toggle span {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+/* モバイルでハンバーガーを開いた時は不透明な--body-bg-elevated背景になるため、
+   上記の白系固定を解除して通常のテーマ配色に戻す */
+.has-hero .site-nav:not(.scrolled) .nav-links.open a {
+  color: var(--body-color);
+  opacity: 0.8;
+}
+
+.has-hero .site-nav:not(.scrolled) .nav-links.open a:hover,
+.has-hero .site-nav:not(.scrolled) .nav-links.open a.active {
+  color: var(--color-accent);
+  opacity: 1;
+}
+
 @media (max-width: 760px) {
   /* JSが動く場合のみハンバーガー化する。JS無効時は.nav-linksを
      通常のflex-wrapのまま表示し、リンクが恒久的に隠れないようにする。 */

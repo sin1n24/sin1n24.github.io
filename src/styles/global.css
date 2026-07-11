@@ -503,6 +503,9 @@ section + section {
 .js .hero-stage[data-stage='3'] {
   animation-delay: 0.46s;
 }
+.js .hero-stage[data-stage='4'] {
+  animation-delay: 0.64s;
+}
 
 @keyframes hero-fade-up {
   to {
@@ -790,15 +793,14 @@ section + section {
   display: var(--footer-logo-dark-display);
 }
 
-.footer-social {
+.social-links {
   display: flex;
   justify-content: center;
   gap: 0.85rem;
   flex-wrap: wrap;
-  margin-bottom: 1.2rem;
 }
 
-.footer-social a {
+.social-links a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -811,15 +813,35 @@ section + section {
   transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
 }
 
-.footer-social a svg {
+.social-links a svg {
   width: 20px;
   height: 20px;
 }
 
-.footer-social a:hover {
+.social-links a:hover {
   color: var(--color-accent);
   border-color: var(--color-accent);
   background-color: rgba(var(--color-accent-rgb), 0.08);
+}
+
+.footer-social {
+  margin-bottom: 1.2rem;
+}
+
+/* ヒーロー上は常時ダーク背景のため、テーマに関わらず白系で固定する */
+.hero-social {
+  margin-top: 1.5rem;
+}
+
+.hero-social a {
+  color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.hero-social a:hover {
+  color: var(--color-accent) !important;
+  background-color: #fff;
+  border-color: #fff;
 }
 
 .social-icon {

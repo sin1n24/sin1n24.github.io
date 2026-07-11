@@ -54,13 +54,27 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url).toString();
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/favicon.ico" />
 
-    <!-- Fonts -->
+    <!-- Fonts（レンダリングをブロックしないよう非同期読み込み。display=swap指定済みなので
+         読み込み完了までフォールバックフォントで表示され、LCPの描画遅延を避ける） -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&family=Noto+Sans+JP:wght@400;500;700&display=swap"
-      rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+      />
+    </noscript>
 
     <!-- JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify({

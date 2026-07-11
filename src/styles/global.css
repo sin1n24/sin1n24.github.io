@@ -357,6 +357,17 @@ section + section {
 }
 
 @media (max-width: 760px) {
+  /* JS無効時のフォールバック(横並びflex-wrapのまま)でも1〜2行に収まるよう
+     文字と間隔を詰めておく。JS有効時はこの下でハンバーガー化されるため
+     ここでの見た目はJS無効時のみ影響する。 */
+  .nav-links {
+    gap: 0.6rem;
+  }
+
+  .nav-links a {
+    font-size: 0.75rem;
+  }
+
   /* JSが動く場合のみハンバーガー化する。JS無効時は.nav-linksを
      通常のflex-wrapのまま表示し、リンクが恒久的に隠れないようにする。 */
   .js .nav-toggle {
@@ -376,11 +387,15 @@ section + section {
     gap: 0.9rem;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
+    /* paddingがある状態でmax-height:0だけだとflexアイテムの最小サイズにより
+       わずかに中身が見えてしまうことがあるため、visibilityでも完全に隠す */
+    visibility: hidden;
+    transition: max-height 0.3s ease, visibility 0.3s ease;
   }
 
   .js .nav-links.open {
     max-height: 80vh;
+    visibility: visible;
   }
 }
 
@@ -619,6 +634,20 @@ section + section {
 
 .timeline-item p {
   margin: 0;
+}
+
+.js .timeline-item.is-extra {
+  display: none;
+}
+
+.timeline.expanded .timeline-item.is-extra {
+  display: list-item;
+}
+
+.news-more-btn {
+  margin: 0 0 1.5rem 1.5rem;
+  background: none;
+  cursor: pointer;
 }
 
 /* ==========================================================

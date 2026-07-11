@@ -10,13 +10,30 @@ interface Props {
 }
 
 const { items } = Astro.props;
+const visibleCount = 3;
+const hasMore = items.length > visibleCount;
 ---
 
-<ul class="timeline">
-  {items.map((item) => (
-    <li class="timeline-item reveal">
+<ul class="timeline" id="news-timeline">
+  {items.map((item, i) => (
+    <li class:list={['timeline-item', 'reveal', { 'is-extra': i >= visibleCount }]}>
       <span class="timeline-date">{item.display}</span>
       <p set:html={item.html} />
     </li>
   ))}
 </ul>
+
+{hasMore && (
+  <button class="btn news-more-btn" id="news-more-btn" type="button">さらに表示</button>
+)}
+
+{hasMore && (
+  <script>
+    const btn = document.getElementById('news-more-btn');
+    const timeline = document.getElementById('news-timeline');
+    btn?.addEventListener('click', () => {
+      timeline?.classList.add('expanded');
+      btn.remove();
+    });
+  </script>
+)}

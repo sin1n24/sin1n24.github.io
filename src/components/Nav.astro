@@ -1,14 +1,16 @@
 ---
 // 上部固定ナビ。スクロールで透過→不透過、現在地ハイライト、モバイルはハンバーガー。
+// アンカー先のセクションid（"新着情報"等）はURL互換のため変更せず、
+// 表示ラベルのみモバイルでの折り返し防止に短縮している。
 const navItems = [
-  { label: '新着情報', href: '/#新着情報' },
-  { label: 'ロボット', href: '/#ロボット' },
-  { label: 'ハードウエア', href: '/#ハードウエア' },
-  { label: 'ソフトウエア', href: '/#ソフトウエア' },
+  { label: '新着', href: '/#新着情報' },
+  { label: 'ロボ', href: '/#ロボット' },
+  { label: 'ハード', href: '/#ハードウエア' },
+  { label: 'ソフト', href: '/#ソフトウエア' },
   { label: '企画', href: '/#企画' },
   { label: '作品', href: '/#作品（コンテスト・展示）' },
   { label: 'Github', href: '/#Github' },
-  { label: 'お仕事', href: '/#お仕事' },
+  { label: '仕事', href: '/#お仕事' },
   { label: 'Store', href: '/store/' },
   { label: 'Blog', href: '/blog/' },
 ];

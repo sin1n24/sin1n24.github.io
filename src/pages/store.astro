@@ -22,7 +22,10 @@ import { QUOTE_FORM_URL, buildQuoteMailto } from '../data/site';
       <div class="card-grid">
         {products.map((product: any) => (
           <div class="product-card reveal">
-            <img src={product.image} alt={product.title} loading="lazy" />
+            <picture>
+              <source srcset={product.image.replace(/\.(jpg|jpeg|png)$/i, '.webp')} type="image/webp" />
+              <img src={product.image} alt={product.title} loading="lazy" />
+            </picture>
             <div class="product-body">
               <h3 class="card-title">{product.title}</h3>
               <p class="card-desc">{product.description}</p>

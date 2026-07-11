@@ -358,6 +358,14 @@ section + section {
   position: absolute;
   inset: 0;
   background-image: var(--hero-image, url('/img/bg-image.jpg'));
+  background-image: var(--hero-image, -webkit-image-set(
+    url('/img/bg-image.webp') type('image/webp'),
+    url('/img/bg-image.jpg') type('image/jpeg')
+  ));
+  background-image: var(--hero-image, image-set(
+    url('/img/bg-image.webp') type('image/webp'),
+    url('/img/bg-image.jpg') type('image/jpeg')
+  ));
   background-size: cover;
   background-position: center;
   transform: scale(1);

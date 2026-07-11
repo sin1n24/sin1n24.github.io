@@ -11,11 +11,23 @@ interface Props {
 }
 
 const { title, url, image, description, tags, shop_url } = Astro.props;
+
+// ローカル画像(/img/...)はビルド時にWebPも生成済みなのでpictureで出し分ける。
+// 外部URL(YouTubeサムネイル等)はJPEGのみなのでそのままimgで表示する。
+const isLocalImage = image?.startsWith('/img/');
+const webpImage = isLocalImage ? image!.replace(/\.(jpg|jpeg|png)$/i, '.webp') : undefined;
 ---
 
 <div class="card reveal">
   {image ? (
-    <img class="card-img" src={image} alt={title} loading="lazy" />
+    webpImage ? (
+      <picture>
+        <source srcset={webpImage} type="image/webp" />
+        <img class="card-img" src={image} alt={title} loading="lazy" />
+      </picture>
+    ) : (
+      <img class="card-img" src={image} alt={title} loading="lazy" />
+    )
   ) : (
     <div class="card-img-placeholder"></div>
   )}

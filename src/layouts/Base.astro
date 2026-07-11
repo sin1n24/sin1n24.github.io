@@ -9,12 +9,14 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  preloadImage?: string;
 }
 
 const {
   title,
   description = SITE.description,
   image = `${SITE.url}/img/ogp.jpg`,
+  preloadImage,
 } = Astro.props;
 
 const pageTitle = title ? `${title} | ${SITE.title}` : SITE.title;
@@ -42,6 +44,10 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url).toString();
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
+
+    {preloadImage && (
+      <link rel="preload" as="image" href={preloadImage} fetchpriority="high" type="image/webp" />
+    )}
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />

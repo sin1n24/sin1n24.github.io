@@ -63,7 +63,7 @@
   description: ロボット大会向けトーナメント管理Webアプリ。対戦表・勝敗記録・スクリーン表示。
   tags:
   - HTML
-  updated_at: '2026-07-10'
+  updated_at: '2026-07-11'
 - title: lucky-number-slot
   url: https://github.com/sin1n24/lucky-number-slot
   github_url: https://github.com/sin1n24/lucky-number-slot

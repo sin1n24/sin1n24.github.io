@@ -1,0 +1,15 @@
+---
+import { SITE } from '../data/site';
+import SocialLinks from './SocialLinks.astro';
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <img class="footer-logo footer-logo-light" src="/img/sss_logo_3x1_black.png" alt="sin1's studio ロゴ" loading="lazy" />
+    <img class="footer-logo footer-logo-dark" src="/img/sss_logo_3x1_white.png" alt="sin1's studio ロゴ" loading="lazy" />
+
+    <SocialLinks class="footer-social" />
+
+    <p class="footer-copyright">{SITE.copyright}</p>
+  </div>
+</footer>

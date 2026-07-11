@@ -1,0 +1,39 @@
+---
+// _data/projects.yml 用のカード。画像 + タイトル + 説明 + タグ + ボタン（詳細を見る / 販売サイト）
+// カード全体をリンクにはせず、ボタンを明示することでshop_urlとの二重リンクを避ける。
+interface Props {
+  title: string;
+  url: string;
+  image?: string;
+  description?: string;
+  tags?: string[];
+  shop_url?: string;
+}
+
+const { title, url, image, description, tags, shop_url } = Astro.props;
+---
+
+<div class="card reveal">
+  {image ? (
+    <img class="card-img" src={image} alt={title} loading="lazy" />
+  ) : (
+    <div class="card-img-placeholder"></div>
+  )}
+  <div class="card-body">
+    <h3 class="card-title">{title}</h3>
+    {description && <p class="card-desc">{description}</p>}
+    {tags && tags.length > 0 && (
+      <div class="card-tags">
+        {tags.map((tag) => (
+          <span class="tag">{tag}</span>
+        ))}
+      </div>
+    )}
+    <div class="card-actions">
+      <a class="btn" href={url} target="_blank" rel="noopener noreferrer">詳細を見る</a>
+      {shop_url && (
+        <a class="btn btn-primary" href={shop_url} target="_blank" rel="noopener noreferrer">販売サイト</a>
+      )}
+    </div>
+  </div>
+</div>

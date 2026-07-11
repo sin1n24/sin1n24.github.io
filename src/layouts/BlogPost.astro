@@ -1,0 +1,30 @@
+---
+import Base from './Base.astro';
+
+interface Props {
+  title: string;
+  date: Date;
+  description?: string;
+}
+
+const { title, date, description } = Astro.props;
+
+// 現行サイト踏襲のフォーマット: YYYY年MM月DD日
+const y = date.getFullYear();
+const m = String(date.getMonth() + 1).padStart(2, '0');
+const d = String(date.getDate()).padStart(2, '0');
+const dateLabel = `${y}年${m}月${d}日`;
+---
+
+<Base title={title} description={description}>
+  <article>
+    <header class="post-header container">
+      <h1 class="post-title-main">{title}</h1>
+      <p class="post-date-main">{dateLabel}</p>
+    </header>
+    <div class="post-body container">
+      <slot />
+      <a class="btn post-back" href="/blog/">← ブログ一覧へ戻る</a>
+    </div>
+  </article>
+</Base>

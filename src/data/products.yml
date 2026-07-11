@@ -1,0 +1,16 @@
+# /store/ 用商品データ（初期2件。画像・説明・URLは_data/projects.ymlの該当項目から流用）
+- title: "小型ジョイスティックコントローラ"
+  image: "/img/9_JoystickController.jpg"
+  description: "M5ATOM/Stickシリーズ対応の最大3ボタン2軸ジョイスティックの小型コントローラ。個人での組み込み・研究用途はもちろん、まとまった数量でのご購入にも対応します。"
+  switch_science_url: "https://www.switch-science.com/collections/all/cat:スイッチサイエンスマーケットプレイス（委託商品）_sin1's-studio"
+  reference_price: "スイッチサイエンス販売価格を参照"
+  min_lot: "数量に応じて個別見積り"
+  tags: ["M5Stack", "AtomS3", "Joystick"]
+
+- title: "M5Stack向 サーボ接続基板"
+  image: "/img/8_ServoBoard.jpg"
+  description: "M5StickC/Atom/Capsule各シリーズに対応したサーボ接続基板。ロボット教室・イベント向けなどまとまった数量でのご購入もご相談ください。"
+  switch_science_url: "https://www.switch-science.com/collections/all/cat:スイッチサイエンスマーケットプレイス（委託商品）_sin1's-studio"
+  reference_price: "スイッチサイエンス販売価格を参照"
+  min_lot: "数量に応じて個別見積り"
+  tags: ["M5Stack", "Hardware", "Servo"]

@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import products from '../data/products.yml';
+import { QUOTE_FORM_URL, buildQuoteMailto } from '../data/site';
+---
+
+<Base
+  title="Store"
+  description="スイッチサイエンス委託品の大量購入・カスタムのご相談窓口。数量に応じた見積りに対応します。"
+>
+  <header class="page-header container">
+    <h1 class="section-heading reveal">Store</h1>
+    <p class="page-lead reveal">
+      委託販売中のプロダクトについて、大量購入・カスタムのご相談を承っています。まずはお気軽にお問い合わせください。
+    </p>
+  </header>
+
+  <section>
+    <div class="container">
+      <SectionHeading title="取扱商品" />
+      <div class="card-grid">
+        {products.map((product: any) => (
+          <div class="product-card reveal">
+            <img src={product.image} alt={product.title} loading="lazy" />
+            <div class="product-body">
+              <h3 class="card-title">{product.title}</h3>
+              <p class="card-desc">{product.description}</p>
+              <div class="card-tags">
+                {product.tags?.map((tag: string) => <span class="tag">{tag}</span>)}
+              </div>
+              <p class="product-price">参考価格: {product.reference_price}</p>
+              <p class="product-lot">最小ロット: {product.min_lot}</p>
+              <div class="card-actions">
+                <a class="btn" href={product.switch_science_url} target="_blank" rel="noopener noreferrer">
+                  スイッチサイエンスで購入
+                </a>
+                <a class="btn btn-primary" href={QUOTE_FORM_URL ?? buildQuoteMailto(product.title)}>
+                  大量購入の見積りを依頼
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <SectionHeading title="見積り依頼の流れ" />
+      <ol class="quote-steps">
+        <li class="reveal">フォーム・メールにて数量・希望納期をご連絡ください。</li>
+        <li class="reveal">内容を確認し、個別にお見積りをご案内します。</li>
+        <li class="reveal">ご請求書払い、または決済リンクにてお支払いいただきます。</li>
+      </ol>
+      <p class="reveal">
+        大量購入以外にも、用途に合わせたカスタム対応のご相談も歓迎です。
+      </p>
+      <p class="reveal">
+        <a class="btn btn-primary" href={QUOTE_FORM_URL ?? buildQuoteMailto('大量購入・カスタムのご相談')}>
+          お問い合わせ・見積り依頼
+        </a>
+      </p>
+    </div>
+  </section>
+</Base>

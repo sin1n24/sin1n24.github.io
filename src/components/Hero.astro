@@ -1,0 +1,24 @@
+---
+// ヒーローセクション。背景写真+紺グラデーションオーバーレイ、Ken Burns、fade-upステージング。
+import SocialLinks from './SocialLinks.astro';
+---
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <img class="hero-logo hero-stage" data-stage="1" src="/img/logo.png" alt="sin1's studio ロゴ" />
+    <h1 class="hero-title hero-stage" data-stage="1">sin1's studio</h1>
+    <p class="hero-tagline hero-stage" data-stage="2">ロボットつくるよ</p>
+    <div class="hero-cta hero-stage" data-stage="3">
+      <a class="btn btn-primary" href="#ロボット">作品を見る</a>
+      <a class="btn" href="#お仕事">お仕事のご相談</a>
+    </div>
+    <div class="hero-stage" data-stage="4">
+      <SocialLinks class="hero-social" />
+    </div>
+  </div>
+
+  <span class="hero-scroll" aria-hidden="true"></span>
+</section>

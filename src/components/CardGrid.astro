@@ -1,0 +1,41 @@
+---
+// _data/protopedia_works.yml, github_repos.yml 用のカードグリッド
+// （現行 _includes/card-grid.html 相当。カード全体が1つのリンク）
+interface CardItem {
+  title: string;
+  url: string;
+  image?: string;
+  description?: string;
+  tags?: string[];
+}
+
+interface Props {
+  items: CardItem[];
+  compact?: boolean;
+}
+
+const { items, compact = false } = Astro.props;
+---
+
+<div class:list={['card-grid', { compact }]}>
+  {items.map((item) => (
+    <a class="card reveal" href={item.url} target="_blank" rel="noopener noreferrer">
+      {item.image ? (
+        <img class="card-img" src={item.image} alt={item.title} loading="lazy" />
+      ) : (
+        <div class="card-img-placeholder"></div>
+      )}
+      <div class="card-body">
+        <h3 class="card-title">{item.title}</h3>
+        {item.description && <p class="card-desc">{item.description}</p>}
+        {item.tags && item.tags.length > 0 && (
+          <div class="card-tags">
+            {item.tags.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        )}
+      </div>
+    </a>
+  ))}
+</div>

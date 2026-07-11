@@ -1,0 +1,98 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import NewsList from '../components/NewsList.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import CardGrid from '../components/CardGrid.astro';
+import news from '../data/news.yml';
+import projects from '../../_data/projects.yml';
+import protopediaWorks from '../../_data/protopedia_works.yml';
+import githubRepos from '../../_data/github_repos.yml';
+
+const robotProjects = projects.filter((p: any) => p.category === 'robot');
+const hardwareProjects = projects.filter((p: any) => p.category === 'hardware');
+const softwareProjects = projects.filter((p: any) => p.category === 'software');
+const planningProjects = projects.filter((p: any) => p.category === 'planning');
+---
+
+<Base description="ロボット・ハードウエア・ソフトウエアをつくる個人工房 sin1's studio のポートフォリオサイト。">
+  <Hero />
+
+  <section id="新着情報">
+    <div class="container">
+      <SectionHeading title="新着情報" />
+      <NewsList items={news} />
+    </div>
+  </section>
+
+  <section id="ロボット">
+    <div class="container">
+      <SectionHeading title="ロボット" />
+      <div class="card-grid">
+        {robotProjects.map((p: any) => <ProjectCard {...p} />)}
+      </div>
+    </div>
+  </section>
+
+  <section id="ハードウエア">
+    <div class="container">
+      <SectionHeading title="ハードウエア" />
+      <div class="card-grid">
+        {hardwareProjects.map((p: any) => <ProjectCard {...p} />)}
+      </div>
+    </div>
+  </section>
+
+  <section id="ソフトウエア">
+    <div class="container">
+      <SectionHeading title="ソフトウエア" />
+      <div class="card-grid">
+        {softwareProjects.map((p: any) => <ProjectCard {...p} />)}
+      </div>
+    </div>
+  </section>
+
+  <section id="企画">
+    <div class="container">
+      <SectionHeading title="企画" />
+      <div class="card-grid">
+        {planningProjects.map((p: any) => <ProjectCard {...p} />)}
+      </div>
+    </div>
+  </section>
+
+  <section id="作品（コンテスト・展示）">
+    <div class="container">
+      <SectionHeading title="作品（コンテスト・展示）" lead="ProtoPedia 掲載作品 — 自動更新" />
+      <CardGrid items={protopediaWorks} compact />
+      <p class="reveal"><a class="btn" href="https://protopedia.net/prototyper/sin1" target="_blank" rel="noopener noreferrer">ProtoPediaで全作品を見る</a></p>
+    </div>
+  </section>
+
+  <section id="Github">
+    <div class="container">
+      <SectionHeading title="Github" lead="公開リポジトリから自動更新" />
+      <CardGrid items={githubRepos} compact />
+      <p class="reveal"><a class="btn" href="https://github.com/sin1n24" target="_blank" rel="noopener noreferrer">GitHubで全リポジトリを見る</a></p>
+    </div>
+  </section>
+
+  <section id="direct-sales">
+    <div class="container">
+      <SectionHeading title="直販・大量購入について" />
+      <p class="reveal">委託品のまとめ買いやカスタム対応など、大量購入・見積りのご相談は Store ページから承っています。</p>
+      <p class="reveal"><a class="btn btn-primary" href="/store/">委託品の大量購入・カスタムはこちら</a></p>
+    </div>
+  </section>
+
+  <section id="お仕事">
+    <div class="container">
+      <SectionHeading title="お仕事" />
+      <p class="reveal">
+        本業もあり、現在請け負っている以外の長期契約はできませんが、特定用途に向けた製作品のカスタムや講師など単発での仕事やライセンス販売は実績もあり対応可能ですのでご相談下さいませ。
+      </p>
+      <p class="reveal"><a class="btn btn-primary" href="mailto:sin1@sin1.studio">お問い合わせ</a></p>
+    </div>
+  </section>
+</Base>

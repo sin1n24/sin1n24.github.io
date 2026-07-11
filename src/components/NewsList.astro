@@ -1,0 +1,22 @@
+---
+interface NewsItem {
+  date: string;
+  display: string;
+  html: string;
+}
+
+interface Props {
+  items: NewsItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul class="timeline">
+  {items.map((item) => (
+    <li class="timeline-item reveal">
+      <span class="timeline-date">{item.display}</span>
+      <p set:html={item.html} />
+    </li>
+  ))}
+</ul>

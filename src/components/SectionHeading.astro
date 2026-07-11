@@ -1,0 +1,10 @@
+---
+interface Props {
+  title: string;
+  lead?: string;
+}
+const { title, lead } = Astro.props;
+---
+
+<h2 class="section-heading reveal">{title}</h2>
+{lead && <p class="section-lead reveal">{lead}</p>}

@@ -1,14 +1,20 @@
-# Jekyll������������J�p�t�H���_�i��΂�Git�Ɋ܂߂Ȃ��j
-_site/
+# Astro
+dist/
+.astro/
 
-# Jekyll�̃L���b�V���t�H���_�i�r���h�����������邽�߂̈ꎞ�f�[�^�j
+# Node.js
+node_modules/
+
+# Jekyll（レガシー。_legacy/配下でビルドすることはないが念のため残す）
+_site/
 .jekyll-cache/
 .jekyll-metadata
 .sass-cache/
 
-# Bundler�iRuby�j�̃��[�J���ݒ�
+# Bundler（Ruby）
 .bundle/
 vendor/
 
-# Node.js�i�����g���Ă���΁j
-node_modules/
+# OS/エディタ
+.DS_Store
+.vscode/

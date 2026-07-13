@@ -64,6 +64,14 @@
   tags:
   - HTML
   updated_at: '2026-07-12'
+- title: KawaroboVR
+  url: http://sin1.studio/KawaroboVR/
+  github_url: https://github.com/sin1n24/KawaroboVR
+  image: ''
+  description: ''
+  tags:
+  - JavaScript
+  updated_at: '2026-07-13'
 - title: lucky-number-slot
   url: https://github.com/sin1n24/lucky-number-slot
   github_url: https://github.com/sin1n24/lucky-number-slot

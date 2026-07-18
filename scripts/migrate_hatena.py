@@ -463,6 +463,32 @@ def unnest_asin_widgets(soup) -> None:
             parent.insert_after(div)
 
 
+HATENA_KEYWORD_HREF_MARKER = "d.hatena.ne.jp/keyword/"
+
+
+def is_hatena_keyword_link(tag: Tag) -> bool:
+    """はてなキーワード自動リンクかどうか(href基準で判定)。
+    実データでは全て class="keyword" 付きだが、判定はhrefのみで行う
+    (http/https両方、d.hatena.ne.jp/keyword/ を含むものを対象とする)。"""
+    if not isinstance(tag, Tag) or tag.name != "a":
+        return False
+    href = tag.get("href") or ""
+    return HATENA_KEYWORD_HREF_MARKER in href
+
+
+def strip_hatena_keyword_links(soup) -> int:
+    """はてなキーワード自動リンクを剥がし、アンカーテキストのみ残す。
+    画像リンクや通常の外部リンク、ブログカード変換後のリンク等は対象外
+    (hrefにd.hatena.ne.jp/keyword/を含むものだけを対象にするため)。
+    戻り値は剥がしたリンクの件数。"""
+    count = 0
+    for a in list(soup.find_all("a")):
+        if is_hatena_keyword_link(a):
+            a.unwrap()
+            count += 1
+    return count
+
+
 def is_standalone_empty_citation(node: Tag) -> bool:
     """YouTube埋め込みの直後などに単独で出力される
     <p><cite class="hatena-citation"><a href="..."> </a></cite></p> のような、
@@ -508,6 +534,9 @@ def convert_html_body(html: str) -> "tuple[str, List[str]]":
     soup = BeautifulSoup(html, "html.parser")
     normalize_images(soup)
     unnest_asin_widgets(soup)
+    # はてなキーワード自動リンクは不要なため剥がし、アンカーテキストのみ残す
+    # (画像・埋め込み・通常リンク・ブログカード変換用リンクには影響しない)
+    strip_hatena_keyword_links(soup)
 
     output_blocks: List[str] = []
     nodes = list(soup.contents)

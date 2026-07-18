@@ -1,0 +1,345 @@
+---
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>記事管理 | sin1's studio</title>
+  </head>
+  <body class="admin-page">
+    <div class="admin-shell container">
+      <header class="admin-header">
+        <h1>記事管理 (/admin/)</h1>
+        <p class="hint">
+          ブラウザだけでブログ記事の新規作成・編集・GitHubへのコミットができます。
+          <a href="/">サイトに戻る</a>
+        </p>
+      </header>
+
+      <details class="settings-panel" open>
+        <summary>接続設定</summary>
+        <div class="field-grid">
+          <label class="field">
+            <span>GitHub Personal Access Token</span>
+            <input type="password" id="pat" autocomplete="off" placeholder="github_pat_..." />
+          </label>
+          <label class="field">
+            <span>リポジトリ Owner</span>
+            <input type="text" id="owner" autocomplete="off" />
+          </label>
+          <label class="field">
+            <span>リポジトリ名</span>
+            <input type="text" id="repo" autocomplete="off" />
+          </label>
+          <label class="field">
+            <span>対象ブランチ（空欄でデフォルトブランチ）</span>
+            <input type="text" id="branch" autocomplete="off" placeholder="main" />
+          </label>
+          <label class="field field-wide">
+            <span>URL変換プロキシ (GAS Web App URL・任意)</span>
+            <input
+              type="text"
+              id="gas-url"
+              autocomplete="off"
+              placeholder="https://script.google.com/macros/s/xxxxx/exec"
+            />
+          </label>
+        </div>
+        <div class="btn-row">
+          <button type="button" id="btn-save-settings" class="btn btn-primary">設定を保存</button>
+          <button type="button" id="btn-clear-settings" class="btn">設定を削除</button>
+        </div>
+        <p id="settings-status" class="status"></p>
+        <p id="global-status" class="status"></p>
+        <p class="hint">
+          ※ トークンはこのブラウザの localStorage にのみ保存されます。他者に公開して見せるページではありません。
+          対象リポジトリのみに限定した Fine-grained Personal Access Token（Contents: Read and write 権限）の発行を推奨します。
+        </p>
+      </details>
+
+      <nav class="tabs">
+        <button type="button" id="tab-new" class="tab-btn active">新規作成</button>
+        <button type="button" id="tab-edit" class="tab-btn">編集</button>
+      </nav>
+
+      <section id="edit-panel" class="panel" style="display: none;">
+        <div class="btn-row">
+          <button type="button" id="btn-load-articles" class="btn">記事一覧を読み込む</button>
+          <input type="search" id="article-search" placeholder="タイトル・ファイル名で絞り込み" class="search-input" />
+        </div>
+        <p id="load-status" class="status"></p>
+        <div id="article-list" class="article-list">
+          <p class="hint">「記事一覧を読み込む」を押すと GitHub から一覧を取得します（初回は少し時間がかかります）。</p>
+        </div>
+      </section>
+
+      <section class="panel editor-panel">
+        <p class="hint">
+          編集対象: <span id="editing-file-label">(未保存の新規記事)</span>
+        </p>
+
+        <div class="field-grid">
+          <label class="field">
+            <span>タイトル</span>
+            <input type="text" id="field-title" autocomplete="off" />
+          </label>
+          <label class="field">
+            <span>日付</span>
+            <input type="date" id="field-date" />
+          </label>
+          <label class="field field-wide">
+            <span>スラッグ（ファイル名。編集時は変更不可）</span>
+            <span class="inline-row">
+              <input type="text" id="field-slug" autocomplete="off" />
+              <button type="button" id="btn-check-slug" class="btn">重複チェック</button>
+            </span>
+            <span id="slug-status" class="status"></span>
+          </label>
+          <label class="field field-wide">
+            <span>カテゴリ（カンマ区切り。複数可）</span>
+            <input type="text" id="field-categories" list="categories-datalist" placeholder="かわロボ, 技術" />
+            <datalist id="categories-datalist"></datalist>
+          </label>
+          <label class="field field-wide">
+            <span>はてなURL（任意・移行記事のみ）</span>
+            <input type="text" id="field-hatena" autocomplete="off" />
+          </label>
+        </div>
+
+        <label class="field">
+          <span>本文（Markdown）</span>
+          <textarea id="field-body" rows="20" spellcheck="false"></textarea>
+        </label>
+
+        <div class="btn-row">
+          <button type="button" id="btn-url-convert" class="btn">選択中のURLをMarkdownリンクに変換</button>
+          <button type="button" id="btn-preview-toggle" class="btn">プレビュー表示</button>
+          <label class="btn file-btn">
+            画像を選択してアップロード
+            <input type="file" id="image-file-input" accept="image/*" hidden />
+          </label>
+        </div>
+        <p id="convert-status" class="status"></p>
+        <p id="paste-status" class="status"></p>
+        <p class="hint">
+          本文中に画像をそのまま貼り付け（Ctrl+V / Cmd+V）すると自動でアップロードし、Markdownの画像リンクを挿入します。
+          URLだけを貼り付けると（GAS変換プロキシ設定時）自動でリンク化されます。
+        </p>
+
+        <div id="preview-pane" class="preview-pane" style="display: none;"></div>
+
+        <div class="btn-row save-row">
+          <button type="button" id="btn-save" class="btn btn-primary">新規記事を保存</button>
+          <button type="button" id="btn-new-post" class="btn">新規作成に戻す</button>
+        </div>
+        <p id="save-status" class="status"></p>
+      </section>
+    </div>
+
+    <script>
+      import '../scripts/admin-editor.js';
+    </script>
+  </body>
+</html>
+
+<style>
+  .admin-page {
+    padding: 2rem 0 4rem;
+  }
+
+  .admin-shell {
+    max-width: 900px;
+  }
+
+  .admin-header h1 {
+    font-size: 1.6rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .admin-header a {
+    color: var(--color-accent);
+  }
+
+  .settings-panel {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: var(--body-bg-elevated);
+  }
+
+  .settings-panel summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    margin-bottom: 0.5rem;
+  }
+
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.75rem 1rem;
+    margin: 0.75rem 0;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-size: 0.9rem;
+  }
+
+  .field-wide {
+    grid-column: 1 / -1;
+  }
+
+  .field input[type='text'],
+  .field input[type='password'],
+  .field input[type='date'],
+  .field input[type='search'],
+  .field textarea {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    padding: 0.5rem 0.6rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--body-bg);
+    color: var(--body-color);
+  }
+
+  .field textarea {
+    width: 100%;
+    min-height: 420px;
+    resize: vertical;
+    line-height: 1.6;
+    font-family: ui-monospace, SFMono-Regular, Consolas, 'Noto Sans JP', monospace;
+  }
+
+  .inline-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .inline-row input {
+    flex: 1;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin: 1.5rem 0 1rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .tab-btn {
+    padding: 0.6rem 1.1rem;
+    border: none;
+    background: none;
+    color: var(--body-color-muted);
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+  }
+
+  .tab-btn.active {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+  }
+
+  .panel {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    background: var(--body-bg-elevated);
+  }
+
+  .search-input {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.5rem 0.6rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--body-bg);
+    color: var(--body-color);
+  }
+
+  .article-list {
+    max-height: 320px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    margin-top: 0.75rem;
+  }
+
+  .article-item {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 0.55rem 0.8rem;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    background: none;
+    color: var(--body-color);
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+
+  .article-item:last-child {
+    border-bottom: none;
+  }
+
+  .article-item:hover {
+    background: var(--tag-bg);
+  }
+
+  .preview-pane {
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    margin-top: 1rem;
+    background: var(--body-bg);
+    line-height: 1.8;
+    overflow-x: auto;
+  }
+
+  .preview-pane img {
+    max-width: 100%;
+  }
+
+  .save-row {
+    margin-top: 1rem;
+  }
+
+  .status {
+    font-size: 0.85rem;
+    min-height: 1.2em;
+    margin: 0.3rem 0;
+  }
+
+  /* ライト/ダーク両方である程度のコントラストが出る中間色を直接指定し、
+     :root[data-theme] によるスコープ付きセレクタの複雑化を避ける */
+  .status-ok {
+    color: #2e9e5b;
+  }
+
+  .status-error {
+    color: #e0453a;
+  }
+
+  .hint {
+    font-size: 0.82rem;
+    color: var(--body-color-muted);
+  }
+
+  .file-btn {
+    position: relative;
+    cursor: pointer;
+  }
+</style>

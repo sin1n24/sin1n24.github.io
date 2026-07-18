@@ -75,6 +75,7 @@ class HatenaEntry:
     status: str = ""
     categories: List[str] = field(default_factory=list)
     body: str = ""
+    extended_body: str = ""
 
 
 @dataclass
@@ -160,8 +161,26 @@ def parse_single_entry(chunk_lines: List[str]) -> Optional[HatenaEntry]:
             # "-----" 区切り自体を読み飛ばす
             if i < n:
                 i += 1
-            # EXTENDED BODY / COMMENT 等、BODY以降のブロックは今回は不要なので
-            # ここで打ち切る（後続ブロックがあっても無視する）
+            # はてなの「続きを読む」機能により、本文が BODY と EXTENDED BODY に
+            # 分割されているケースがある（実データで約1/3の記事に存在）。
+            # EXTENDED BODY が直後に続く場合のみ本文として連結する。
+            # EXCERPT/KEYWORDS/COMMENT等それ以降のブロックは今回不要なので無視する。
+            j = i
+            while j < n and not chunk_lines[j].strip():
+                j += 1
+            if j < n:
+                m2 = FIELD_RE.match(chunk_lines[j])
+                if m2 and m2.group(1).strip().upper() == "EXTENDED BODY":
+                    k = j + 1
+                    ext_lines: List[str] = []
+                    while k < n and not BLOCK_END_RE.match(chunk_lines[k]):
+                        ext_lines.append(chunk_lines[k])
+                        k += 1
+                    ext_body = "\n".join(ext_lines).strip("\n")
+                    if ext_body.strip():
+                        entry.extended_body = ext_body
+            # BODY(+EXTENDED BODY)以降のブロック(EXCERPT/KEYWORDS/COMMENT等)は
+            # 今回不要なのでここで打ち切る
             break
         elif key == "TITLE":
             entry.title = val.strip()
@@ -277,8 +296,20 @@ def is_twitter_blockquote(tag: Tag) -> bool:
 def is_twitter_widget_script(node) -> bool:
     if not isinstance(node, Tag) or node.name != "script":
         return False
-    src = node.get("src", "")
-    return "platform.twitter.com/widgets.js" in src
+    src = node.get("src", "") or ""
+    # 実データでは新ドメイン(platform.x.com)と旧ドメイン(platform.twitter.com)が混在する
+    return "platform.twitter.com/widgets.js" in src or "platform.x.com/widgets.js" in src
+
+
+def find_twitter_widget_script(node) -> Optional[Tag]:
+    """twitter-tweet blockquoteの直後に続くwidgets.jsを探す。
+    実データでは <p><script ...></script></p> のように<p>でラップされている
+    ことがあるため、ノード自身だけでなく子孫も見る。"""
+    if is_twitter_widget_script(node):
+        return node
+    if isinstance(node, Tag):
+        return node.find(lambda t: is_twitter_widget_script(t))
+    return None
 
 
 def is_youtube_iframe(tag: Tag) -> bool:
@@ -286,6 +317,16 @@ def is_youtube_iframe(tag: Tag) -> bool:
         return False
     src = tag.get("src", "") or ""
     return "youtube.com" in src or "youtu.be" in src
+
+
+def find_youtube_element(tag: Tag) -> Optional[Tag]:
+    """YouTube iframeそのもの、または <p><iframe .../></p> のように
+    ラップされた構造からiframe本体を探す(実データでは<p>で包まれるのが通常)。"""
+    if not isinstance(tag, Tag):
+        return None
+    if is_youtube_iframe(tag):
+        return tag
+    return tag.find(lambda t: is_youtube_iframe(t))
 
 
 def is_hatena_blogcard(tag: Tag) -> bool:
@@ -304,7 +345,7 @@ def is_hatena_blogcard(tag: Tag) -> bool:
 def find_blogcard_element(tag: Tag) -> Optional[Tag]:
     """ブログカード要素そのもの、またはそれを div 等でラップした構造から
     ブログカード本体(iframe/a)を探す。実データでは
-    <div class="hatena-embed-..."><iframe class="embed-card" .../></div>
+    <p><iframe class="embed-card embed-webcard" .../><cite class="hatena-citation">...</cite></p>
     のようにラップされているケースが多い。"""
     if not isinstance(tag, Tag):
         return None
@@ -313,26 +354,130 @@ def find_blogcard_element(tag: Tag) -> Optional[Tag]:
     return tag.find(lambda t: is_hatena_blogcard(t))
 
 
-def blogcard_to_markdown_link(tag: Tag) -> str:
-    """はてなブログカードを通常のMarkdownリンクに変換する。"""
-    href = None
-    if tag.name == "a":
-        href = tag.get("href")
-    else:
-        # iframe/div: 内部の<a>やdata属性からURLを探す
-        href = tag.get("src") or tag.get("data-url")
-        inner_a = tag.find("a")
-        if not href and inner_a is not None:
-            href = inner_a.get("href")
+def _find_hatena_citation_link(container: Tag) -> "tuple[Optional[str], str]":
+    """同じコンテナ内にある <cite class="hatena-citation"><a href=...>を探す。
+    ブログカードのiframe src は hatenablog-parts.com の埋め込みプロキシURLで
+    実際のリンク先ではないため、隣接するこのcite要素から実URLを取得する。"""
+    if not isinstance(container, Tag):
+        return None, ""
+    cite = container.find(
+        lambda t: isinstance(t, Tag)
+        and t.name == "cite"
+        and "hatena-citation" in (t.get("class") or [])
+    )
+    if cite is None:
+        return None, ""
+    a = cite.find("a")
+    if a is None or not a.get("href"):
+        return None, ""
+    return a.get("href"), a.get_text(strip=True)
 
-    title_text = tag.get_text(strip=True)
+
+def _extract_url_param(src: str) -> Optional[str]:
+    """埋め込みプロキシURL(例: hatenablog-parts.com/embed?url=...)から
+    実URLをクエリパラメータより復元する。"""
+    try:
+        from urllib.parse import urlparse, parse_qs, unquote
+
+        parsed = urlparse(src)
+        qs = parse_qs(parsed.query)
+        if qs.get("url"):
+            return unquote(qs["url"][0])
+    except Exception:
+        pass
+    return None
+
+
+def blogcard_to_markdown_link(tag: Tag, container: Optional[Tag] = None) -> str:
+    """はてなブログカードを通常のMarkdownリンクに変換する。"""
+    search_root = container if container is not None else tag
+    real_href, cite_text = _find_hatena_citation_link(search_root)
+
+    href = real_href
+    if not href:
+        if tag.name == "a":
+            href = tag.get("href")
+        else:
+            # iframe/div: 内部の<a>やdata属性、embedプロキシURLのurl=パラメータからURLを探す
+            href = tag.get("src") or tag.get("data-url")
+            if href:
+                decoded = _extract_url_param(href)
+                if decoded:
+                    href = decoded
+            inner_a = tag.find("a")
+            if not href and inner_a is not None:
+                href = inner_a.get("href")
+
+    title_text = (tag.get("title") or "").strip()
     if not title_text:
-        title_text = tag.get("title", "") or ""
+        title_text = tag.get_text(strip=True)
+    if not title_text:
+        title_text = cite_text
     if not href:
         href = ""
     if not title_text:
         title_text = href or "リンク"
     return "[{}]({})".format(title_text, href)
+
+
+def is_hatena_asin_widget(tag: Tag) -> bool:
+    """はてなのAmazon商品埋め込みウィジェット(ASINカード)かどうか。"""
+    if not isinstance(tag, Tag) or tag.name != "div":
+        return False
+    classes = tag.get("class") or []
+    return "hatena-asin-detail" in classes
+
+
+def asin_widget_to_markdown_link(tag: Tag) -> str:
+    """はてなのAmazon商品ウィジェットを通常のMarkdownリンクに変換する。"""
+    title_a = None
+    title_p = tag.find("p", class_="hatena-asin-detail-title")
+    if title_p is not None:
+        title_a = title_p.find("a")
+    if title_a is None:
+        title_a = tag.find("a")
+
+    href = title_a.get("href") if title_a is not None else None
+    title_text = title_a.get_text(strip=True) if title_a is not None else ""
+    if not title_text:
+        img = tag.find("img")
+        if img is not None:
+            title_text = (img.get("alt") or "").strip()
+    if not href:
+        href = ""
+    if not title_text:
+        title_text = href or "Amazon商品"
+    return "[{}]({})".format(title_text, href)
+
+
+def unnest_asin_widgets(soup) -> None:
+    """html.parserはHTML5仕様と異なり <p>...<div>...</div></p> のような
+    ブロック要素の入れ子を自動修復しない。実データでは
+    <p>本文<div class="hatena-asin-detail">...</div></p> のように
+    ASINウィジェットが<p>内に紛れ込むケースが多発するため、
+    トップレベルの走査で正しく検出できるよう<p>の外へ移動させておく。"""
+    for div in list(soup.find_all("div", class_="hatena-asin-detail")):
+        parent = div.parent
+        if parent is not None and parent != soup:
+            div.extract()
+            parent.insert_after(div)
+
+
+def is_standalone_empty_citation(node: Tag) -> bool:
+    """YouTube埋め込みの直後などに単独で出力される
+    <p><cite class="hatena-citation"><a href="..."> </a></cite></p> のような、
+    可視テキストが空の引用リンクを検出する(ブログカードの場合は同じ<p>内で
+    既にリンクとして処理済みのため、ここでは「単独で中身が空」のケースのみ対象)。"""
+    if not isinstance(node, Tag):
+        return False
+    cites = node.find_all(
+        lambda t: isinstance(t, Tag)
+        and t.name == "cite"
+        and "hatena-citation" in (t.get("class") or [])
+    )
+    if not cites:
+        return False
+    return node.get_text(strip=True) == ""
 
 
 def resolve_img_src(img: Tag) -> Optional[str]:
@@ -362,6 +507,7 @@ def convert_html_body(html: str) -> "tuple[str, List[str]]":
     warnings: List[str] = []
     soup = BeautifulSoup(html, "html.parser")
     normalize_images(soup)
+    unnest_asin_widgets(soup)
 
     output_blocks: List[str] = []
     nodes = list(soup.contents)
@@ -380,26 +526,49 @@ def convert_html_body(html: str) -> "tuple[str, List[str]]":
 
         if is_twitter_blockquote(node):
             block_html = str(node)
-            # 直後のscriptタグ(widgets.js)も一緒に温存する
+            # 直後のscriptタグ(widgets.js)も一緒に温存する。
+            # 実データでは <p><script ...></script></p> のように<p>で
+            # ラップされていることがあるため、その中も探す。
             j = i + 1
             while j < n and isinstance(nodes[j], NavigableString) and not str(nodes[j]).strip():
                 j += 1
-            if j < n and is_twitter_widget_script(nodes[j]):
-                block_html += "\n" + str(nodes[j])
-                i = j + 1
+            if j < n:
+                script_tag = find_twitter_widget_script(nodes[j])
+                if script_tag is not None:
+                    block_html += "\n" + str(script_tag)
+                    i = j + 1
+                else:
+                    i += 1
             else:
                 i += 1
             output_blocks.append(block_html)
             continue
 
-        if is_youtube_iframe(node):
-            output_blocks.append(str(node))
+        if isinstance(node, Tag) and is_standalone_empty_citation(node):
+            # YouTube埋め込みの直後などに単独で出る、可視テキストが空の
+            # 引用リンク(<cite class="hatena-citation">)は読者にとって
+            # 意味がないので出力しない
             i += 1
             continue
 
+        if isinstance(node, Tag) and is_hatena_asin_widget(node):
+            output_blocks.append(asin_widget_to_markdown_link(node))
+            i += 1
+            continue
+
+        # ブログカード判定はYouTube判定より先に行う。はてなの埋め込みカードは
+        # <iframe src="https://hatenablog-parts.com/embed?url=https%3A%2F%2Fyoutube.com%2F...">
+        # のようにsrcのクエリパラメータにyoutube.comのURLをエンコードして含む
+        # ことがあり、先にYouTube判定すると誤って生HTMLのまま温存されてしまう。
         blogcard_el = find_blogcard_element(node) if isinstance(node, Tag) else None
         if blogcard_el is not None:
-            output_blocks.append(blogcard_to_markdown_link(blogcard_el))
+            output_blocks.append(blogcard_to_markdown_link(blogcard_el, container=node))
+            i += 1
+            continue
+
+        youtube_el = find_youtube_element(node) if isinstance(node, Tag) else None
+        if youtube_el is not None:
+            output_blocks.append(str(youtube_el))
             i += 1
             continue
 
@@ -415,13 +584,6 @@ def convert_html_body(html: str) -> "tuple[str, List[str]]":
                 output_blocks.append(str(node))
             i += 1
             continue
-
-        # 未知のclassを持つ要素は警告のみ出してmarkdownify変換は試みる
-        if isinstance(node, Tag) and node.get("class"):
-            classes = node.get("class")
-            known_prefixes = ("hatena", "twitter", "embed")
-            if not any(any(c.startswith(p) for p in known_prefixes) for c in classes):
-                pass  # 一般的なclass(装飾目的など)は変換を試みるだけで十分
 
         md_fragment = html_to_md(str(node), heading_style="ATX").strip()
         if md_fragment:
@@ -490,7 +652,14 @@ def convert_entry(entry: HatenaEntry) -> ConvertedPost:
     if not entry.basename:
         warnings.append("BASENAMEが空です。slug/hatena_urlが不正な可能性があります")
 
-    body_md, body_warnings = convert_body(entry.body)
+    # 「続きを読む」で分割されている場合はBODYとEXTENDED BODYを連結してから変換する
+    # (タグがBODY/EXTENDED BODYの境界をまたいで開いたままのケースがあるため、
+    #  個別にパースせず1つのHTML文字列として結合してからパースする)
+    full_raw_body = entry.body
+    if entry.extended_body.strip():
+        full_raw_body = (full_raw_body + "\n" + entry.extended_body).strip("\n")
+
+    body_md, body_warnings = convert_body(full_raw_body)
     warnings.extend(body_warnings)
 
     return ConvertedPost(

@@ -961,7 +961,8 @@ section + section {
   border-bottom: 1px solid var(--border-color);
 }
 
-.blog-list a {
+.blog-list-link {
+  display: block;
   text-decoration: none;
   color: inherit;
 }
@@ -977,6 +978,10 @@ section + section {
   color: var(--body-color-muted);
 }
 
+.blog-list .category-tags {
+  margin-top: 0.6rem;
+}
+
 .post-header {
   padding: 7rem 0 1rem;
 }
@@ -989,6 +994,97 @@ section + section {
 .post-date-main {
   color: var(--body-color-muted);
   font-size: 0.9rem;
+}
+
+.post-header .category-tags {
+  margin-top: 0.9rem;
+  justify-content: center;
+}
+
+/* ==========================================================
+   カテゴリバッジ / カテゴリ一覧
+   ========================================================== */
+.category-tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+}
+
+.category-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.72rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  background: var(--tag-bg);
+  color: var(--tag-color);
+  text-decoration: none !important;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.category-tag:hover {
+  background: var(--color-accent);
+  color: #fff !important;
+}
+
+.category-count {
+  font-size: 0.65rem;
+  opacity: 0.75;
+}
+
+.category-index {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.category-index-label {
+  font-size: 0.8rem;
+  color: var(--body-color-muted);
+  white-space: nowrap;
+}
+
+header.page-header .category-index-label {
+  margin: 0 0 0.3rem;
+  text-align: center;
+}
+
+/* ==========================================================
+   ブログ検索 (Pagefind)
+   ========================================================== */
+.blog-search-section {
+  padding-top: 0;
+  padding-bottom: 2.5rem;
+}
+
+.blog-search-section + section {
+  border-top: none;
+  padding-top: 0;
+}
+
+.search-unavailable {
+  font-size: 0.85rem;
+  color: var(--body-color-muted);
+}
+
+#blog-search {
+  --pagefind-ui-primary: var(--color-accent);
+  --pagefind-ui-text: var(--body-color);
+  --pagefind-ui-background: var(--body-bg-elevated);
+  --pagefind-ui-border: var(--border-color);
+  --pagefind-ui-tag: var(--tag-bg);
+  --pagefind-ui-border-width: 1px;
+  --pagefind-ui-border-radius: 8px;
+  --pagefind-ui-font: var(--font-body);
 }
 
 .post-body {

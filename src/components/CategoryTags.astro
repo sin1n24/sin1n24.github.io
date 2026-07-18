@@ -1,0 +1,24 @@
+---
+// 記事のカテゴリをpill状のバッジで表示し、各カテゴリの一覧ページへリンクする。
+// blog/index.astro・BlogPost.astro（記事詳細）・category/[category].astro で共用。
+interface Props {
+  categories?: string[];
+  class?: string;
+}
+
+const { categories, class: className } = Astro.props;
+---
+
+{
+  categories && categories.length > 0 && (
+    <ul class:list={['category-tags', className]}>
+      {categories.map((category) => (
+        <li>
+          <a href={`/blog/category/${encodeURIComponent(category)}/`} class="category-tag">
+            {category}
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}

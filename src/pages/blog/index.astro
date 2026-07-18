@@ -1,33 +1,91 @@
 ---
 import Base from '../../layouts/Base.astro';
+import BlogList from '../../components/BlogList.astro';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
+
+// カテゴリごとの件数を集計し、多い順に「カテゴリ一覧」として提示する
+const categoryCounts = new Map<string, number>();
+posts.forEach((post) => {
+  (post.data.categories ?? []).forEach((category) => {
+    categoryCounts.set(category, (categoryCounts.get(category) ?? 0) + 1);
+  });
+});
+const allCategories = Array.from(categoryCounts.entries()).sort((a, b) => b[1] - a[1]);
 ---
 
 <Base title="Blog" description="sin1's studio の活動報告・技術記事一覧。">
   <header class="page-header container">
     <h1 class="section-heading reveal">Blog</h1>
   </header>
+
+  <section class="blog-search-section">
+    <div class="container">
+      <div id="blog-search" class="reveal"></div>
+    </div>
+  </section>
+
   <section>
     <div class="container">
-      <ul class="blog-list">
-        {posts.map((post) => {
-          const y = post.data.date.getFullYear();
-          const m = String(post.data.date.getMonth() + 1).padStart(2, '0');
-          const d = String(post.data.date.getDate()).padStart(2, '0');
-          return (
-            <li class="reveal">
-              <a href={`/blog/${post.id}/`}>
-                <p class="post-title">{post.data.title}</p>
-                <p class="post-date">{`${y}年${m}月${d}日`}</p>
-              </a>
-            </li>
-          );
-        })}
-      </ul>
+      {
+        allCategories.length > 0 && (
+          <div class="category-index reveal">
+            <span class="category-index-label">カテゴリ:</span>
+            <ul class="category-tags">
+              {allCategories.map(([category, count]) => (
+                <li>
+                  <a href={`/blog/category/${encodeURIComponent(category)}/`} class="category-tag">
+                    {category}
+                    <span class="category-count">{count}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+
+      <BlogList posts={posts} />
     </div>
   </section>
 </Base>
+
+<!-- Pagefind: astro buildの後処理(pagefind --site dist)で /pagefind/ 配下に生成される。
+     開発サーバー(astro dev)では未生成のため404になるが、search-init側でtypeof判定して
+     フォールバックする（本文検索は本番ビルド後のみ機能） -->
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+<script src="/pagefind/pagefind-ui.js" is:inline></script>
+<script is:inline>
+  window.addEventListener('DOMContentLoaded', () => {
+    const el = document.getElementById('blog-search');
+    if (!el) return;
+    if (typeof PagefindUI !== 'undefined') {
+      new PagefindUI({
+        element: '#blog-search',
+        showSubResults: true,
+        showImages: false,
+        resetStyles: true,
+        translations: {
+          placeholder: '記事を検索...',
+          clear_search: 'クリア',
+          load_more: 'もっと見る',
+          search_label: 'このブログを検索',
+          filters_label: '絞り込み',
+          zero_results: '「[SEARCH_TERM]」に一致する記事は見つかりませんでした',
+          many_results: '「[SEARCH_TERM]」の検索結果: [COUNT]件',
+          one_result: '「[SEARCH_TERM]」の検索結果: [COUNT]件',
+          alt_search: '「[SEARCH_TERM]」に一致する記事はありませんでした。「[DIFFERENT_TERM]」の結果を表示します',
+          search_suggestion: '「[SEARCH_TERM]」に一致する記事はありませんでした。以下のワードもお試しください',
+          searching: '「[SEARCH_TERM]」を検索中...',
+        },
+      });
+    } else {
+      // ローカル開発サーバーなど、pagefindのビルド成果物が無い環境向けの案内
+      el.innerHTML =
+        '<p class="search-unavailable">検索機能は本番ビルド後のみ利用できます（pagefindのインデックスが未生成です）。</p>';
+    }
+  });
+</script>

@@ -22,6 +22,9 @@ const state = {
   editingSha: null,
   articles: [],
   categories: new Set(DEFAULT_CATEGORIES),
+  // このセッション中にアップロードした画像（{ path, filename, url, downloadUrl, sha }）。
+  // 新規作成⇔編集タブの切り替えやresetFormForNewではクリアしない（気づいた時に未使用画像を消せるように継続表示する）。
+  uploadedImages: [],
 };
 
 let slugManuallyEdited = false;
@@ -144,6 +147,18 @@ async function ghPutFile(path, base64Content, message, sha) {
   if (state.settings.branch) body.branch = state.settings.branch;
   const res = await fetch(`${ghApiBase()}/contents/${encodePath(path)}`, {
     method: 'PUT',
+    headers: { ...ghHeaders(), 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) throw await ghError(res);
+  return res.json();
+}
+
+async function ghDeleteFile(path, sha, message) {
+  const body = { message, sha };
+  if (state.settings.branch) body.branch = state.settings.branch;
+  const res = await fetch(`${ghApiBase()}/contents/${encodePath(path)}`, {
+    method: 'DELETE',
     headers: { ...ghHeaders(), 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   });
@@ -481,14 +496,121 @@ async function handleImageFile(file, textarea) {
   try {
     const buffer = await file.arrayBuffer();
     const base64 = arrayBufferToBase64(buffer);
-    await ghPutFile(path, base64, `chore(admin): add image ${filename}`);
+    const result = await ghPutFile(path, base64, `chore(admin): add image ${filename}`);
     const publicUrl = `${SITE_URL}/img/blog/${filename}`;
     const markdown = `![画像](${publicUrl})`;
     replaceRange(textarea, insertStart, insertStart + placeholderText.length, markdown);
-    setPasteStatus(`アップロード完了: ${filename}`, 'ok');
+
+    // GitHub Contents APIのPUTレスポンスにはコミット直後からアクセス可能な
+    // raw.githubusercontent.com 形式のURL（download_url）が含まれている。
+    // 本文へ挿入するMarkdown自体はサイト公開URL（publicUrl）のままにし、
+    // download_urlはアップロード直後の確認用サムネイル表示にのみ使う
+    // （raw.githubusercontent.comは本番の画像配信元として使わない）。
+    const content = result && result.content ? result.content : {};
+    const uploaded = { path, filename, url: publicUrl, downloadUrl: content.download_url || '', sha: content.sha || '' };
+    state.uploadedImages.push(uploaded);
+    renderUploadedImages();
+    showPastePreview(uploaded);
+
+    setPasteStatus(
+      `アップロード完了: ${filename} ／ サイトへの反映には数十秒〜1分ほどかかります（GitHub Pagesのビルド完了待ち）。` +
+        'それまでは本文プレビュー内の画像がリンク切れに見えることがありますが、故障ではありません。',
+      'ok'
+    );
   } catch (err) {
     replaceRange(textarea, insertStart, insertStart + placeholderText.length, '');
     setPasteStatus(`画像アップロード失敗: ${err.message || err}`, 'error');
+  }
+}
+
+// ---------- アップロード直後のサムネイルプレビュー ----------
+
+function showPastePreview(uploaded) {
+  const el = document.getElementById('paste-preview');
+  if (!el) return;
+  el.innerHTML = '';
+  if (!uploaded || !uploaded.downloadUrl) return;
+  const img = document.createElement('img');
+  img.src = uploaded.downloadUrl;
+  img.alt = uploaded.filename;
+  img.className = 'paste-preview-thumb';
+  el.appendChild(img);
+  const label = document.createElement('span');
+  label.className = 'paste-preview-label';
+  label.textContent = `アップロード確認用プレビュー: ${uploaded.filename}`;
+  el.appendChild(label);
+}
+
+// ---------- セッション内アップロード画像の一覧・未使用検出・削除 ----------
+
+function isImageUsedInBody(url) {
+  const bodyEl = document.getElementById('field-body');
+  if (!bodyEl) return false;
+  return bodyEl.value.includes(url);
+}
+
+function renderUploadedImages() {
+  const panel = document.getElementById('uploaded-images-panel');
+  const list = document.getElementById('uploaded-images-list');
+  if (!panel || !list) return;
+
+  if (!state.uploadedImages.length) {
+    panel.style.display = 'none';
+    list.innerHTML = '';
+    return;
+  }
+  panel.style.display = 'block';
+  list.innerHTML = '';
+
+  state.uploadedImages.forEach((img) => {
+    const used = isImageUsedInBody(img.url);
+    const item = document.createElement('div');
+    item.className = 'uploaded-image-item';
+
+    const thumb = document.createElement('img');
+    thumb.className = 'uploaded-image-thumb';
+    thumb.src = img.downloadUrl || img.url;
+    thumb.alt = img.filename;
+    item.appendChild(thumb);
+
+    const info = document.createElement('div');
+    info.className = 'uploaded-image-info';
+    const name = document.createElement('span');
+    name.className = 'uploaded-image-name';
+    name.textContent = img.filename;
+    info.appendChild(name);
+    if (!used) {
+      const badge = document.createElement('span');
+      badge.className = 'badge-unused';
+      badge.textContent = '未使用';
+      info.appendChild(badge);
+    }
+    item.appendChild(info);
+
+    const delBtn = document.createElement('button');
+    delBtn.type = 'button';
+    delBtn.className = 'btn btn-danger uploaded-image-delete';
+    delBtn.textContent = '削除';
+    delBtn.addEventListener('click', () => handleDeleteUploadedImage(img));
+    item.appendChild(delBtn);
+
+    list.appendChild(item);
+  });
+}
+
+async function handleDeleteUploadedImage(img) {
+  if (!requireAuth(setPasteStatus)) return;
+  const usedNote = isImageUsedInBody(img.url) ? '\n※本文中で使用されています。削除するとリンク切れになります。' : '';
+  const confirmed = confirm(`この画像をGitHubリポジトリから削除しますか？\n${img.filename}${usedNote}`);
+  if (!confirmed) return;
+  setPasteStatus(`画像を削除中... (${img.filename})`);
+  try {
+    await ghDeleteFile(img.path, img.sha, `chore(admin): remove unused image ${img.filename}`);
+    state.uploadedImages = state.uploadedImages.filter((i) => i.path !== img.path);
+    renderUploadedImages();
+    setPasteStatus(`削除しました: ${img.filename}`, 'ok');
+  } catch (err) {
+    setPasteStatus(`削除に失敗しました: ${err.message || err}`, 'error');
   }
 }
 
@@ -513,12 +635,28 @@ function wireTextareaPaste(textarea) {
     }
 
     const text = e.clipboardData && e.clipboardData.getData('text/plain');
-    if (text && URL_ONLY_REGEX.test(text.trim()) && state.settings && state.settings.gasUrl) {
-      e.preventDefault();
+    if (text && URL_ONLY_REGEX.test(text.trim())) {
+      const url = text.trim();
       const start = textarea.selectionStart;
       const end = textarea.selectionEnd;
-      await runUrlConversion(textarea, start, end, text.trim());
-      return;
+      const selectedText = textarea.value.slice(start, end);
+
+      if (selectedText) {
+        // 貼り付け前に選択されていたテキストがあれば、それをそのままリンクラベルにする。
+        // GASプロキシへの問い合わせは不要なのでその場で即座に変換する。
+        e.preventDefault();
+        const markdown = `[${selectedText}](${url})`;
+        replaceRange(textarea, start, end, markdown);
+        setConvertStatus('選択していたテキストをリンクラベルにしました', 'ok');
+        return;
+      }
+
+      if (state.settings && state.settings.gasUrl) {
+        // 選択範囲が空（カーソルのみ）の場合は従来通りGASプロキシでタイトルを取得する
+        e.preventDefault();
+        await runUrlConversion(textarea, start, end, url);
+        return;
+      }
     }
     // それ以外（複数行の通常テキスト等）はデフォルトのペースト処理に任せる
   });
@@ -837,6 +975,9 @@ function init() {
   wireSlugAuto();
   wireArticleList();
   wireTextareaPaste(document.getElementById('field-body'));
+
+  // 本文の内容が変わるたびに「未使用」判定を再描画する（軽量なincludes判定のみ）
+  document.getElementById('field-body').addEventListener('input', renderUploadedImages);
 }
 
 if (document.readyState === 'loading') {

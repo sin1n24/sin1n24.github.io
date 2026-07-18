@@ -125,10 +125,20 @@ import '../styles/global.css';
         </div>
         <p id="convert-status" class="status"></p>
         <p id="paste-status" class="status"></p>
+        <div id="paste-preview" class="paste-preview"></div>
         <p class="hint">
           本文中に画像をそのまま貼り付け（Ctrl+V / Cmd+V）すると自動でアップロードし、Markdownの画像リンクを挿入します。
-          URLだけを貼り付けると（GAS変換プロキシ設定時）自動でリンク化されます。
+          サイト本番URLへの反映にはビルド完了まで数十秒〜1分ほどかかるため、直後は上のプレビューで確認してください。
+          URLだけを貼り付けると、選択中のテキストがあればそれをリンクラベルに、無ければ（GAS変換プロキシ設定時）自動取得したタイトルでリンク化されます。
         </p>
+
+        <div id="uploaded-images-panel" class="uploaded-images-panel" style="display: none;">
+          <h3 class="uploaded-images-title">このセッションでアップロードした画像</h3>
+          <p class="hint">
+            本文で使われていない画像には「未使用」バッジが付きます。書き終えたら不要な画像を削除できます。
+          </p>
+          <div id="uploaded-images-list" class="uploaded-images-list"></div>
+        </div>
 
         <div id="preview-pane" class="preview-pane" style="display: none;"></div>
 
@@ -341,5 +351,101 @@ import '../styles/global.css';
   .file-btn {
     position: relative;
     cursor: pointer;
+  }
+
+  .btn-danger {
+    color: #e0453a;
+    border-color: #e0453a;
+  }
+
+  .paste-preview {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0.4rem 0;
+  }
+
+  .paste-preview:empty {
+    display: none;
+  }
+
+  .paste-preview-thumb {
+    max-width: 96px;
+    max-height: 96px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    object-fit: cover;
+  }
+
+  .paste-preview-label {
+    font-size: 0.8rem;
+    color: var(--body-color-muted);
+  }
+
+  .uploaded-images-panel {
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.9rem 1rem;
+    margin: 1rem 0;
+    background: var(--body-bg);
+  }
+
+  .uploaded-images-title {
+    font-size: 0.95rem;
+    font-family: var(--font-heading);
+    margin: 0 0 0.3rem;
+  }
+
+  .uploaded-images-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .uploaded-image-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    width: 140px;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--body-bg-elevated);
+  }
+
+  .uploaded-image-thumb {
+    width: 100%;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 4px;
+    background: var(--tag-bg);
+  }
+
+  .uploaded-image-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .uploaded-image-name {
+    font-size: 0.75rem;
+    word-break: break-all;
+    color: var(--body-color-muted);
+  }
+
+  .badge-unused {
+    display: inline-block;
+    align-self: flex-start;
+    font-size: 0.7rem;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    background: #e0453a;
+    color: #fff;
+  }
+
+  .uploaded-image-delete {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.5rem;
   }
 </style>

@@ -1,0 +1,44 @@
+---
+import Base from '../../../layouts/Base.astro';
+import BlogList from '../../../components/BlogList.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+
+  const categorySet = new Set<string>();
+  posts.forEach((post) => {
+    (post.data.categories ?? []).forEach((category) => categorySet.add(category));
+  });
+
+  return Array.from(categorySet).map((category) => {
+    const categoryPosts = posts
+      .filter((post) => post.data.categories?.includes(category))
+      .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+    return {
+      params: { category },
+      props: { category, posts: categoryPosts },
+    };
+  });
+}
+
+const { category, posts } = Astro.props;
+---
+
+<Base
+  title={`カテゴリ: ${category}`}
+  description={`「${category}」カテゴリの記事一覧（${posts.length}件）。`}
+>
+  <header class="page-header container">
+    <p class="category-index-label reveal">カテゴリ</p>
+    <h1 class="section-heading reveal">{category}</h1>
+    <p class="page-lead reveal">{posts.length}件の記事</p>
+  </header>
+  <section>
+    <div class="container">
+      <p class="reveal"><a href="/blog/" class="btn post-back">← ブログ一覧へ戻る</a></p>
+      <BlogList posts={posts} />
+    </div>
+  </section>
+</Base>

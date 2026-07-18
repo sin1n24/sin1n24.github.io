@@ -1,13 +1,15 @@
 ---
 import Base from './Base.astro';
+import CategoryTags from '../components/CategoryTags.astro';
 
 interface Props {
   title: string;
   date: Date;
   description?: string;
+  categories?: string[];
 }
 
-const { title, date, description } = Astro.props;
+const { title, date, description, categories } = Astro.props;
 
 // 現行サイト踏襲のフォーマット: YYYY年MM月DD日
 const y = date.getFullYear();
@@ -17,14 +19,17 @@ const dateLabel = `${y}年${m}月${d}日`;
 ---
 
 <Base title={title} description={description}>
-  <article>
+  <!-- data-pagefind-body: このブロックのみを検索対象にする（nav/footer等の共通要素や
+       他ページを索引ノイズにしないため、記事詳細ページに限定してPagefindへ範囲指定） -->
+  <article data-pagefind-body>
     <header class="post-header container">
       <h1 class="post-title-main">{title}</h1>
       <p class="post-date-main">{dateLabel}</p>
+      <CategoryTags categories={categories} class="post-categories-main" />
     </header>
     <div class="post-body container">
       <slot />
-      <a class="btn post-back" href="/blog/">← ブログ一覧へ戻る</a>
+      <a class="btn post-back" href="/blog/" data-pagefind-ignore>← ブログ一覧へ戻る</a>
     </div>
   </article>
 </Base>

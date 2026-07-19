@@ -16,6 +16,9 @@ const { title, url, image, description, tags, shop_url } = Astro.props;
 // 外部URL(YouTubeサムネイル等)はJPEGのみなのでそのままimgで表示する。
 const isLocalImage = image?.startsWith('/img/');
 const webpImage = isLocalImage ? image!.replace(/\.(jpg|jpeg|png)$/i, '.webp') : undefined;
+
+// サイト内リンク(/blog/...等)は同一タブ、外部リンクのみ新規タブで開く
+const isExternal = /^https?:\/\//.test(url);
 ---
 
 <div class="card reveal">
@@ -42,7 +45,7 @@ const webpImage = isLocalImage ? image!.replace(/\.(jpg|jpeg|png)$/i, '.webp') :
       </div>
     )}
     <div class="card-actions">
-      <a class="btn" href={url} target="_blank" rel="noopener noreferrer">詳細を見る</a>
+      <a class="btn" href={url} target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noopener noreferrer' : undefined}>詳細を見る</a>
       {shop_url && (
         <a class="btn btn-primary" href={shop_url} target="_blank" rel="noopener noreferrer">販売サイト</a>
       )}

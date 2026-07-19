@@ -3,28 +3,28 @@
 
 - title: "Leopard"
   category: robot
-  url: "https://sin1n24.hatenablog.com/entry/2023/09/05/233955"
+  url: "/blog/2023-09-05-233955/"
   image: "/img/2_Leopard.jpg"
   description: "かわさきロボット競技大会出場機体。独自のリンク機構設計と制御基板。"
   tags: ["Robotics", "ESP32", "Mechanism"]
 
 - title: "ロボット遠隔操作システム"
   category: robot
-  url: "https://github.com/sin1n24/RobotS3RCam"
+  url: "/blog/robot-s3rcam/"
   image: "https://img.youtube.com/vi/P5PM_GwRe_A/maxresdefault.jpg"
   description: "AtomS3R-CAMとAtomS3RによるESP-NOW無線FPVロボット。低遅延・オープンソース。"
   tags: ["ESP32", "ESP-NOW", "M5Stack", "FPV"]
 
 - title: "VR遠隔操縦システム"
   category: robot
-  url: "https://docs.google.com/presentation/d/102zdY-PNOnPTbznJMxDMi7jyg4cydIe-_hQr4PIHcWo/edit?usp=sharing"
+  url: "/blog/vr-teleop-system/"
   image: "/img/3_LeopardVR.jpg"
   description: "THETAカメラとVRゴーグルでロボットに搭乗している感覚を体験するシステム。"
   tags: ["Robotics", "Unity", "VR"]
 
 - title: "小型ジョイスティックコントローラ"
   category: hardware
-  url: "https://sin1n24.hatenablog.com/entry/2025/01/24/005304"
+  url: "/blog/2025-01-24-005304/"
   image: "/img/9_JoystickController.jpg"
   description: "M5ATOM/Stickシリーズ対応の最大3ボタン2軸ジョイスティック。スイッチサイエンス委託中。"
   tags: ["M5Stack", "AtomS3", "Hardware"]
@@ -32,7 +32,7 @@
 
 - title: "M5Stack向 サーボ接続基板"
   category: hardware
-  url: "https://sin1n24.hatenablog.com/entry/2024/01/03/010304"
+  url: "/blog/2024-01-03-010304/"
   image: "/img/8_ServoBoard.jpg"
   description: "M5StickC/Atom/Capsule各シリーズ対応のサーボ接続基板。スイッチサイエンス委託中。"
   tags: ["M5Stack", "Hardware", "Servo"]
@@ -47,21 +47,21 @@
 
 - title: "Links"
   category: software
-  url: "https://sin1n24.hatenablog.com/entry/2025/12/15/222244"
+  url: "/blog/2025-12-15-222244/"
   image: "/img/1_Links.jpg"
   description: "リンク機構シミュレータ・かわロボ設計補助ソフト。AI活用でWebアプリ移植中。"
   tags: ["C++", "DxLib", "IK", "Simulation"]
 
 - title: "かわロボVR"
   category: software
-  url: "https://sin1n24.hatenablog.com/entry/2018/10/29/213618"
+  url: "/blog/2018-10-29-213618/"
   image: "/img/4_KawaroboVR.png"
   description: "物理演算VR空間でロボットの操縦練習・試運転・ネット対戦ができる。Quest/Android対応。"
   tags: ["Unity", "VR", "Android"]
 
 - title: "かわロボアドベントカレンダー"
   category: planning
-  url: "https://sin1n24.hatenablog.com/entry/2025/12/25/233111"
+  url: "/blog/2025-12-25-233111/"
   image: "/img/5_KawaRoboAdCal.jpg"
   description: "クリスマス前に皆でかわロボの記事を書く恒例イベント（毎年開催）。"
   tags: ["Adventor", "Community"]

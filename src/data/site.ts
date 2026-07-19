@@ -25,7 +25,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
   { name: "GitHub", url: "https://github.com/sin1n24", icon: "github" },
   { name: "YouTube", url: "https://www.youtube.com/@sin1n24", icon: "youtube" },
   { name: "MakerWorld", url: "https://makerworld.com/en/@sin1west", icon: "makerworld" },
-  { name: "Blog", url: "https://sin1n24.hatenablog.com/", icon: "blog" },
+  { name: "Blog", url: "/blog/", icon: "blog" },
   { name: "Email", url: "mailto:sin1@sin1.studio", icon: "email" },
 ];
 

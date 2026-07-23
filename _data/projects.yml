@@ -64,6 +64,7 @@
 - title: "AvaGotchi（あばごっち）"
   category: software
   url: "https://sin1.studio/AvaGotchi/"
+  url_label: "使ってみる"
   image: "/img/11_AvaGotchi.jpg"
   description: "M5Stack Basic/Gray用のたまごっち風育成ゲーム。ブラウザから直接書き込み可能。"
   tags: ["M5Stack", "ESP32", "Game"]
@@ -71,6 +72,7 @@
 - title: "ORBITAL_DRIFT"
   category: software
   url: "https://sin1.studio/ORBITAL_DRIFT/"
+  url_label: "使ってみる"
   image: "/img/7_OrbitalDrift.png"
   description: "高専の時に最初に作ったアクションミニゲームをAIで再現。"
   tags: ["Vanilla JS", "Canvas 2D", "Game"]
@@ -90,10 +92,10 @@
   description: "手のひらサイズの格闘対戦ロボット競技規格。ミニ大会随時開催中。"
   tags: ["Robotics", "M5Stack", "Competition"]
 
-- title: "serval"
+- title: "トーナメント管理システム"
   category: planning
   url: "/blog/2026-07-12-025929/"
   official_url: "https://sin1.studio/serval/"
   image: "/img/12_Serval.jpg"
-  description: "ロボット大会向けトーナメント管理Webアプリ。対戦表・勝敗記録・大画面演出・LINE呼出しに対応。"
+  description: "「serval」というロボット大会向けトーナメント管理Webアプリ。対戦表・勝敗記録・大画面演出・LINE呼出しに対応。"
   tags: ["GAS", "Tournament", "Robotics"]

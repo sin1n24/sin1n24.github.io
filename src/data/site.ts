@@ -14,6 +14,8 @@ export const SITE = {
 
 export const GA_MEASUREMENT_ID = "G-S8GDP6VQHY";
 
+export const ADSENSE_CLIENT_ID = "ca-pub-8274345994743020";
+
 export interface SocialLink {
   name: string;
   url: string;

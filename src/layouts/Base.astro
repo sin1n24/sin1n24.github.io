@@ -2,7 +2,7 @@
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import ThemeToggleScript from '../components/ThemeToggleScript.astro';
-import { SITE, GA_MEASUREMENT_ID } from '../data/site';
+import { SITE, GA_MEASUREMENT_ID, ADSENSE_CLIENT_ID } from '../data/site';
 import '../styles/global.css';
 
 interface Props {
@@ -33,6 +33,12 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url).toString();
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+
+    <!-- Google AdSense -->
+    <script
+      async
+      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`}
+      crossorigin="anonymous"></script>
 
     <!-- OGP / Twitter Card -->
     <meta property="og:type" content="website" />

@@ -22,6 +22,7 @@ EXCLUDE = {
     "AvaGotchi",        # in ソフトウエア section
     "ORBITAL_DRIFT",    # in ソフトウエア section
     "KawaroboVR",       # linked from かわロボVR card as 使ってみる; Simba (legacy version) still shown here
+    "QRevolver",        # not worth showcasing
 }
 
 

@@ -2,7 +2,7 @@
   url: https://sin1n24.github.io/Hand2Servo/
   github_url: https://github.com/sin1n24/Hand2Servo
   image: ''
-  description: ''
+  description: ブラウザから手軽にサーボモータの角度を手動で試せるWebツール。
   tags:
   - JavaScript
   updated_at: '2025-08-30'
@@ -14,15 +14,6 @@
   tags:
   - HTML
   updated_at: '2026-05-03'
-- title: QRevolver
-  url: https://qrevolver.onrender.com/
-  github_url: https://github.com/sin1n24/QRevolver
-  image: ''
-  description: QRevolver — QRGunmanのWeb移植・改良版。PCや別スマホでQRを表示し早撃ち(スキャン速度)を競う。Node計測+SSE
-    / GAS月別ランキング / Render対応。
-  tags:
-  - JavaScript
-  updated_at: '2026-06-14'
 - title: Simba
   url: http://sin1.studio/Simba/
   github_url: https://github.com/sin1n24/Simba

@@ -40,7 +40,9 @@
 
 - title: "MakerWorld 3Dモデル"
   category: hardware
-  url: "https://makerworld.com/en/@sin1west"
+  url: "/blog/2025-04-06-232358/"
+  official_url: "https://makerworld.com/en/@sin1west"
+  official_label: "公開サイト"
   image: "/img/10_MakerWorld.jpg"
   description: "BambuLab運営の3Dモデル共有サイトで3Dデータを公開中。ライセンス販売はご相談を。"
   tags: ["3D Print", "BambuLab", "MakerWorld"]

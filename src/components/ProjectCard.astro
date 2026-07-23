@@ -10,10 +10,22 @@ interface Props {
   shop_url?: string;
   try_url?: string;
   official_url?: string;
+  official_label?: string;
   url_label?: string;
 }
 
-const { title, url, image, description, tags, shop_url, try_url, official_url, url_label } = Astro.props;
+const {
+  title,
+  url,
+  image,
+  description,
+  tags,
+  shop_url,
+  try_url,
+  official_url,
+  official_label,
+  url_label,
+} = Astro.props;
 
 // ローカル画像(/img/...)はビルド時にWebPも生成済みなのでpictureで出し分ける。
 // 外部URL(YouTubeサムネイル等)はJPEGのみなのでそのままimgで表示する。
@@ -48,12 +60,12 @@ const isExternal = /^https?:\/\//.test(url);
       </div>
     )}
     <div class="card-actions">
-      <a class="btn" href={url} target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noopener noreferrer' : undefined}>{url_label ?? '詳細'}</a>
+      <a class={url_label ? 'btn btn-primary' : 'btn'} href={url} target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noopener noreferrer' : undefined}>{url_label ?? '詳細'}</a>
       {try_url && (
-        <a class="btn" href={try_url} target="_blank" rel="noopener noreferrer">使ってみる</a>
+        <a class="btn btn-primary" href={try_url} target="_blank" rel="noopener noreferrer">使ってみる</a>
       )}
       {official_url && (
-        <a class="btn" href={official_url} target="_blank" rel="noopener noreferrer">公式サイト</a>
+        <a class="btn btn-primary" href={official_url} target="_blank" rel="noopener noreferrer">{official_label ?? '公式サイト'}</a>
       )}
       {shop_url && (
         <a class="btn btn-primary" href={shop_url} target="_blank" rel="noopener noreferrer">販売サイト</a>

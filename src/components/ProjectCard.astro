@@ -47,7 +47,7 @@ const isExternal = /^https?:\/\//.test(url);
       </div>
     )}
     <div class="card-actions">
-      <a class="btn" href={url} target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noopener noreferrer' : undefined}>詳細を見る</a>
+      <a class="btn" href={url} target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noopener noreferrer' : undefined}>詳細</a>
       {try_url && (
         <a class="btn" href={try_url} target="_blank" rel="noopener noreferrer">使ってみる</a>
       )}

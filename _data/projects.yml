@@ -59,6 +59,7 @@
   image: "/img/4_KawaroboVR.png"
   description: "物理演算VR空間でロボットの操縦練習・試運転・ネット対戦ができる。Quest/Android対応。"
   tags: ["Unity", "VR", "Android"]
+  try_url: "https://sin1.studio/KawaroboVR/"
 
 - title: "AvaGotchi（あばごっち）"
   category: software
@@ -88,3 +89,11 @@
   image: "/img/6_MiniKawaRobo.jpg"
   description: "手のひらサイズの格闘対戦ロボット競技規格。ミニ大会随時開催中。"
   tags: ["Robotics", "M5Stack", "Competition"]
+
+- title: "serval"
+  category: planning
+  url: "/blog/2026-07-12-025929/"
+  official_url: "https://sin1.studio/serval/"
+  image: "/img/12_Serval.jpg"
+  description: "ロボット大会向けトーナメント管理Webアプリ。対戦表・勝敗記録・大画面演出・LINE呼出しに対応。"
+  tags: ["GAS", "Tournament", "Robotics"]

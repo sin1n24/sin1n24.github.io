@@ -2,18 +2,10 @@
   url: https://sin1n24.github.io/Hand2Servo/
   github_url: https://github.com/sin1n24/Hand2Servo
   image: ''
-  description: ブラウザでサーボを手動制御するWebツール。
+  description: ''
   tags:
   - JavaScript
   updated_at: '2025-08-30'
-- title: ORBITAL_DRIFT
-  url: http://sin1.studio/ORBITAL_DRIFT/
-  github_url: https://github.com/sin1n24/ORBITAL_DRIFT
-  image: ''
-  description: 高専時代に最初に作ったアクションミニゲームをAIで再現。ブラウザで遊べます。
-  tags:
-  - HTML
-  updated_at: '2026-05-02'
 - title: SmartBadge
   url: https://sin1.studio/SmartBadge/
   github_url: https://github.com/sin1n24/SmartBadge
@@ -31,15 +23,6 @@
   tags:
   - JavaScript
   updated_at: '2026-06-14'
-- title: AvaGotchi
-  url: https://sin1.studio/AvaGotchi/
-  github_url: https://github.com/sin1n24/AvaGotchi
-  image: ''
-  description: M5Stack Gray tamagotchi-style pet game with M5Stack-Avatar, ESP-NOW
-    StreetPass, weather sync and IMU minigame
-  tags:
-  - C++
-  updated_at: '2026-06-21'
 - title: Simba
   url: http://sin1.studio/Simba/
   github_url: https://github.com/sin1n24/Simba
@@ -48,35 +31,27 @@
   tags:
   - TypeScript
   updated_at: '2026-07-03'
-- title: Links
-  url: https://sin1.studio/Links/
-  github_url: https://github.com/sin1n24/Links
-  image: ''
-  description: ''
-  tags:
-  - JavaScript
-  updated_at: '2026-07-03'
-- title: serval
-  url: http://sin1.studio/serval/
-  github_url: https://github.com/sin1n24/serval
-  image: ''
-  description: ロボット大会向けトーナメント管理Webアプリ。対戦表・勝敗記録・スクリーン表示。
-  tags:
-  - HTML
-  updated_at: '2026-07-12'
-- title: KawaroboVR
-  url: http://sin1.studio/KawaroboVR/
-  github_url: https://github.com/sin1n24/KawaroboVR
-  image: ''
-  description: ''
-  tags:
-  - JavaScript
-  updated_at: '2026-07-14'
 - title: lucky-number-slot
-  url: https://github.com/sin1n24/lucky-number-slot
+  url: https://sin1.studio/lucky-number-slot/
   github_url: https://github.com/sin1n24/lucky-number-slot
   image: ''
   description: かじた式スロット - 語呂合わせ占いスロット
   tags:
   - HTML
-  updated_at: '2026-06-19'
+  updated_at: '2026-07-23'
+- title: gas-stock-logger
+  url: https://github.com/sin1n24/gas-stock-logger
+  github_url: https://github.com/sin1n24/gas-stock-logger
+  image: ''
+  description: Google Apps Script (GAS) を使用して、ECサイトの在庫状況を定期的にスクレイピングし、Googleスプレッドシートに記録・可視化するツール。在庫減少時のメール通知や、日次推移ログ、月別販売数の簡易計算機能を搭載。
+  tags:
+  - JavaScript
+  updated_at: '2026-01-31'
+- title: match-video-editor
+  url: https://github.com/sin1n24/match-video-editor
+  github_url: https://github.com/sin1n24/match-video-editor
+  image: ''
+  description: ロボット競技の試合動画を合図検出でカットし演出付きで連結するClaude Codeスキル（スキル化後は未テスト）
+  tags:
+  - Python
+  updated_at: '2026-06-13'

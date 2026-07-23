@@ -8,9 +8,11 @@ interface Props {
   description?: string;
   tags?: string[];
   shop_url?: string;
+  try_url?: string;
+  official_url?: string;
 }
 
-const { title, url, image, description, tags, shop_url } = Astro.props;
+const { title, url, image, description, tags, shop_url, try_url, official_url } = Astro.props;
 
 // ローカル画像(/img/...)はビルド時にWebPも生成済みなのでpictureで出し分ける。
 // 外部URL(YouTubeサムネイル等)はJPEGのみなのでそのままimgで表示する。
@@ -46,6 +48,12 @@ const isExternal = /^https?:\/\//.test(url);
     )}
     <div class="card-actions">
       <a class="btn" href={url} target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noopener noreferrer' : undefined}>詳細を見る</a>
+      {try_url && (
+        <a class="btn" href={try_url} target="_blank" rel="noopener noreferrer">使ってみる</a>
+      )}
+      {official_url && (
+        <a class="btn" href={official_url} target="_blank" rel="noopener noreferrer">公式サイト</a>
+      )}
       {shop_url && (
         <a class="btn btn-primary" href={shop_url} target="_blank" rel="noopener noreferrer">販売サイト</a>
       )}

@@ -51,6 +51,7 @@
   image: "/img/1_Links.jpg"
   description: "リンク機構シミュレータ・かわロボ設計補助ソフト。AI活用でWebアプリ移植中。"
   tags: ["C++", "DxLib", "IK", "Simulation"]
+  try_url: "https://sin1.studio/Links/"
 
 - title: "かわロボVR"
   category: software
@@ -58,6 +59,20 @@
   image: "/img/4_KawaroboVR.png"
   description: "物理演算VR空間でロボットの操縦練習・試運転・ネット対戦ができる。Quest/Android対応。"
   tags: ["Unity", "VR", "Android"]
+
+- title: "AvaGotchi（あばごっち）"
+  category: software
+  url: "https://sin1.studio/AvaGotchi/"
+  image: "/img/11_AvaGotchi.jpg"
+  description: "M5Stack Basic/Gray用のたまごっち風育成ゲーム。ブラウザから直接書き込み可能。"
+  tags: ["M5Stack", "ESP32", "Game"]
+
+- title: "ORBITAL_DRIFT"
+  category: software
+  url: "https://sin1.studio/ORBITAL_DRIFT/"
+  image: "/img/7_OrbitalDrift.png"
+  description: "高専の時に最初に作ったアクションミニゲームをAIで再現。"
+  tags: ["Vanilla JS", "Canvas 2D", "Game"]
 
 - title: "かわロボアドベントカレンダー"
   category: planning
@@ -68,7 +83,8 @@
 
 - title: "ミニかわロボ"
   category: planning
-  url: "https://sin1.studio/MiniKawaRobo/"
+  url: "/blog/category/ミニかわロボ/"
+  official_url: "https://sin1.studio/MiniKawaRobo/"
   image: "/img/6_MiniKawaRobo.jpg"
   description: "手のひらサイズの格闘対戦ロボット競技規格。ミニ大会随時開催中。"
   tags: ["Robotics", "M5Stack", "Competition"]

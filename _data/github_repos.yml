@@ -6,14 +6,6 @@
   tags:
   - JavaScript
   updated_at: '2025-08-30'
-- title: SmartBadge
-  url: https://sin1.studio/SmartBadge/
-  github_url: https://github.com/sin1n24/SmartBadge
-  image: ''
-  description: Web上で動くスマートバッジ表示ツール。
-  tags:
-  - HTML
-  updated_at: '2026-05-03'
 - title: Simba
   url: http://sin1.studio/Simba/
   github_url: https://github.com/sin1n24/Simba

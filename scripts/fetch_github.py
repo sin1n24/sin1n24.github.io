@@ -19,6 +19,13 @@ EXCLUDE = {
     "gas-stock-logger",
     "QRGunman",         # predecessor of QRevolver
     "JimaCup7",         # event page with no description
+    "serval",           # in 企画 section
+    "Links",            # in ソフトウエア section
+    "AvaGotchi",        # in ソフトウエア section
+    "ORBITAL_DRIFT",    # in ソフトウエア section
+    "KawaroboVR",       # same theme as かわロボVR card, linked there as 使ってみる
+    "Simba",            # same theme as かわロボVR card, linked there as 使ってみる
+    "Hand2Servo",       # not worth showcasing
 }
 
 

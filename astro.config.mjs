@@ -7,7 +7,11 @@ export default defineConfig({
   site: 'https://sin1.studio',
   output: 'static',
   trailingSlash: 'always',
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes('/admin/'),
+    }),
+  ],
   vite: {
     plugins: [yaml()],
   },

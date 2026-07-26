@@ -29,6 +29,8 @@
 
   --footer-logo-light-display: block;
   --footer-logo-dark-display: none;
+  --cert-badge-light-display: block;
+  --cert-badge-dark-display: none;
 }
 
 :root[data-theme='dark'] {
@@ -47,6 +49,8 @@
 
   --footer-logo-light-display: none;
   --footer-logo-dark-display: block;
+  --cert-badge-light-display: none;
+  --cert-badge-dark-display: block;
 }
 
 /* prefers-color-scheme をデフォルトとして採用。手動トグルで data-theme="light" が
@@ -68,6 +72,8 @@
 
     --footer-logo-light-display: none;
     --footer-logo-dark-display: block;
+    --cert-badge-light-display: none;
+    --cert-badge-dark-display: block;
   }
 }
 
@@ -872,6 +878,24 @@ section + section {
 
 .footer-logo-dark {
   display: var(--footer-logo-dark-display);
+}
+
+.cert-badge {
+  display: block;
+  margin: 0.5rem 0 1rem;
+}
+
+.cert-badge img {
+  width: 150px;
+  height: auto;
+}
+
+.cert-badge-light {
+  display: var(--cert-badge-light-display);
+}
+
+.cert-badge-dark {
+  display: var(--cert-badge-dark-display);
 }
 
 .social-links {

@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Fetch GitHub public repos → _data/github_repos.yml"""
 
+import base64
 import os
+import re
 import sys
 import yaml
 import requests
@@ -25,13 +27,19 @@ EXCLUDE = {
     "QRevolver",        # not worth showcasing
 }
 
+# READMEのMarkdown画像記法 ![alt](url) の最初の1件を拾う
+README_IMAGE_RE = re.compile(r'!\[[^\]]*\]\((https?://[^)\s]+)\)')
 
-def fetch_repos():
+
+def build_headers():
     token = os.environ.get("GITHUB_TOKEN", "")
     headers = {"Accept": "application/vnd.github.v3+json"}
     if token:
         headers["Authorization"] = f"token {token}"
+    return headers
 
+
+def fetch_repos(headers):
     resp = requests.get(
         f"https://api.github.com/users/{USER}/repos",
         params={"per_page": 100, "sort": "updated", "type": "public"},
@@ -42,7 +50,24 @@ def fetch_repos():
     return resp.json()
 
 
-def process(repos):
+def fetch_readme_image(repo_name, headers):
+    """READMEに埋め込まれた画像（デモ動画のYouTubeサムネイル等）があれば最初の1件のURLを返す"""
+    try:
+        resp = requests.get(
+            f"https://api.github.com/repos/{USER}/{repo_name}/readme",
+            headers=headers,
+            timeout=10,
+        )
+        if resp.status_code != 200:
+            return None
+        content = base64.b64decode(resp.json()["content"]).decode("utf-8", errors="ignore")
+        match = README_IMAGE_RE.search(content)
+        return match.group(1) if match else None
+    except Exception:
+        return None
+
+
+def process(repos, headers):
     items = []
     for r in repos:
         if r["name"] in EXCLUDE or r.get("private"):
@@ -57,11 +82,15 @@ def process(repos):
         if r.get("language"):
             tags.append(r["language"])
 
+        # READMEの作例画像を優先、無ければGitHub自動生成のOGP画像にフォールバック
+        image = fetch_readme_image(r["name"], headers) or \
+            f"https://opengraph.githubassets.com/1/{USER}/{r['name']}"
+
         items.append({
             "title": r["name"],
             "url": url,
             "github_url": r["html_url"],
-            "image": f"https://opengraph.githubassets.com/1/{USER}/{r['name']}",
+            "image": image,
             "description": (r.get("description") or "").strip(),
             "tags": tags,
             "updated_at": r["updated_at"][:10],
@@ -81,25 +110,27 @@ def load_existing():
 
 
 def main():
+    headers = build_headers()
+
     try:
-        repos = fetch_repos()
+        repos = fetch_repos(headers)
     except Exception as e:
         print(f"ERROR fetching GitHub repos: {e}", file=sys.stderr)
         sys.exit(1)
 
-    items = process(repos)
+    items = process(repos, headers)
     if not items:
         print("WARNING: No repos returned — keeping existing data", file=sys.stderr)
         sys.exit(0)
 
-    # Preserve manual description overrides from existing file
+    # Preserve manual description/image overrides from existing file
     existing = {it["title"]: it for it in load_existing()}
     for item in items:
         old = existing.get(item["title"], {})
         if not item["description"] and old.get("description"):
             item["description"] = old["description"]
-        if old.get("image"):
-            item["image"] = old["image"]
+        if old.get("image_override"):
+            item["image"] = old["image_override"]
 
     with open(OUTPUT, "w", encoding="utf-8") as f:
         yaml.dump(items, f, allow_unicode=True, sort_keys=False, default_flow_style=False)

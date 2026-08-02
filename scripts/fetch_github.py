@@ -61,7 +61,7 @@ def process(repos):
             "title": r["name"],
             "url": url,
             "github_url": r["html_url"],
-            "image": "",
+            "image": f"https://opengraph.githubassets.com/1/{USER}/{r['name']}",
             "description": (r.get("description") or "").strip(),
             "tags": tags,
             "updated_at": r["updated_at"][:10],

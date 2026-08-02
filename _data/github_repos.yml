@@ -1,7 +1,7 @@
 - title: Hand2Servo
   url: https://sin1n24.github.io/Hand2Servo/
   github_url: https://github.com/sin1n24/Hand2Servo
-  image: ''
+  image: https://opengraph.githubassets.com/1/sin1n24/Hand2Servo
   description: ブラウザから手軽にサーボモータの角度を手動で試せるWebツール。
   tags:
   - JavaScript
@@ -9,7 +9,7 @@
 - title: Simba
   url: http://sin1.studio/Simba/
   github_url: https://github.com/sin1n24/Simba
-  image: ''
+  image: https://opengraph.githubassets.com/1/sin1n24/Simba
   description: かわロボVR(2018)のブラウザ版練習シミュレータ。Three.js+Rapier、ゲームパッド/タッチ操作対応。
   tags:
   - TypeScript
@@ -17,7 +17,7 @@
 - title: lucky-number-slot
   url: https://sin1.studio/lucky-number-slot/
   github_url: https://github.com/sin1n24/lucky-number-slot
-  image: ''
+  image: https://opengraph.githubassets.com/1/sin1n24/lucky-number-slot
   description: かじた式スロット - 語呂合わせ占いスロット
   tags:
   - HTML
@@ -25,7 +25,7 @@
 - title: gas-stock-logger
   url: https://github.com/sin1n24/gas-stock-logger
   github_url: https://github.com/sin1n24/gas-stock-logger
-  image: ''
+  image: https://opengraph.githubassets.com/1/sin1n24/gas-stock-logger
   description: Google Apps Script (GAS) を使用して、ECサイトの在庫状況を定期的にスクレイピングし、Googleスプレッドシートに記録・可視化するツール。在庫減少時のメール通知や、日次推移ログ、月別販売数の簡易計算機能を搭載。
   tags:
   - JavaScript
@@ -33,8 +33,16 @@
 - title: match-video-editor
   url: https://github.com/sin1n24/match-video-editor
   github_url: https://github.com/sin1n24/match-video-editor
-  image: ''
+  image: https://opengraph.githubassets.com/1/sin1n24/match-video-editor
   description: ロボット競技の試合動画を合図検出でカットし演出付きで連結するClaude Codeスキル（スキル化後は未テスト）
   tags:
   - Python
   updated_at: '2026-06-13'
+- title: RSSIDistance
+  url: https://github.com/sin1n24/RSSIDistance
+  github_url: https://github.com/sin1n24/RSSIDistance
+  image: https://opengraph.githubassets.com/1/sin1n24/RSSIDistance
+  description: M5Stick2台でRSSIでざっくり距離を測って遠距離・中距離・近距離の3種類で画面と音で通知する。
+  tags:
+  - C++
+  updated_at: '2026-08-02'

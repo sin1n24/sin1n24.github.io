@@ -25,14 +25,14 @@ const planningProjects = projects.filter((p: any) => p.category === 'planning');
 
   <section id="新着情報">
     <div class="container">
-      <SectionHeading title="新着情報" />
+      <SectionHeading title="新着情報" lead="ブログ更新やイベント出展、新作公開など、直近の活動をまとめています。" />
       <NewsList items={news} />
     </div>
   </section>
 
   <section id="ロボット">
     <div class="container">
-      <SectionHeading title="ロボット" />
+      <SectionHeading title="ロボット" lead="15年以上出場を続けているかわさきロボット競技大会（かわロボ）を中心に、独自のリンク機構設計やESP-NOWによる無線FPV操縦システムなど、実戦で使うロボットを製作しています。設計・制御基板・遠隔操縦の仕組みまで一貫して自作しているのが特徴です。" />
       <div class="card-grid">
         {robotProjects.map((p: any) => <ProjectCard {...p} />)}
       </div>
@@ -41,7 +41,7 @@ const planningProjects = projects.filter((p: any) => p.category === 'planning');
 
   <section id="ハードウエア">
     <div class="container">
-      <SectionHeading title="ハードウエア" />
+      <SectionHeading title="ハードウエア" lead="M5Stackシリーズ向けの拡張基板を中心に、自分のロボット製作で実際に使うハードウエアを設計・製作しています。スイッチサイエンスで委託販売もしており、まとまった数量でのご相談にも対応しています。" />
       <div class="card-grid">
         {hardwareProjects.map((p: any) => <ProjectCard {...p} />)}
       </div>
@@ -50,7 +50,7 @@ const planningProjects = projects.filter((p: any) => p.category === 'planning');
 
   <section id="ソフトウエア">
     <div class="container">
-      <SectionHeading title="ソフトウエア" />
+      <SectionHeading title="ソフトウエア" lead="ロボットの設計を補助するシミュレータから、VR空間での操縦練習ツール、遊べる小さなゲームまで、ものづくりに関わるソフトウエアを幅広く手がけています。C++・Unity・Web技術を用途に応じて使い分けています。" />
       <div class="card-grid">
         {softwareProjects.map((p: any) => <ProjectCard {...p} />)}
       </div>
@@ -59,7 +59,7 @@ const planningProjects = projects.filter((p: any) => p.category === 'planning');
 
   <section id="企画">
     <div class="container">
-      <SectionHeading title="企画" />
+      <SectionHeading title="企画" lead="「作って戦うロボット文化」を広げるための企画・コミュニティ運営にも取り組んでいます。手のひらサイズの対戦規格「ミニかわロボ」の提唱や、毎年恒例のかわロボ Advent カレンダーなど、技術情報の共有を軸にした活動です。" />
       <div class="card-grid">
         {planningProjects.map((p: any) => <ProjectCard {...p} />)}
       </div>

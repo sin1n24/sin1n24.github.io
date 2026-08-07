@@ -34,3 +34,8 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          # Pages側の公開処理が遅延した際、デフォルトの10分では待ちきれず
+          # 「失敗」と誤判定される（実際は数十秒後に公開が完了している）。
+          # 誤判定を見て再実行すると処理が衝突し、かえって公開が滞るため長めに取る。
+          timeout: 1800000

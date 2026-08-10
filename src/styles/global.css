@@ -1241,22 +1241,57 @@ header.page-header .category-index-label {
   display: block;
 }
 
+/* 前後記事ナビと関連記事の間に挟む「一覧へ戻る」（左端）「シェア」（中央）の行。
+   3列グリッドの両端を1frにして中央列を挟むことで、シェア側を行全体の中央に揃える */
+.post-actions {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  margin-top: 2.5rem;
+}
+
 .post-back {
+  grid-column: 1;
+  justify-self: start;
   display: inline-block;
-  margin-top: 1rem;
+  margin: 0;
 }
 
 .post-share {
+  grid-column: 2;
+  justify-self: center;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  margin-top: 1rem;
-  margin-right: 0.75rem;
+  margin: 0;
+  /* 外部（X）へ飛ぶボタンだと分かるよう、サイト内リンクのアクセントカラーとは
+     あえて分けてbody-color基調（ライト:黒系/ダーク:白系）にする */
+  color: var(--body-color);
+  border-color: var(--body-color);
+}
+
+.post-share:hover {
+  background-color: var(--body-color);
+  color: var(--body-bg) !important;
 }
 
 .post-share svg {
   width: 15px;
   height: 15px;
+}
+
+@media (max-width: 480px) {
+  .post-actions {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 0.75rem;
+  }
+
+  .post-back,
+  .post-share {
+    grid-column: 1;
+    justify-self: center;
+  }
 }
 
 /* リンクカード（admin「選択中のURLをリンクカードにする」で本文に挿入されるHTML）*/

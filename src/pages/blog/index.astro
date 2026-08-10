@@ -3,10 +3,13 @@ import Base from '../../layouts/Base.astro';
 import BlogList from '../../components/BlogList.astro';
 import { getCollection } from 'astro:content';
 import { isPublished } from '../../utils/publish';
+import { featuredPosts } from '../../utils/related';
 
 const posts = (await getCollection('blog'))
   .filter((post) => isPublished(post.data))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const featured = featuredPosts(posts);
 
 // カテゴリごとの件数を集計し、多い順に「カテゴリ一覧」として提示する
 const categoryCounts = new Map<string, number>();
@@ -28,6 +31,17 @@ const allCategories = Array.from(categoryCounts.entries()).sort((a, b) => b[1] -
       <div id="blog-search" class="reveal"></div>
     </div>
   </section>
+
+  {
+    featured.length > 0 && (
+      <section class="blog-featured-section">
+        <div class="container">
+          <h2 class="section-heading reveal">注目記事</h2>
+          <BlogList posts={featured} />
+        </div>
+      </section>
+    )
+  }
 
   <section>
     <div class="container">

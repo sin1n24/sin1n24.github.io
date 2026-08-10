@@ -34,6 +34,27 @@ const state = {
 let slugManuallyEdited = false;
 let markedLoaded = false;
 
+// ---------- 未保存の変更ガード ----------
+// タイトル/本文などをユーザーが実際にタイプしたときだけ dirty を立てる
+// （プログラムによる .value 代入では 'input' イベントが発火しないため、
+//  記事読み込みやフォームリセット直後に誤ってdirty扱いになることはない）。
+let dirty = false;
+
+function markDirty() {
+  dirty = true;
+}
+
+function markClean() {
+  dirty = false;
+}
+
+// 新規作成⇔編集の切り替えや別記事の読み込みなど、現在の入力内容を
+// 上書き・破棄する可能性がある操作の直前に呼ぶ。dirtyでなければ常にtrue。
+function confirmDiscardIfDirty() {
+  if (!dirty) return true;
+  return confirm('保存されていない変更があります。破棄してよろしいですか？');
+}
+
 // ---------- base64 / utf-8 ヘルパー ----------
 
 function utf8ToBase64(str) {
@@ -402,6 +423,7 @@ function renderArticleList(articles) {
 }
 
 async function selectArticleForEdit(article) {
+  if (!confirmDiscardIfDirty()) return;
   setSaveStatus('記事を読み込み中...');
   try {
     const data = await ghGetFile(article.path);
@@ -419,6 +441,7 @@ async function selectArticleForEdit(article) {
     setSaveStatus(`読み込みました: ${article.path}`, 'ok');
     rememberCategories(fm.categories);
     updateDeleteButtonState();
+    markClean();
   } catch (err) {
     setSaveStatus(`記事の読み込みに失敗しました: ${err.message || err}`, 'error');
   }
@@ -771,6 +794,7 @@ async function handleSaveNew() {
     document.getElementById('editing-file-label').textContent = path;
     setSaveStatus(`保存しました: ${path}`, 'ok');
     rememberCategories(data.categories);
+    markClean();
     await cleanupUnusedSessionImages(data.body);
   } catch (err) {
     setSaveStatus(`保存に失敗しました: ${err.message || err}`, 'error');
@@ -796,6 +820,7 @@ async function handleSaveEdit() {
     state.editingSha = result.content ? result.content.sha : state.editingSha;
     setSaveStatus(`更新しました: ${state.editingPath}`, 'ok');
     rememberCategories(data.categories);
+    markClean();
     await cleanupUnusedSessionImages(data.body);
   } catch (err) {
     if (err.status === 409) {
@@ -840,6 +865,7 @@ function resetFormForNew() {
   document.getElementById('field-body').value = '';
   document.getElementById('editing-file-label').textContent = '(未保存の新規記事)';
   setSaveStatus('');
+  markClean();
 }
 
 function updateDeleteButtonState() {
@@ -934,6 +960,18 @@ function wireSlugAuto() {
   dateEl.addEventListener('input', refresh);
 }
 
+function wireDirtyTracking() {
+  ['field-title', 'field-date', 'field-slug', 'field-categories', 'field-hatena', 'field-body'].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', markDirty);
+  });
+  window.addEventListener('beforeunload', (e) => {
+    if (!dirty) return;
+    e.preventDefault();
+    e.returnValue = '';
+  });
+}
+
 function wireArticleList() {
   document.getElementById('btn-load-articles').addEventListener('click', async () => {
     if (!requireAuth(setLoadStatus)) return;
@@ -970,9 +1008,18 @@ function init() {
   rememberCategories([]);
   switchMode('new');
 
-  document.getElementById('tab-new').addEventListener('click', () => switchMode('new'));
-  document.getElementById('tab-edit').addEventListener('click', () => switchMode('edit'));
-  document.getElementById('btn-new-post').addEventListener('click', () => switchMode('new'));
+  document.getElementById('tab-new').addEventListener('click', () => {
+    if (!confirmDiscardIfDirty()) return;
+    switchMode('new');
+  });
+  document.getElementById('tab-edit').addEventListener('click', () => {
+    if (!confirmDiscardIfDirty()) return;
+    switchMode('edit');
+  });
+  document.getElementById('btn-new-post').addEventListener('click', () => {
+    if (!confirmDiscardIfDirty()) return;
+    switchMode('new');
+  });
 
   document.getElementById('btn-check-slug').addEventListener('click', handleCheckSlug);
   document.getElementById('btn-save').addEventListener('click', () => {
@@ -989,6 +1036,7 @@ function init() {
   wireSlugAuto();
   wireArticleList();
   wireTextareaPaste(document.getElementById('field-body'));
+  wireDirtyTracking();
 }
 
 if (document.readyState === 'loading') {

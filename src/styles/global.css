@@ -1205,8 +1205,10 @@ header.page-header .category-index-label {
 }
 
 .post-body img {
+  max-width: 80%;
   border-radius: 8px;
-  margin: 1.2rem 0;
+  margin: 1.2rem auto;
+  display: block;
 }
 
 .post-back {

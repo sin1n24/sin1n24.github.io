@@ -22,9 +22,7 @@ blogPosts.forEach((post) => {
     categoryCounts.set(category, (categoryCounts.get(category) ?? 0) + 1);
   });
 });
-const topCategories = Array.from(categoryCounts.entries())
-  .sort((a, b) => b[1] - a[1])
-  .slice(0, 3);
+const topCategories = Array.from(categoryCounts.entries()).sort((a, b) => b[1] - a[1]);
 
 const robotProjects = projects.filter((p: any) => p.category === 'robot');
 const hardwareProjects = projects.filter((p: any) => p.category === 'hardware');
@@ -58,7 +56,7 @@ const planningProjects = projects.filter((p: any) => p.category === 'planning');
 
   <section id="ブログ">
     <div class="container">
-      <SectionHeading title="ブログ" lead="2007年から続けている製作記録・大会参加報告・技術ノウハウのブログです。全226記事を「かわロボ」「ミニかわロボ」「技術」を中心に3つのジャンルで公開しています。" />
+      <SectionHeading title="ブログ" lead="2007年から続けている製作記録・大会参加報告・技術ノウハウのブログです。全226記事をジャンル別に公開しています。" />
       <div class="category-index reveal">
         <span class="category-index-label">ジャンル:</span>
         <ul class="category-tags">

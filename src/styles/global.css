@@ -1197,6 +1197,7 @@ header.page-header .category-index-label {
 
 .post-body {
   padding-bottom: 3rem;
+  container-type: inline-size;
 }
 
 .post-body :is(h2, h3) {
@@ -1204,8 +1205,35 @@ header.page-header .category-index-label {
   margin-top: 2.2rem;
 }
 
+.post-body table {
+  width: 100%;
+  margin: 1.2rem 0;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.post-body th,
+.post-body td {
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.post-body th {
+  font-family: var(--font-heading);
+  background: var(--body-bg-elevated);
+}
+
+/* 縦長・横長どちらの画像でも、長い方の辺が本文幅の80%に収まるようにする。
+   max-width/max-heightを両方効かせ、幅基準になるか高さ基準になるかは
+   画像自身のアスペクト比にブラウザが任せる（container query単位cqwで
+   「本文幅の80%」を高さ側にも適用できる）。 */
 .post-body img {
   max-width: 80%;
+  max-height: 80cqw;
+  width: auto;
+  height: auto;
+  object-fit: contain;
   border-radius: 8px;
   margin: 1.2rem auto;
   display: block;

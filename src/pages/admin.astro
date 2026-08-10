@@ -350,10 +350,15 @@ import '../styles/global.css';
     background: var(--body-bg);
     line-height: 1.8;
     overflow-x: auto;
+    container-type: inline-size;
   }
 
   .preview-pane img {
     max-width: 80%;
+    max-height: 80cqw;
+    width: auto;
+    height: auto;
+    object-fit: contain;
     display: block;
     margin: 0 auto;
   }

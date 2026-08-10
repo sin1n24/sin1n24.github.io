@@ -10,7 +10,7 @@ import projects from '../../_data/projects.yml';
 import protopediaWorks from '../../_data/protopedia_works.yml';
 import githubRepos from '../../_data/github_repos.yml';
 import { getCollection } from 'astro:content';
-import { extractDescription } from '../utils/text';
+import { extractDescription, extractFirstImage } from '../utils/text';
 
 const blogPosts = await getCollection('blog');
 const latestPosts = [...blogPosts].sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 3);
@@ -77,12 +77,18 @@ const planningProjects = projects.filter((p: any) => p.category === 'planning');
           const m = String(post.data.date.getMonth() + 1).padStart(2, '0');
           const d = String(post.data.date.getDate()).padStart(2, '0');
           const excerpt = extractDescription(post.body ?? '', 80);
+          const thumb = extractFirstImage(post.body ?? '');
           return (
             <li class="reveal">
-              <a href={`/blog/${post.id}/`} class="blog-list-link">
-                <p class="post-title">{post.data.title}</p>
-                <p class="post-date">{`${y}年${m}月${d}日`}</p>
-                <p class="card-desc">{excerpt}{excerpt.length >= 80 ? '…' : ''}</p>
+              <a href={`/blog/${post.id}/`} class="blog-preview-link">
+                {thumb && (
+                  <img class="post-thumb" src={thumb} alt="" loading="lazy" decoding="async" />
+                )}
+                <div class="blog-list-content">
+                  <p class="post-title">{post.data.title}</p>
+                  <p class="post-date">{`${y}年${m}月${d}日`}</p>
+                  <p class="card-desc">{excerpt}{excerpt.length >= 80 ? '…' : ''}</p>
+                </div>
               </a>
             </li>
           );

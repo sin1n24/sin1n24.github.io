@@ -108,7 +108,18 @@ import '../styles/global.css';
             <span>はてなURL（任意・移行記事のみ）</span>
             <input type="text" id="field-hatena" autocomplete="off" />
           </label>
+          <label class="field field-wide field-checkbox">
+            <span class="inline-row">
+              <input type="checkbox" id="field-draft" />
+              下書きにする（サイトには表示されません）
+            </span>
+          </label>
         </div>
+        <p class="hint">
+          「日付」に未来の日付を指定して保存すると、その日になるまで（毎日03:00 JSTの自動ビルドが日付を過ぎた時点で）サイトに表示されません。
+          「下書きにする」を付けると日付に関わらず公開されず、外すまで非表示のままになります。
+          どちらの場合もGitHubリポジトリ自体には即座に保存されます（非公開の下書きが漏洩しない場所ではありません）。
+        </p>
 
         <label class="field">
           <span>本文（Markdown）</span>
@@ -230,6 +241,21 @@ import '../styles/global.css';
     display: flex;
     gap: 0.5rem;
     align-items: center;
+  }
+
+  .field-checkbox {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .field-checkbox .inline-row {
+    gap: 0.4rem;
+  }
+
+  .field-checkbox input[type='checkbox'] {
+    flex: none;
+    width: auto;
   }
 
   .inline-row input {

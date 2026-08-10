@@ -205,7 +205,7 @@ function unquoteYaml(str) {
   return s;
 }
 
-function buildFrontmatter({ title, date, categories, hatenaUrl }) {
+function buildFrontmatter({ title, date, categories, hatenaUrl, draft }) {
   const lines = ['---'];
   lines.push(`title: "${escapeYamlString(title)}"`);
   lines.push(`date: ${date}`);
@@ -214,6 +214,10 @@ function buildFrontmatter({ title, date, categories, hatenaUrl }) {
   }
   if (hatenaUrl) {
     lines.push(`hatena_url: "${escapeYamlString(hatenaUrl)}"`);
+  }
+  // draft: false は書かない（既存224記事のfrontmatter形状を変えないため。省略=公開扱い）
+  if (draft) {
+    lines.push('draft: true');
   }
   lines.push('---');
   return lines.join('\n');
@@ -237,6 +241,7 @@ function parseFrontmatter(raw) {
   const dateMatch = fmText.match(/^date:\s*(.*)$/m);
   const categoriesMatch = fmText.match(/^categories:\s*\[(.*)\]\s*$/m);
   const hatenaMatch = fmText.match(/^hatena_url:\s*(.*)$/m);
+  const draftMatch = fmText.match(/^draft:\s*(true|false)\s*$/m);
 
   return {
     title: titleMatch ? unquoteYaml(titleMatch[1]) : '',
@@ -248,6 +253,7 @@ function parseFrontmatter(raw) {
           .filter(Boolean)
       : [],
     hatenaUrl: hatenaMatch ? unquoteYaml(hatenaMatch[1]) : '',
+    draft: draftMatch ? draftMatch[1] === 'true' : false,
     body,
   };
 }
@@ -377,7 +383,14 @@ async function loadArticles(onProgress) {
       const file = files[i];
       const cached = cache[file.path];
       if (cached && cached.sha === file.sha) {
-        results[i] = { path: file.path, name: file.name, sha: file.sha, title: cached.title, date: cached.date };
+        results[i] = {
+          path: file.path,
+          name: file.name,
+          sha: file.sha,
+          title: cached.title,
+          date: cached.date,
+          draft: !!cached.draft,
+        };
       } else {
         try {
           const data = await ghGetFile(file.path);
@@ -389,10 +402,16 @@ async function loadArticles(onProgress) {
             sha: file.sha,
             title: fm.title || file.name,
             date: fm.date || '',
+            draft: !!fm.draft,
           };
-          cache[file.path] = { sha: file.sha, title: results[i].title, date: results[i].date };
+          cache[file.path] = {
+            sha: file.sha,
+            title: results[i].title,
+            date: results[i].date,
+            draft: results[i].draft,
+          };
         } catch (err) {
-          results[i] = { path: file.path, name: file.name, sha: file.sha, title: file.name, date: '' };
+          results[i] = { path: file.path, name: file.name, sha: file.sha, title: file.name, date: '', draft: false };
         }
       }
       done++;
@@ -416,7 +435,7 @@ function renderArticleList(articles) {
     const item = document.createElement('button');
     item.type = 'button';
     item.className = 'article-item';
-    item.textContent = `${a.date || '----------'}  ${a.title}`;
+    item.textContent = `${a.date || '----------'}  ${a.title}${a.draft ? '　[下書き]' : ''}`;
     item.addEventListener('click', () => selectArticleForEdit(a));
     container.appendChild(item);
   });
@@ -436,6 +455,7 @@ async function selectArticleForEdit(article) {
     document.getElementById('field-slug').value = article.name.replace(/\.md$/, '');
     document.getElementById('field-categories').value = fm.categories.join(', ');
     document.getElementById('field-hatena').value = fm.hatenaUrl;
+    document.getElementById('field-draft').checked = !!fm.draft;
     document.getElementById('field-body').value = fm.body;
     document.getElementById('editing-file-label').textContent = article.path;
     setSaveStatus(`読み込みました: ${article.path}`, 'ok');
@@ -748,8 +768,9 @@ function collectFormData() {
     .map((s) => s.trim())
     .filter(Boolean);
   const hatenaUrl = document.getElementById('field-hatena').value.trim();
+  const draft = document.getElementById('field-draft').checked;
   const body = document.getElementById('field-body').value;
-  return { title, date, slug, categories, hatenaUrl, body };
+  return { title, date, slug, categories, hatenaUrl, draft, body };
 }
 
 function validateForm(data) {
@@ -862,6 +883,7 @@ function resetFormForNew() {
   document.getElementById('field-slug').value = defaultSlug('', todayStr());
   document.getElementById('field-categories').value = '';
   document.getElementById('field-hatena').value = '';
+  document.getElementById('field-draft').checked = false;
   document.getElementById('field-body').value = '';
   document.getElementById('editing-file-label').textContent = '(未保存の新規記事)';
   setSaveStatus('');
@@ -961,7 +983,7 @@ function wireSlugAuto() {
 }
 
 function wireDirtyTracking() {
-  ['field-title', 'field-date', 'field-slug', 'field-categories', 'field-hatena', 'field-body'].forEach((id) => {
+  ['field-title', 'field-date', 'field-slug', 'field-categories', 'field-hatena', 'field-draft', 'field-body'].forEach((id) => {
     const el = document.getElementById(id);
     if (el) el.addEventListener('input', markDirty);
   });

@@ -11,8 +11,9 @@ import protopediaWorks from '../../_data/protopedia_works.yml';
 import githubRepos from '../../_data/github_repos.yml';
 import { getCollection } from 'astro:content';
 import { extractDescription, extractFirstImage } from '../utils/text';
+import { isPublished } from '../utils/publish';
 
-const blogPosts = await getCollection('blog');
+const blogPosts = (await getCollection('blog')).filter((post) => isPublished(post.data));
 const latestPosts = [...blogPosts].sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 3);
 
 const categoryCounts = new Map<string, number>();

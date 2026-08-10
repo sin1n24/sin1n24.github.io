@@ -3,6 +3,11 @@ name: Deploy Astro site to Pages
 on:
   push:
     branches: [main]
+  schedule:
+    # 予定日公開の下書き記事を日付到来時に反映するための日次リビルド（03:00 JST）。
+    # update-data.yml側のcommitは[skip ci]付きかつGITHUB_TOKEN由来でpushトリガーを起こさないため、
+    # デプロイ自体にも独立したscheduleが必要。
+    - cron: "0 18 * * *"
   workflow_dispatch:
 
 permissions:

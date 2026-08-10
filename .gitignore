@@ -26,3 +26,7 @@ __pycache__/
 # 作業中の一時ファイル
 *.tmp.cjs
 preview*.log
+
+# clasp（GASデプロイ用ローカル設定。公開リポジトリには含めない）
+.clasp.json
+.claspignore

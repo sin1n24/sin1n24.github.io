@@ -8,3 +8,8 @@ export function extractDescription(markdown: string, length = 100): string {
     .trim();
   return plain.slice(0, length);
 }
+
+export function extractFirstImage(markdown: string): string | null {
+  const match = markdown.match(/!\[[^\]]*\]\(([^)\s]+)/);
+  return match ? match[1] : null;
+}

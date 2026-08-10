@@ -2,6 +2,7 @@
 // ブログ記事一覧の<ul>部分。blog/index.astro・blog/category/[category].astro で共用。
 import type { CollectionEntry } from 'astro:content';
 import CategoryTags from './CategoryTags.astro';
+import { extractFirstImage } from '../utils/text';
 
 interface Props {
   posts: CollectionEntry<'blog'>[];
@@ -16,11 +17,17 @@ const { posts } = Astro.props;
       const y = post.data.date.getFullYear();
       const m = String(post.data.date.getMonth() + 1).padStart(2, '0');
       const d = String(post.data.date.getDate()).padStart(2, '0');
+      const thumb = extractFirstImage(post.body ?? '');
       return (
         <li class="reveal">
           <a href={`/blog/${post.id}/`} class="blog-list-link">
-            <p class="post-title">{post.data.title}</p>
-            <p class="post-date">{`${y}年${m}月${d}日`}</p>
+            {thumb && (
+              <img class="post-thumb" src={thumb} alt="" loading="lazy" decoding="async" />
+            )}
+            <div class="blog-list-body">
+              <p class="post-title">{post.data.title}</p>
+              <p class="post-date">{`${y}年${m}月${d}日`}</p>
+            </div>
           </a>
           <CategoryTags categories={post.data.categories} />
         </li>

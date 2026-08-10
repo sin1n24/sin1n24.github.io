@@ -1025,9 +1025,25 @@ section + section {
 }
 
 .blog-list-link {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   text-decoration: none;
   color: inherit;
+}
+
+.post-thumb {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 8px;
+  background: var(--tag-bg);
+}
+
+.blog-list-body {
+  min-width: 0;
+  flex: 1;
 }
 
 .blog-list .post-title {

@@ -665,19 +665,29 @@ function buildLinkCardHtml({ url, title, image, description }) {
   );
 }
 
+// 選択範囲が「URL単体」または既存の「[ラベル](URL)」形式のMarkdownリンクかを判定する。
+// 該当すればURLと（あれば）ラベルを返す。どちらでもなければnull。
+function extractUrlFromSelection(selected) {
+  if (URL_ONLY_REGEX.test(selected)) return { url: selected, label: '' };
+  const linkMatch = selected.match(/^\[([^\]]*)\]\((https?:\/\/[^\s)]+)\)$/);
+  if (linkMatch) return { url: linkMatch[2], label: linkMatch[1] };
+  return null;
+}
+
 async function cardifyUrlAtSelection(textarea) {
   const start = textarea.selectionStart;
   const end = textarea.selectionEnd;
   const selected = textarea.value.slice(start, end).trim();
-  if (!URL_ONLY_REGEX.test(selected)) {
-    setConvertStatus('選択範囲がURLではありません（URLのみを選択してください）', 'error');
+  const extracted = extractUrlFromSelection(selected);
+  if (!extracted) {
+    setConvertStatus('選択範囲がURL、または[タイトル](URL)形式のリンクではありません', 'error');
     return;
   }
   if (!state.settings || !state.settings.gasUrl) {
     setConvertStatus('URL変換プロキシ（GAS Web App URL）が未設定のためカード化できません', 'error');
     return;
   }
-  const url = selected;
+  const { url, label } = extracted;
   const placeholder = `[カード生成中...](${url})`;
   replaceRange(textarea, start, end, placeholder);
   setConvertStatus(`カード情報を取得中... (${url})`);
@@ -693,6 +703,9 @@ async function cardifyUrlAtSelection(textarea) {
   } catch (err) {
     setConvertStatus(`タイトル・説明の自動取得に失敗しました（${err.message || err}）`, 'error');
   }
+  // 選択したのが既存の[ラベル](URL)なら、そのラベルを自動取得タイトルより優先する
+  // （ユーザーが既に意図して付けた表記を尊重する）
+  if (label) title = label;
 
   if (!image) {
     const manualImage = window.prompt(

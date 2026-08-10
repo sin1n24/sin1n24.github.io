@@ -1024,12 +1024,10 @@ section + section {
   border-bottom: 1px solid var(--border-color);
 }
 
-.blog-list-link {
+.blog-list-row {
   display: flex;
   align-items: center;
   gap: 1rem;
-  text-decoration: none;
-  color: inherit;
 }
 
 .post-thumb {
@@ -1041,12 +1039,21 @@ section + section {
   background: var(--tag-bg);
 }
 
+.blog-list-content {
+  min-width: 0;
+  flex: 1;
+}
+
+.blog-list-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
 .blog-list .post-title {
   font-family: var(--font-heading);
   font-size: 1.15rem;
   margin: 0;
-  flex: 1;
-  min-width: 0;
 }
 
 .post-meta {
@@ -1055,10 +1062,6 @@ section + section {
   flex-wrap: wrap;
   gap: 0.6rem;
   margin-top: 0.35rem;
-}
-
-.post-meta-indented {
-  margin-left: calc(128px + 1rem);
 }
 
 .blog-list .post-date {

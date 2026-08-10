@@ -14,52 +14,7 @@ import '../styles/global.css';
     <div class="admin-shell container">
       <header class="admin-header">
         <h1>記事管理 (/admin/)</h1>
-        <p class="hint">
-          ブラウザだけでブログ記事の新規作成・編集・GitHubへのコミットができます。
-          <a href="/">サイトに戻る</a>
-        </p>
       </header>
-
-      <details class="settings-panel" open>
-        <summary>接続設定</summary>
-        <div class="field-grid">
-          <label class="field">
-            <span>GitHub Personal Access Token</span>
-            <input type="password" id="pat" autocomplete="off" placeholder="github_pat_..." />
-          </label>
-          <label class="field">
-            <span>リポジトリ Owner</span>
-            <input type="text" id="owner" autocomplete="off" />
-          </label>
-          <label class="field">
-            <span>リポジトリ名</span>
-            <input type="text" id="repo" autocomplete="off" />
-          </label>
-          <label class="field">
-            <span>対象ブランチ（空欄でデフォルトブランチ）</span>
-            <input type="text" id="branch" autocomplete="off" placeholder="main" />
-          </label>
-          <label class="field field-wide">
-            <span>URL変換プロキシ (GAS Web App URL・任意)</span>
-            <input
-              type="text"
-              id="gas-url"
-              autocomplete="off"
-              placeholder="https://script.google.com/macros/s/xxxxx/exec"
-            />
-          </label>
-        </div>
-        <div class="btn-row">
-          <button type="button" id="btn-save-settings" class="btn btn-primary">設定を保存</button>
-          <button type="button" id="btn-clear-settings" class="btn">設定を削除</button>
-        </div>
-        <p id="settings-status" class="status"></p>
-        <p id="global-status" class="status"></p>
-        <p class="hint">
-          ※ トークンはこのブラウザの localStorage にのみ保存されます。他者に公開して見せるページではありません。
-          対象リポジトリのみに限定した Fine-grained Personal Access Token（Contents: Read and write 権限）の発行を推奨します。
-        </p>
-      </details>
 
       <nav class="tabs">
         <button type="button" id="tab-new" class="tab-btn active">新規作成</button>
@@ -156,7 +111,55 @@ import '../styles/global.css';
         </div>
         <p id="save-status" class="status"></p>
       </section>
+
+      <details class="settings-panel">
+        <summary>接続設定</summary>
+        <div class="field-grid">
+          <label class="field">
+            <span>GitHub Personal Access Token</span>
+            <input type="password" id="pat" autocomplete="off" placeholder="github_pat_..." />
+          </label>
+          <label class="field">
+            <span>リポジトリ Owner</span>
+            <input type="text" id="owner" autocomplete="off" />
+          </label>
+          <label class="field">
+            <span>リポジトリ名</span>
+            <input type="text" id="repo" autocomplete="off" />
+          </label>
+          <label class="field">
+            <span>対象ブランチ（空欄でデフォルトブランチ）</span>
+            <input type="text" id="branch" autocomplete="off" placeholder="main" />
+          </label>
+          <label class="field field-wide">
+            <span>URL変換プロキシ (GAS Web App URL・任意)</span>
+            <input
+              type="text"
+              id="gas-url"
+              autocomplete="off"
+              placeholder="https://script.google.com/macros/s/xxxxx/exec"
+            />
+          </label>
+        </div>
+        <div class="btn-row">
+          <button type="button" id="btn-save-settings" class="btn btn-primary">設定を保存</button>
+          <button type="button" id="btn-clear-settings" class="btn">設定を削除</button>
+        </div>
+        <p id="settings-status" class="status"></p>
+        <p id="global-status" class="status"></p>
+        <p class="hint">
+          ※ トークンはこのブラウザの localStorage にのみ保存されます。他者に公開して見せるページではありません。
+          対象リポジトリのみに限定した Fine-grained Personal Access Token（Contents: Read and write 権限）の発行を推奨します。
+        </p>
+      </details>
     </div>
+
+    <footer class="admin-footer">
+      <a href="/" aria-label="サイトトップへ戻る">
+        <img class="footer-logo footer-logo-light" src="/img/sss_logo_3x1_black.png" alt="sin1's studio ロゴ" loading="lazy" />
+        <img class="footer-logo footer-logo-dark" src="/img/sss_logo_3x1_white.png" alt="sin1's studio ロゴ" loading="lazy" />
+      </a>
+    </footer>
 
     <script>
       import '../scripts/admin-editor.js';
@@ -178,16 +181,23 @@ import '../styles/global.css';
     margin-bottom: 0.25rem;
   }
 
-  .admin-header a {
-    color: var(--color-accent);
-  }
-
   .settings-panel {
     border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 1rem 1.25rem;
-    margin: 1.5rem 0;
+    margin: 2.5rem 0 0;
     background: var(--body-bg-elevated);
+  }
+
+  .admin-footer {
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  .admin-footer .footer-logo {
+    max-width: 200px;
+    margin: 0 auto;
+    opacity: 0.85;
   }
 
   .settings-panel summary {

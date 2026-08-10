@@ -1,15 +1,20 @@
 ---
 import Base from './Base.astro';
 import CategoryTags from '../components/CategoryTags.astro';
+import BlogList from '../components/BlogList.astro';
+import type { CollectionEntry } from 'astro:content';
 
 interface Props {
   title: string;
   date: Date;
   description?: string;
   categories?: string[];
+  prevPost?: CollectionEntry<'blog'> | null;
+  nextPost?: CollectionEntry<'blog'> | null;
+  related?: CollectionEntry<'blog'>[];
 }
 
-const { title, date, description, categories } = Astro.props;
+const { title, date, description, categories, prevPost, nextPost, related = [] } = Astro.props;
 
 // 現行サイト踏襲のフォーマット: YYYY年MM月DD日
 const y = date.getFullYear();
@@ -29,6 +34,31 @@ const dateLabel = `${y}年${m}月${d}日`;
     </header>
     <div class="post-body container">
       <slot />
+
+      {(prevPost || nextPost) && (
+        <nav class="post-nav" aria-label="前後の記事" data-pagefind-ignore>
+          {prevPost && (
+            <a class="post-nav-link post-nav-prev" href={`/blog/${prevPost.id}/`}>
+              <span class="post-nav-label">← 前の記事</span>
+              <span class="post-nav-title">{prevPost.data.title}</span>
+            </a>
+          )}
+          {nextPost && (
+            <a class="post-nav-link post-nav-next" href={`/blog/${nextPost.id}/`}>
+              <span class="post-nav-label">次の記事 →</span>
+              <span class="post-nav-title">{nextPost.data.title}</span>
+            </a>
+          )}
+        </nav>
+      )}
+
+      {related.length > 0 && (
+        <section class="post-related" data-pagefind-ignore>
+          <h2 class="section-heading post-related-heading reveal">関連記事</h2>
+          <BlogList posts={related} />
+        </section>
+      )}
+
       <a class="btn post-back" href="/blog/" data-pagefind-ignore>← ブログ一覧へ戻る</a>
     </div>
   </article>

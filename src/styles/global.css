@@ -1216,6 +1216,65 @@ header.page-header .category-index-label {
   margin-top: 1rem;
 }
 
+.post-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.post-nav-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  text-decoration: none;
+  color: inherit;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  transition: border-color 0.2s ease;
+}
+
+.post-nav-link:hover {
+  border-color: var(--color-accent);
+}
+
+.post-nav-next {
+  grid-column: 2;
+  text-align: right;
+}
+
+.post-nav-label {
+  font-size: 0.78rem;
+  color: var(--body-color-muted);
+}
+
+.post-nav-title {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+}
+
+.post-related {
+  margin-top: 2.5rem;
+}
+
+.post-related-heading {
+  font-size: 1.3rem;
+}
+
+@media (max-width: 600px) {
+  .post-nav {
+    grid-template-columns: 1fr;
+  }
+
+  .post-nav-next {
+    grid-column: 1;
+    text-align: left;
+  }
+}
+
 /* ==========================================================
    その他ページ共通
    ========================================================== */

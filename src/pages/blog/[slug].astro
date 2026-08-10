@@ -5,19 +5,47 @@ import { extractDescription } from '../../utils/text';
 import { isPublished } from '../../utils/publish';
 
 export async function getStaticPaths() {
-  const posts = (await getCollection('blog')).filter((post) => isPublished(post.data));
-  return posts.map((post) => ({
-    params: { slug: post.id },
-    props: { post },
-  }));
+  const RELATED_LIMIT = 3;
+  // 前後記事の判定用に古い順で並べる（prev=1つ古い記事、next=1つ新しい記事）
+  const posts = (await getCollection('blog'))
+    .filter((post) => isPublished(post.data))
+    .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+
+  return posts.map((post, index) => {
+    const categories = post.data.categories ?? [];
+    const related = categories.length
+      ? posts
+          .filter((p) => p.id !== post.id && (p.data.categories ?? []).some((c) => categories.includes(c)))
+          .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+          .slice(0, RELATED_LIMIT)
+      : [];
+
+    return {
+      params: { slug: post.id },
+      props: {
+        post,
+        prevPost: posts[index - 1] ?? null,
+        nextPost: posts[index + 1] ?? null,
+        related,
+      },
+    };
+  });
 }
 
-const { post } = Astro.props;
+const { post, prevPost, nextPost, related } = Astro.props;
 const { Content } = await render(post);
 
 const description = extractDescription(post.body ?? '');
 ---
 
-<BlogPost title={post.data.title} date={post.data.date} categories={post.data.categories} description={description}>
+<BlogPost
+  title={post.data.title}
+  date={post.data.date}
+  categories={post.data.categories}
+  description={description}
+  prevPost={prevPost}
+  nextPost={nextPost}
+  related={related}
+>
   <Content />
 </BlogPost>

@@ -13,6 +13,7 @@ const SITE_URL = 'https://sin1.studio';
 const DEFAULT_CATEGORIES = ['かわロボ', 'ミニかわロボ', 'ガジェット', '技術'];
 const SETTINGS_KEY = 'sin1studio_admin_settings_v1';
 const ARTICLE_CACHE_KEY = 'sin1studio_admin_article_cache_v1';
+const AUTOSAVE_KEY = 'sin1studio_admin_autosave_v1';
 const URL_ONLY_REGEX = /^https?:\/\/\S+$/i;
 // クリップボードの内容が「URLらしき文字列を含んでいるかどうか」の緩い判定用（フィードバック表示の要否判定にのみ使う）
 const URL_LIKE_REGEX = /https?:\/\//i;
@@ -46,6 +47,67 @@ function markDirty() {
 
 function markClean() {
   dirty = false;
+  clearAutosave();
+}
+
+// ---------- 自動保存（ブラウザクラッシュ・誤操作対策） ----------
+// GitHubへの保存とは別に、実際にタイプした内容を都度localStorageへスナップショットする。
+// 事故で内容が消えても次回アクセス時に復元を提案できるようにするためのもの。
+
+function saveAutosave() {
+  try {
+    const data = collectFormData();
+    localStorage.setItem(
+      AUTOSAVE_KEY,
+      JSON.stringify({
+        ...data,
+        mode: state.mode,
+        editingPath: state.editingPath,
+        editingSha: state.editingSha,
+        savedAt: Date.now(),
+      })
+    );
+  } catch (err) {
+    // 容量オーバー等は無視（自動保存が効かないだけでエディタ自体は使える）
+  }
+}
+
+function clearAutosave() {
+  localStorage.removeItem(AUTOSAVE_KEY);
+}
+
+function loadAutosave() {
+  try {
+    const raw = localStorage.getItem(AUTOSAVE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch (err) {
+    return null;
+  }
+}
+
+let autosaveTimer = null;
+function scheduleAutosave() {
+  if (autosaveTimer) clearTimeout(autosaveTimer);
+  autosaveTimer = setTimeout(saveAutosave, 800);
+}
+
+function restoreAutosave(autosave) {
+  state.mode = autosave.mode === 'edit' ? 'edit' : 'new';
+  state.editingPath = autosave.editingPath || null;
+  state.editingSha = autosave.editingSha || null;
+  updateModeUI(state.mode);
+  document.getElementById('field-title').value = autosave.title || '';
+  document.getElementById('field-date').value = autosave.date || todayStr();
+  document.getElementById('field-slug').value = autosave.slug || '';
+  document.getElementById('field-categories').value = (autosave.categories || []).join(', ');
+  document.getElementById('field-hatena').value = autosave.hatenaUrl || '';
+  document.getElementById('field-draft').checked = !!autosave.draft;
+  document.getElementById('field-body').value = autosave.body || '';
+  document.getElementById('editing-file-label').textContent = state.editingPath || '(未保存の新規記事)';
+  slugManuallyEdited = true; // 復元したスラッグをタイトル入力で自動上書きしない
+  dirty = true; // 復元直後はまだGitHubへ未保存
+  updateDeleteButtonState();
+  setSaveStatus('自動保存データを復元しました。内容を確認して保存してください', 'ok');
 }
 
 // 新規作成⇔編集の切り替えや別記事の読み込みなど、現在の入力内容を
@@ -898,13 +960,17 @@ function updateDeleteButtonState() {
   btn.disabled = !canDelete;
 }
 
-function switchMode(mode) {
-  state.mode = mode;
+function updateModeUI(mode) {
   document.getElementById('tab-new').classList.toggle('active', mode === 'new');
   document.getElementById('tab-edit').classList.toggle('active', mode === 'edit');
   document.getElementById('edit-panel').style.display = mode === 'edit' ? 'block' : 'none';
   document.getElementById('field-slug').readOnly = mode === 'edit';
   document.getElementById('btn-save').textContent = mode === 'edit' ? '更新を保存' : '新規記事を保存';
+}
+
+function switchMode(mode) {
+  state.mode = mode;
+  updateModeUI(mode);
   if (mode === 'new') {
     resetFormForNew();
   } else {
@@ -985,10 +1051,16 @@ function wireSlugAuto() {
 function wireDirtyTracking() {
   ['field-title', 'field-date', 'field-slug', 'field-categories', 'field-hatena', 'field-draft', 'field-body'].forEach((id) => {
     const el = document.getElementById(id);
-    if (el) el.addEventListener('input', markDirty);
+    if (el) {
+      el.addEventListener('input', () => {
+        markDirty();
+        scheduleAutosave();
+      });
+    }
   });
   window.addEventListener('beforeunload', (e) => {
     if (!dirty) return;
+    saveAutosave(); // デバウンス待ちの変更を離脱前に確定させる
     e.preventDefault();
     e.returnValue = '';
   });
@@ -1028,7 +1100,20 @@ function wireArticleList() {
 function init() {
   wireSettings();
   rememberCategories([]);
-  switchMode('new');
+
+  const autosave = loadAutosave();
+  const hasAutosaveContent = autosave && (autosave.title || (autosave.body || '').trim());
+  if (hasAutosaveContent) {
+    const savedAt = new Date(autosave.savedAt || Date.now()).toLocaleString('ja-JP');
+    if (confirm(`自動保存されたデータ（${savedAt}時点）があります。復元しますか？`)) {
+      restoreAutosave(autosave);
+    } else {
+      clearAutosave();
+      switchMode('new');
+    }
+  } else {
+    switchMode('new');
+  }
 
   document.getElementById('tab-new').addEventListener('click', () => {
     if (!confirmDiscardIfDirty()) return;

@@ -810,6 +810,68 @@ async function cleanupUnusedSessionImages(finalBody) {
   }
 }
 
+// ---------- Markdown書式ショートカット（Ctrl/Cmd+B等） ----------
+
+// 選択範囲をbefore/afterで囲む。既に囲まれていれば外す（トグル）。
+function wrapSelection(textarea, before, after = before) {
+  const start = textarea.selectionStart;
+  const end = textarea.selectionEnd;
+  const value = textarea.value;
+  const selected = value.slice(start, end);
+
+  const alreadyWrapped =
+    selected.length >= before.length + after.length && selected.startsWith(before) && selected.endsWith(after);
+
+  const newText = alreadyWrapped ? selected.slice(before.length, selected.length - after.length) : before + selected + after;
+
+  textarea.value = value.slice(0, start) + newText + value.slice(end);
+  textarea.selectionStart = start;
+  textarea.selectionEnd = start + newText.length;
+  textarea.focus();
+  textarea.dispatchEvent(new Event('input', { bubbles: true }));
+}
+
+function insertLinkAtSelection(textarea) {
+  const start = textarea.selectionStart;
+  const end = textarea.selectionEnd;
+  const selected = textarea.value.slice(start, end);
+  const url = window.prompt('リンク先URLを入力してください', 'https://');
+  if (url === null) return;
+  const label = selected || 'リンクテキスト';
+  replaceRange(textarea, start, end, `[${label}](${url})`);
+  const labelStart = start + 1;
+  textarea.selectionStart = labelStart;
+  textarea.selectionEnd = labelStart + label.length;
+  textarea.focus();
+  textarea.dispatchEvent(new Event('input', { bubbles: true }));
+}
+
+function wireTextareaShortcuts(textarea) {
+  textarea.addEventListener('keydown', (e) => {
+    if (!(e.ctrlKey || e.metaKey) || e.altKey) return;
+    switch (e.key.toLowerCase()) {
+      case 'b':
+        e.preventDefault();
+        wrapSelection(textarea, '**');
+        break;
+      case 'i':
+        e.preventDefault();
+        wrapSelection(textarea, '*');
+        break;
+      case 'e':
+        e.preventDefault();
+        wrapSelection(textarea, '`');
+        break;
+      case 'k':
+        e.preventDefault();
+        insertLinkAtSelection(textarea);
+        break;
+      default:
+        break;
+    }
+  });
+}
+
 function wireTextareaPaste(textarea) {
   textarea.addEventListener('paste', async (e) => {
     const items = e.clipboardData && e.clipboardData.items;
@@ -1269,6 +1331,7 @@ function init() {
   wireSlugAuto();
   wireArticleList();
   wireTextareaPaste(document.getElementById('field-body'));
+  wireTextareaShortcuts(document.getElementById('field-body'));
   wireDirtyTracking();
 }
 

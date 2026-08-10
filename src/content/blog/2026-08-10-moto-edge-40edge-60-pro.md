@@ -56,4 +56,6 @@ Edge 40の「軽さ・薄さ」も魅力的でしたが、Edge 60 proの「カ�
 
 しばらくはこのスマホを新しい相棒にして、また色々な活動記録や製作の様子を残していきたいと思います。
 
-[AA Motorola edge 60pro PANTONE｜12GB/256GB｜ダーズブルー](https://amzn.to/4wj2kEu)
+<a class="link-card" href="https://www.amazon.co.jp/Motorola-%E3%83%A2%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9-256GB%EF%BD%9C%E3%83%80%E3%83%BC%E3%82%BA%E3%83%96%E3%83%AB%E3%83%BC%EF%BD%9CSIM%E3%83%95%E3%83%AA%E3%83%BC%E3%82%B9%E3%83%9E%E3%83%9B-%E5%AF%BE%E5%BF%9C%EF%BD%9C%E6%AD%A3%E8%A6%8F%E4%BB%A3%E7%90%86%E5%BA%97%E5%93%81%EF%BD%9C6-7%E3%82%A4%E3%83%B3%E3%83%81%EF%BD%9C%E6%9C%89%E6%A9%9FEL%EF%BD%9CSuper-HD%EF%BD%9CIP68%E3%83%BBIP69%E9%98%B2%E6%B0%B4%E9%98%B2%E5%A1%B5%EF%BD%9C%E5%A4%A7%E5%AE%B9%E9%87%8F%E3%83%90%E3%83%83%E3%83%86%E3%83%AA%E3%83%BC/dp/B0FDKSSX5Q?pd_rd_w=QuB6A&amp;content-id=amzn1.sym.308c03cc-4571-454b-b6e1-051d8b645bdf%3Aamzn1.symc.c946cdfb-3c15-48da-90e6-e9b2cb1b2953&amp;pf_rd_p=308c03cc-4571-454b-b6e1-051d8b645bdf&amp;pf_rd_r=WP8W4K3YZZ2RVRP1N6DK&amp;pd_rd_wg=dSY48&amp;pd_rd_r=b6656bb6-3346-44d2-b2d4-37df69216df9&amp;pd_rd_i=B0FDKSSX5Q&amp;th=1&amp;linkCode=ll2&amp;tag=sin1n24-22&amp;linkId=daf8120078acad588d100b440578f88d&amp;ref_=as_li_ss_tl" target="_blank" rel="noopener noreferrer"><img class="link-card-image" src="https://m.media-amazon.com/images/I/81P4VWdeLUL._AC_SL1500_.jpg" alt="" loading="lazy" /><span class="link-card-body"><span class="link-card-title">
+Motorola(モトローラ) motorola edge 60pro PANTONE｜12GB/256GB｜ダーズブルー｜PB7U0001JP
+</span><span class="link-card-domain">amazon.co.jp</span></span></a>

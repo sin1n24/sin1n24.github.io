@@ -24,12 +24,12 @@ const { posts } = Astro.props;
             {thumb && (
               <img class="post-thumb" src={thumb} alt="" loading="lazy" decoding="async" />
             )}
-            <div class="blog-list-body">
-              <p class="post-title">{post.data.title}</p>
-              <p class="post-date">{`${y}年${m}月${d}日`}</p>
-            </div>
+            <p class="post-title">{post.data.title}</p>
           </a>
-          <CategoryTags categories={post.data.categories} />
+          <div class:list={['post-meta', { 'post-meta-indented': thumb }]}>
+            <p class="post-date">{`${y}年${m}月${d}日`}</p>
+            <CategoryTags categories={post.data.categories} />
+          </div>
         </li>
       );
     })

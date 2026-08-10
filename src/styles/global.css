@@ -1033,32 +1033,42 @@ section + section {
 }
 
 .post-thumb {
-  width: 64px;
-  height: 64px;
+  width: 128px;
+  height: 128px;
   flex-shrink: 0;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 10px;
   background: var(--tag-bg);
-}
-
-.blog-list-body {
-  min-width: 0;
-  flex: 1;
 }
 
 .blog-list .post-title {
   font-family: var(--font-heading);
   font-size: 1.15rem;
-  margin: 0 0 0.35rem;
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.35rem;
+}
+
+.post-meta-indented {
+  margin-left: calc(128px + 1rem);
 }
 
 .blog-list .post-date {
   font-size: 0.8rem;
   color: var(--body-color-muted);
+  margin: 0;
 }
 
 .blog-list .category-tags {
-  margin-top: 0.6rem;
+  margin-top: 0;
 }
 
 .post-header {

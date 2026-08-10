@@ -54,8 +54,10 @@ Google Apps Script のWebアプリを間に挟み、対象URLの `<title>` / `og
 
 ```bash
 curl "https://script.google.com/macros/s/xxxxx/exec?url=https://example.com/"
-# => {"ok":true,"title":"Example Domain","url":"https://example.com/"}
+# => {"ok":true,"title":"Example Domain","image":"","description":"","url":"https://example.com/"}
 ```
+
+`image`/`description`は取得できたサイトのみ値が入ります（無ければ空文字）。Amazon等、サーバー間フェッチをボット判定でブロックするサイトは`title`もダミー値（例:「Amazon.co.jp」）になり、`image`は空になります。/admin/側はこの場合カード用の画像URLを手動入力できるようフォールバックします。
 
 ## コードを更新する場合
 

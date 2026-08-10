@@ -622,6 +622,92 @@ async function convertUrlAtSelection(textarea) {
   await runUrlConversion(textarea, start, end, selected);
 }
 
+// ---------- URL → リンクカード（画像+タイトル+説明文）化 ----------
+
+async function fetchOgpViaProxy(url) {
+  if (!state.settings.gasUrl) {
+    throw new Error('URL変換プロキシ（GAS Web App URL）が設定されていません');
+  }
+  const sep = state.settings.gasUrl.includes('?') ? '&' : '?';
+  const endpoint = `${state.settings.gasUrl}${sep}url=${encodeURIComponent(url)}`;
+  const res = await fetch(endpoint);
+  if (!res.ok) throw new Error(`プロキシがHTTP ${res.status} を返しました`);
+  const data = await res.json();
+  if (!data.ok) throw new Error(data.error || '取得に失敗しました');
+  return { title: data.title || '', image: data.image || '', description: data.description || '' };
+}
+
+function domainOf(url) {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch (err) {
+    return '';
+  }
+}
+
+function escapeHtmlAttr(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function buildLinkCardHtml({ url, title, image, description }) {
+  const domain = domainOf(url);
+  const imgTag = image ? `<img class="link-card-image" src="${escapeHtmlAttr(image)}" alt="" loading="lazy" />` : '';
+  const descTag = description ? `<span class="link-card-desc">${escapeHtmlAttr(description)}</span>` : '';
+  return (
+    `<a class="link-card" href="${escapeHtmlAttr(url)}" target="_blank" rel="noopener noreferrer">` +
+    `${imgTag}<span class="link-card-body">` +
+    `<span class="link-card-title">${escapeHtmlAttr(title)}</span>${descTag}` +
+    `<span class="link-card-domain">${escapeHtmlAttr(domain)}</span></span></a>`
+  );
+}
+
+async function cardifyUrlAtSelection(textarea) {
+  const start = textarea.selectionStart;
+  const end = textarea.selectionEnd;
+  const selected = textarea.value.slice(start, end).trim();
+  if (!URL_ONLY_REGEX.test(selected)) {
+    setConvertStatus('選択範囲がURLではありません（URLのみを選択してください）', 'error');
+    return;
+  }
+  if (!state.settings || !state.settings.gasUrl) {
+    setConvertStatus('URL変換プロキシ（GAS Web App URL）が未設定のためカード化できません', 'error');
+    return;
+  }
+  const url = selected;
+  const placeholder = `[カード生成中...](${url})`;
+  replaceRange(textarea, start, end, placeholder);
+  setConvertStatus(`カード情報を取得中... (${url})`);
+
+  let title = url;
+  let image = '';
+  let description = '';
+  try {
+    const data = await fetchOgpViaProxy(url);
+    if (data.title) title = data.title;
+    image = data.image;
+    description = data.description;
+  } catch (err) {
+    setConvertStatus(`タイトル・説明の自動取得に失敗しました（${err.message || err}）`, 'error');
+  }
+
+  if (!image) {
+    const manualImage = window.prompt(
+      '画像を自動取得できませんでした（Amazon等はサーバーからの自動取得をブロックしていることがあります）。\n' +
+        'カードに使う画像URLを入力してください（空欄なら画像なしのカードにします）',
+      ''
+    );
+    image = (manualImage || '').trim();
+  }
+
+  const html = buildLinkCardHtml({ url, title, image, description });
+  replaceRange(textarea, start, start + placeholder.length, html);
+  setConvertStatus(image ? 'カードを挿入しました' : 'カードを挿入しました（画像なし）', 'ok');
+}
+
 // ---------- 画像貼り付け → アップロード ----------
 
 let imageUploadCounter = 0;
@@ -999,6 +1085,8 @@ function updateSettingsStatus() {
   );
   const convertBtn = document.getElementById('btn-url-convert');
   if (convertBtn) convertBtn.disabled = !hasGas;
+  const cardBtn = document.getElementById('btn-url-card');
+  if (cardBtn) cardBtn.disabled = !hasGas;
 }
 
 function wireSettings() {
@@ -1137,6 +1225,9 @@ function init() {
   document.getElementById('btn-preview-toggle').addEventListener('click', togglePreview);
   document.getElementById('btn-url-convert').addEventListener('click', () => {
     convertUrlAtSelection(document.getElementById('field-body'));
+  });
+  document.getElementById('btn-url-card').addEventListener('click', () => {
+    cardifyUrlAtSelection(document.getElementById('field-body'));
   });
   document.getElementById('btn-delete-article').addEventListener('click', handleDeleteArticle);
 

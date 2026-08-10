@@ -1,14 +1,19 @@
 /**
  * sin1studio-admin-ogp-proxy
  *
- * /admin/ のURL→Markdownリンク変換機能のためのプロキシ。
+ * /admin/ のURL→Markdownリンク変換・リンクカード化機能のためのプロキシ。
  * ブラウザから任意サイトへ直接fetchするとCORSでブロックされるため、
- * Google Apps Script のWebアプリを介して <title> / og:title を取得して返す。
+ * Google Apps Script のWebアプリを介して <title> / og:title / og:image / og:description を取得して返す。
  *
  * 使い方:
  *   GET <デプロイURL>?url=<対象URL>
- *   -> { ok: true, title: "取得したタイトル", url: "<対象URL>" }
+ *   -> { ok: true, title, image, description, url }
+ *      image/descriptionは取得できなければ空文字（titleさえ取れればok:trueを返す）
  *   -> 失敗時 { ok: false, error: "...", url: "<対象URL>" }
+ *
+ * 注意: Amazon等、サーバー間フェッチをボット判定でブロックするサイトは
+ * imageが取れない（og:imageが無い確認ページが返る）。その場合はimage:""で返るので、
+ * 呼び出し側（admin-editor.js）で手動入力にフォールバックすること。
  *
  * 導入手順は README.md を参照。
  */
@@ -51,7 +56,13 @@ function doGet(e) {
       return jsonResponse_({ ok: false, error: 'タイトルを取得できませんでした', url: targetUrl });
     }
 
-    return jsonResponse_({ ok: true, title: title, url: targetUrl });
+    return jsonResponse_({
+      ok: true,
+      title: title,
+      image: extractMeta_(html, 'og:image'),
+      description: extractMeta_(html, 'og:description'),
+      url: targetUrl,
+    });
   } catch (err) {
     return jsonResponse_({ ok: false, error: String(err), url: targetUrl });
   }
@@ -64,20 +75,28 @@ function isValidUrl_(str) {
 
 /** og:title を優先し、無ければ <title> タグから抽出する */
 function extractTitle_(html) {
-  const ogPatterns = [
-    /<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']*)["'][^>]*>/i,
-    /<meta[^>]+content=["']([^"']*)["'][^>]+property=["']og:title["'][^>]*>/i,
-  ];
-  for (const re of ogPatterns) {
-    const m = html.match(re);
-    if (m && m[1]) return decodeEntities_(m[1].trim());
-  }
+  const ogTitle = extractMeta_(html, 'og:title');
+  if (ogTitle) return ogTitle;
 
   const titleMatch = html.match(/<title[^>]*>([^<]*)<\/title>/i);
   if (titleMatch && titleMatch[1]) {
     return decodeEntities_(titleMatch[1].trim());
   }
 
+  return '';
+}
+
+/** 指定したproperty（og:image, og:description等）のmetaタグのcontentを抽出する */
+function extractMeta_(html, property) {
+  const escaped = property.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const patterns = [
+    new RegExp('<meta[^>]+property=["\']' + escaped + '["\'][^>]+content=["\']([^"\']*)["\'][^>]*>', 'i'),
+    new RegExp('<meta[^>]+content=["\']([^"\']*)["\'][^>]+property=["\']' + escaped + '["\'][^>]*>', 'i'),
+  ];
+  for (const re of patterns) {
+    const m = html.match(re);
+    if (m && m[1]) return decodeEntities_(m[1].trim());
+  }
   return '';
 }
 

@@ -83,6 +83,7 @@ import '../styles/global.css';
 
         <div class="btn-row">
           <button type="button" id="btn-url-convert" class="btn">選択中のURLをMarkdownリンクに変換</button>
+          <button type="button" id="btn-url-card" class="btn">選択中のURLをリンクカードにする</button>
           <button type="button" id="btn-preview-toggle" class="btn">プレビュー表示</button>
           <label class="btn file-btn">
             画像を選択してアップロード
@@ -353,7 +354,7 @@ import '../styles/global.css';
     container-type: inline-size;
   }
 
-  .preview-pane img {
+  .preview-pane img:not(.link-card-image) {
     max-width: 80%;
     max-height: 80cqw;
     width: auto;

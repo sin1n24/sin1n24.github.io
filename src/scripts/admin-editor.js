@@ -506,6 +506,7 @@ function renderArticleList(articles) {
 async function selectArticleForEdit(article) {
   if (!confirmDiscardIfDirty()) return;
   setSaveStatus('記事を読み込み中...');
+  hideTweetAnnounceButton();
   try {
     const data = await ghGetFile(article.path);
     const raw = base64ToUtf8(data.content);
@@ -946,6 +947,24 @@ function validateForm(data) {
 
 // ---------- 保存処理 ----------
 
+// ---------- 投稿告知ツイート ----------
+
+function hideTweetAnnounceButton() {
+  const btn = document.getElementById('btn-tweet-announce');
+  if (!btn) return;
+  btn.style.display = 'none';
+  btn.removeAttribute('href');
+}
+
+function showTweetAnnounceButton(title, slug) {
+  const btn = document.getElementById('btn-tweet-announce');
+  if (!btn) return;
+  const url = `${SITE_URL}/blog/${slug}/`;
+  const text = `ブログを投稿しました！${title} - ${url}`;
+  btn.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+  btn.style.display = '';
+}
+
 async function handleSaveNew() {
   if (!requireAuth()) return;
   const data = collectFormData();
@@ -977,6 +996,7 @@ async function handleSaveNew() {
     setSaveStatus(`保存しました: ${path}`, 'ok');
     rememberCategories(data.categories);
     markClean();
+    showTweetAnnounceButton(data.title, data.slug);
     await cleanupUnusedSessionImages(data.body);
   } catch (err) {
     setSaveStatus(`保存に失敗しました: ${err.message || err}`, 'error');
@@ -1003,6 +1023,7 @@ async function handleSaveEdit() {
     setSaveStatus(`更新しました: ${state.editingPath}`, 'ok');
     rememberCategories(data.categories);
     markClean();
+    showTweetAnnounceButton(data.title, data.slug);
     await cleanupUnusedSessionImages(data.body);
   } catch (err) {
     if (err.status === 409) {
@@ -1048,6 +1069,7 @@ function resetFormForNew() {
   document.getElementById('field-body').value = '';
   document.getElementById('editing-file-label').textContent = '(未保存の新規記事)';
   setSaveStatus('');
+  hideTweetAnnounceButton();
   markClean();
 }
 

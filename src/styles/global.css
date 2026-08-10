@@ -1246,6 +1246,19 @@ header.page-header .category-index-label {
   margin-top: 1rem;
 }
 
+.post-share {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  margin-right: 0.75rem;
+}
+
+.post-share svg {
+  width: 15px;
+  height: 15px;
+}
+
 /* リンクカード（admin「選択中のURLをリンクカードにする」で本文に挿入されるHTML）*/
 .link-card {
   display: flex;

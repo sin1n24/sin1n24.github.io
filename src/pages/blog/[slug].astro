@@ -2,24 +2,34 @@
 import { getCollection, render } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
 import { extractDescription } from '../../utils/text';
-import { isPublished } from '../../utils/publish';
+import { isPublished, isIndexable } from '../../utils/publish';
 import { relatedPosts } from '../../utils/related';
 
 export async function getStaticPaths() {
-  // 前後記事の判定用に古い順で並べる（prev=1つ古い記事、next=1つ新しい記事）
+  // 前後記事の判定用に古い順で並べる（prev=1つ古い記事、next=1つ新しい記事）。
+  // noindex記事もページ自体は生成する（直URLで読める）が、他記事の前後ナビ・
+  // 関連記事の候補には含めない（indexable = isPublished かつ !noindexの記事のみ）。
   const posts = (await getCollection('blog'))
     .filter((post) => isPublished(post.data))
     .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+  const indexablePosts = posts.filter((post) => isIndexable(post.data));
 
-  return posts.map((post, index) => ({
-    params: { slug: post.id },
-    props: {
-      post,
-      prevPost: posts[index - 1] ?? null,
-      nextPost: posts[index + 1] ?? null,
-      related: relatedPosts(post, posts),
-    },
-  }));
+  return posts.map((post) => {
+    // 自分自身 + indexable記事だけの並びの中で前後を探す
+    // （noindex記事の自ページでは、直近のindexable記事が前後に表示される）
+    const chain = indexablePosts.includes(post) ? indexablePosts : [...indexablePosts, post].sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+    const index = chain.findIndex((p) => p.id === post.id);
+
+    return {
+      params: { slug: post.id },
+      props: {
+        post,
+        prevPost: chain[index - 1] ?? null,
+        nextPost: chain[index + 1] ?? null,
+        related: relatedPosts(post, indexablePosts),
+      },
+    };
+  });
 }
 
 const { post, prevPost, nextPost, related } = Astro.props;
@@ -36,6 +46,7 @@ const description = extractDescription(post.body ?? '');
   prevPost={prevPost}
   nextPost={nextPost}
   related={related}
+  noindex={post.data.noindex}
 >
   <Content />
 </BlogPost>

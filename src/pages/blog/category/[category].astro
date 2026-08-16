@@ -2,10 +2,10 @@
 import Base from '../../../layouts/Base.astro';
 import BlogList from '../../../components/BlogList.astro';
 import { getCollection } from 'astro:content';
-import { isPublished } from '../../../utils/publish';
+import { isIndexable } from '../../../utils/publish';
 
 export async function getStaticPaths() {
-  const posts = (await getCollection('blog')).filter((post) => isPublished(post.data));
+  const posts = (await getCollection('blog')).filter((post) => isIndexable(post.data));
 
   const categorySet = new Set<string>();
   posts.forEach((post) => {

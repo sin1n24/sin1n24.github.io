@@ -8,6 +8,7 @@
 interface PublishableData {
   date: Date;
   draft?: boolean;
+  noindex?: boolean;
 }
 
 /**
@@ -25,4 +26,12 @@ export function isPublished(data: PublishableData, now: Date = new Date()): bool
   // toISOString()の日付部分がfrontmatterに書いた日付とそのまま一致する。
   const postDay = data.date.toISOString().slice(0, 10);
   return postDay <= todayJST(now);
+}
+
+// noindex記事はdraftと異なりページ自体は生成され直URLで読めるが、
+// 一覧・カテゴリページ・前後記事ナビ・関連記事からは除外し、検索エンジンにも
+// <meta name="robots" content="noindex"> で索引しないよう伝える。
+// （個人的な日記色が強い記事を、内容は残しつつ露出だけ絞るための仕組み）
+export function isIndexable(data: PublishableData, now: Date = new Date()): boolean {
+  return isPublished(data, now) && !data.noindex;
 }

@@ -2,11 +2,11 @@
 import Base from '../../layouts/Base.astro';
 import BlogList from '../../components/BlogList.astro';
 import { getCollection } from 'astro:content';
-import { isPublished } from '../../utils/publish';
+import { isIndexable } from '../../utils/publish';
 import { featuredPosts } from '../../utils/related';
 
 const posts = (await getCollection('blog'))
-  .filter((post) => isPublished(post.data))
+  .filter((post) => isIndexable(post.data))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const featured = featuredPosts(posts);

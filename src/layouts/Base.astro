@@ -11,6 +11,7 @@ interface Props {
   image?: string;
   preloadImage?: string;
   hasHero?: boolean;
+  noindex?: boolean;
 }
 
 const {
@@ -19,6 +20,7 @@ const {
   image = `${SITE.url}/img/ogp.jpg`,
   preloadImage,
   hasHero = false,
+  noindex = false,
 } = Astro.props;
 
 const pageTitle = title ? `${title} | ${SITE.title}` : SITE.title;
@@ -33,6 +35,7 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url).toString();
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
 
     <!-- Google AdSense -->
     <script

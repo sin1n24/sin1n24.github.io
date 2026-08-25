@@ -46,3 +46,11 @@
   tags:
   - C++
   updated_at: '2026-08-02'
+- title: squish-toy
+  url: https://github.com/sin1n24/squish-toy
+  github_url: https://github.com/sin1n24/squish-toy
+  image: https://opengraph.githubassets.com/1/sin1n24/squish-toy
+  description: 好きな画像をつまんで伸ばして変顔にできるブラウザトイ
+  tags:
+  - JavaScript
+  updated_at: '2026-08-25'

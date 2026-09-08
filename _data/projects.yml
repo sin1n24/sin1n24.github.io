@@ -87,6 +87,14 @@
   description: "好きな画像の顔パーツをつまんで伸ばして変顔にできるインタラクティブトイ。画像はブラウザ内だけで処理し、ダウンロード・シェアも可能。"
   tags: ["Vanilla JS", "Canvas 2D", "Interactive"]
 
+- title: "同い年ロボット"
+  category: software
+  url: "https://sin1.studio/onaidoshi-robot/"
+  url_label: "使ってみる"
+  image: "/img/14_OnaidoshiRobot.png"
+  description: "生まれ年を入力すると、同じ年に誕生した実在のロボットや架空のロボットを表示する診断サイト。"
+  tags: ["Vanilla JS", "Web"]
+
 - title: "かわロボアドベントカレンダー"
   category: planning
   url: "/blog/2025-12-25-233111/"

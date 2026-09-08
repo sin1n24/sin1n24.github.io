@@ -54,3 +54,10 @@
   tags:
   - JavaScript
   updated_at: '2026-08-25'
+- title: onaidoshi-robot
+  url: https://github.com/sin1n24/onaidoshi-robot
+  github_url: https://github.com/sin1n24/onaidoshi-robot
+  image: https://opengraph.githubassets.com/1/sin1n24/onaidoshi-robot
+  description: 生まれ年から同い年の実在ロボット・ロボット競技を表示するサイト
+  tags: []
+  updated_at: '2026-09-08'

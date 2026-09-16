@@ -61,3 +61,11 @@
   description: 生まれ年から同い年の実在ロボット・ロボット競技を表示するサイト
   tags: []
   updated_at: '2026-09-09'
+- title: OrigamiSim
+  url: https://github.com/sin1n24/OrigamiSim
+  github_url: https://github.com/sin1n24/OrigamiSim
+  image: https://opengraph.githubassets.com/1/sin1n24/OrigamiSim
+  description: 折り紙を実際に折るように遊ぶガイド付き3D折り紙シミュレーター(Three.js/TypeScript)。※現在制作途中のプロジェクトです
+  tags:
+  - TypeScript
+  updated_at: '2026-09-16'

@@ -2,6 +2,7 @@
 import Base from './Base.astro';
 import CategoryTags from '../components/CategoryTags.astro';
 import BlogList from '../components/BlogList.astro';
+import RelatedProducts from '../components/RelatedProducts.astro';
 import { SITE } from '../data/site';
 import type { CollectionEntry } from 'astro:content';
 
@@ -13,10 +14,11 @@ interface Props {
   prevPost?: CollectionEntry<'blog'> | null;
   nextPost?: CollectionEntry<'blog'> | null;
   related?: CollectionEntry<'blog'>[];
+  relatedProducts?: string[];
   noindex?: boolean;
 }
 
-const { title, date, description, categories, prevPost, nextPost, related = [], noindex = false } = Astro.props;
+const { title, date, description, categories, prevPost, nextPost, related = [], relatedProducts = [], noindex = false } = Astro.props;
 
 // 現行サイト踏襲のフォーマット: YYYY年MM月DD日
 const y = date.getFullYear();
@@ -66,6 +68,8 @@ const xIcon = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><
           この記事をシェア
         </a>
       </div>
+
+      <RelatedProducts asins={relatedProducts} />
 
       {related.length > 0 && (
         <section class="post-related" data-pagefind-ignore>

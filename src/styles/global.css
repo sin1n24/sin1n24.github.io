@@ -1388,6 +1388,65 @@ header.page-header .category-index-label {
   font-size: 0.95rem;
 }
 
+.related-products {
+  margin-top: 2.5rem;
+}
+
+.related-products-heading {
+  font-size: 1.3rem;
+}
+
+.related-products-note {
+  font-size: 0.75rem;
+  color: var(--body-color-muted);
+  margin: 0.2rem 0 1rem;
+}
+
+.related-products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  max-width: 720px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  height: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.8rem;
+  text-decoration: none !important;
+  color: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.product-card:hover {
+  border-color: var(--color-accent);
+}
+
+.product-card-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  border-radius: 6px;
+  background: var(--tag-bg);
+}
+
+.product-card-title {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .post-related {
   margin-top: 2.5rem;
 }

@@ -10,6 +10,8 @@ const blog = defineCollection({
     hatena_url: z.string().optional(),
     draft: z.boolean().optional(),
     noindex: z.boolean().optional(),
+    // 「関連商品」セクションに表示するAmazon商品のASIN（src/data/amazon-products.ymlのキー）
+    relatedProducts: z.array(z.string()).optional(),
   }),
 });
 

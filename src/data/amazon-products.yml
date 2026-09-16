@@ -1,0 +1,19 @@
+# 記事の「関連商品」セクション・本文リンクカードで参照するAmazon商品マスタ。
+# キーはASIN。imageはAmazon商品ページ掲載画像のURL（m.media-amazon.com、ホットリンク）。
+# リンク先は https://www.amazon.co.jp/dp/{ASIN}/?tag=sin1n24-22 を各所で組み立てる。
+B017BIX7CQ:
+  title: "フタバ 10J (10ch-2.4GHz T-FHSS AIRモデル) ドローン用TRセット(フルスプリング仕様)"
+  image: "https://m.media-amazon.com/images/I/61OpfoB9qNL._AC_SX679_.jpg"
+
+B07H673FGF:
+  title: "R3206SBM #00107172-3"
+  image: "https://m.media-amazon.com/images/I/311bdySJTkL._AC_.jpg"
+
+B0718T232Z:
+  title: "HiLetgo ESP32 ESP-32 NodeMCU開発ボード2.4GHz WiFi + Bluetoothデュアルモード"
+  image: "https://m.media-amazon.com/images/I/61oLjkzaIIL._AC_SX679_.jpg"
+
+# 旧ASIN B07BW2BLY1 (M5Stack Basic) は販売終了のため後継品に差し替え (2026-09-16)
+B07PWJMNRN:
+  title: "M5Stack ESP32 基本コア開発キット V2.7 拡張可能なマイクロコントローラ WiFi BLE IoT プロトタイプボード"
+  image: "https://m.media-amazon.com/images/I/31x4Vcji19L._AC_.jpg"

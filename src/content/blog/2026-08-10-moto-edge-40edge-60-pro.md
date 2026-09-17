@@ -2,7 +2,7 @@
 title: "moto edge 40からedge 60 proへスマホを乗換えました"
 date: 2026-08-10
 categories: ["ガジェット"]
-relatedProducts: ["B0FDKSSX5Q"]
+relatedProducts: ["B0FDKSSX5Q", "B0CJR8Y56J", "B0CXNY69DC", "B0H2WJ5PTR", "B0FQ57B4M4"]
 ---
 
 普段メインで使っているスマートフォンを新調したので、そのご報告と簡単なレビューをしたいと思います。

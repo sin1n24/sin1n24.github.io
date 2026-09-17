@@ -2,7 +2,7 @@
 title: "VR遠隔操縦システム — 自作ロボに\"搭乗\"して操縦してみた"
 date: 2026-07-19
 categories: ["かわロボ", "技術"]
-relatedProducts: ["B0CF1DLZPY", "B01MXNYG27", "B017BIX7CQ"]
+relatedProducts: ["B0CF1DLZPY", "B01MXNYG27", "B017BIX7CQ", "B0DKXKS9CQ", "B085QK2T6V"]
 ---
 
 自作ロボットに全天球カメラ（RICOH THETA）を搭載し、VRゴーグルを被るとまるでロボットのコックピットに搭乗しているかのような感覚で遠隔操縦できるシステムです。

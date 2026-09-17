@@ -2,6 +2,7 @@
 title: "ウェブサイトを作成しました。"
 date: 2026-05-04
 categories: ["お知らせ"]
+relatedProducts: ["B0CF1DLZPY"]
 ---
 
 この度、自身のポートフォリオサイト兼活動拠点として**「sin1's studio」**を開設いたしました。

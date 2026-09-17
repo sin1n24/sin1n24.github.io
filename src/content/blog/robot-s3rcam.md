@@ -2,6 +2,7 @@
 title: "ロボット遠隔操作システム「RobotS3RCam」"
 date: 2026-07-19
 categories: ["ミニかわロボ", "技術"]
+relatedProducts: ["B0DQPGWZVH", "B0C7KYYF5S"]
 ---
 
 AtomS3R-CAM＋AtomS3R（またはAtomS3）による、ESP-NOWワイヤレスカメラ遠隔操縦ロボットです。カメラ映像を見ながら手元のコントローラで操縦できる超小型FPVシステムで、ソースコードはオープンソースとして公開しています。

@@ -2,7 +2,7 @@
 title: "Claude Codeと一緒に開発環境を引き継いでみた"
 date: 2026-07-21
 categories: ["技術"]
-relatedProducts: ["B01MXNYG27", "B085QK2T6V", "B0H7MHNN14"]
+relatedProducts: ["B01ICQ4PAY", "B0H7MHNN14", "B085QK2T6V"]
 ---
 
 ※この記事は会話を元にSonnetに書いてもらい、最後に人間が校正しました。

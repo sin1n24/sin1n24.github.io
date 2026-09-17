@@ -1399,7 +1399,9 @@ header.page-header .category-index-label {
 
 .related-products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  /* auto-fill (not auto-fit): 空きトラックを保持したまま幅配分するため、
+     カード枚数が1〜2枚でも3枚時と同じカードサイズを維持できる */
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 1rem;
   max-width: 720px;
   list-style: none;

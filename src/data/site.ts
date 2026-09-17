@@ -17,7 +17,7 @@ export const GA_MEASUREMENT_ID = "G-S8GDP6VQHY";
 export interface SocialLink {
   name: string;
   url: string;
-  icon: "x" | "github" | "youtube" | "makerworld" | "blog" | "email";
+  icon: "x" | "github" | "youtube" | "makerworld" | "email";
 }
 
 export const SOCIAL_LINKS: SocialLink[] = [
@@ -25,7 +25,6 @@ export const SOCIAL_LINKS: SocialLink[] = [
   { name: "GitHub", url: "https://github.com/sin1n24", icon: "github" },
   { name: "YouTube", url: "https://www.youtube.com/@sin1n24", icon: "youtube" },
   { name: "MakerWorld", url: "https://makerworld.com/en/@sin1west", icon: "makerworld" },
-  { name: "Blog", url: "/blog/", icon: "blog" },
   { name: "Email", url: "mailto:sin1@sin1.studio", icon: "email" },
 ];
 

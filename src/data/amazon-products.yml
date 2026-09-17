@@ -1,19 +1,276 @@
 # 記事の「関連商品」セクション・本文リンクカードで参照するAmazon商品マスタ。
 # キーはASIN。imageはAmazon商品ページ掲載画像のURL（m.media-amazon.com、ホットリンク）。
 # リンク先は https://www.amazon.co.jp/dp/{ASIN}/?tag=sin1n24-22 を各所で組み立てる。
+# 2026-09-17: 全記事展開の一次バッチで既存アフィリエイトリンク・頻出提案商品を一括登録。
+
+B000NMQWUM:
+  title: "バロン (Baron) チェア 【ハイバック】 シルバーフレーム 可動肘 座メッシュ ブラック CP85CR FDH1"
+  image: "https://m.media-amazon.com/images/I/51Oyqa55H1L._AC_SX679_.jpg"
+
+B000XH9B46:
+  title: "Kingston microSDHC Class4 4GB SDC4/4GBFE"
+  image: "https://m.media-amazon.com/images/I/41bIMlEuvAL._AC_SX450_.jpg"
+
+B00C0KM7F4:
+  title: "(docomo) Xperia Tablet Z SO-03E ブラック"
+  image: "https://m.media-amazon.com/images/I/51+RuR5Ti+L._AC_SX679_.jpg"
+
+B00CDG799E:
+  title: "Logicool G ゲームパッド F310r 有線USB接続コントローラー"
+  image: "https://m.media-amazon.com/images/I/519-CQdsB+L._AC_SX522_.jpg"
+
+B00D74BNIE:
+  title: "[窓美人] 洗えるカーテンセット [エール] 遮光性カーテン+UVカットミラーレース 4枚セット"
+  image: "https://m.media-amazon.com/images/I/81sKs3qcn+L._AC_SY300_SX300_QL70_ML2_.jpg"
+
+B00DNS898G:
+  title: "ニトムズ 冷気ストップライナー 透明 L カーテンレールに取付 冷え防止 E1405"
+  image: "https://m.media-amazon.com/images/I/51eRWU1QPkL._AC_SY300_SX300_QL70_ML2_.jpg"
+
+B00I3PKJJG:
+  title: "EPSON MOVERIO シースルーモバイルビューアー BT-200"
+  image: "https://m.media-amazon.com/images/I/71WhFAMr2CL._AC_SX679_.jpg"
+
+B00O7CC262:
+  title: "【SIMフリー】 Sony XPERIA Z3 Compact D5803 (ブラック) [並行輸入品]"
+  image: "https://m.media-amazon.com/images/I/91iPBzE2knL._AC_SY879_.jpg"
+
+B00O8HWAS6:
+  title: "SONY ウェアラブルカメラ AZ1 アクションカム ミニ HDR-AZ1"
+  image: "https://m.media-amazon.com/images/I/51COkxv1IkL._AC_SX679_.jpg"
+
+B00VUJYNWG:
+  title: "デジタル・マイクロサーボ SG90 (5個)"
+  image: "https://m.media-amazon.com/images/I/718iPfZSQWL._AC_SX679_.jpg"
+
+B00XY0S2CG:
+  title: "アイリスオーヤマ メタルラック SE-915E 幅91×奥行46×高さ151cm 4段 銀"
+  image: "https://m.media-amazon.com/images/I/61qIehdOO5L._AC_SX679_.jpg"
+
+B00ZUA4TGQ:
+  title: "mbed LPC824"
+  image: "https://m.media-amazon.com/images/I/41xt8bykvkL._AC_.jpg"
+
+B011TWDW9S:
+  title: "DORIS パソコンデスク L字型 勉強机 コーナー ワークデスク 幅150cm 組立式 ブラック"
+  image: "https://m.media-amazon.com/images/I/61iKUV9CM6L._AC_SY300_SX300_QL70_ML2_.jpg"
+
+B014US3FQI:
+  title: "RICOH THETA S ブラック 360度全天球カメラ"
+  image: "https://m.media-amazon.com/images/I/6141rud2ceL._AC_SX679_.jpg"
+
+B015XKQV0E:
+  title: "ハイアール 電子レンジ ブラック 18L フラットタイプ JM-FH18D(K)"
+  image: "https://m.media-amazon.com/images/I/31EBqTkHdiL._AC_.jpg"
+
+B016FKJJ8M:
+  title: "デジタル・マイクロサーボ SG90 (1個)"
+  image: "https://m.media-amazon.com/images/I/6185dovy2RL._AC_SX679_.jpg"
+
+B017B6R9SG:
+  title: "VOX PLUS 3DVR ゴーグル ヘッドマウント用 ヘッドバンド付き ホワイト"
+  image: "https://m.media-amazon.com/images/I/51ZQb-AmE-L._AC_SX679_.jpg"
+
 B017BIX7CQ:
   title: "フタバ 10J (10ch-2.4GHz T-FHSS AIRモデル) ドローン用TRセット(フルスプリング仕様)"
   image: "https://m.media-amazon.com/images/I/61OpfoB9qNL._AC_SX679_.jpg"
 
-B07H673FGF:
-  title: "R3206SBM #00107172-3"
-  image: "https://m.media-amazon.com/images/I/311bdySJTkL._AC_.jpg"
+B0181UI52A:
+  title: "USB用シミュレータケーブル FUTABA・JR・Spektrum・Walkera等対応 (青)"
+  image: "https://m.media-amazon.com/images/I/61cGpc9MW1L._AC_SY445_SX342_QL70_ML2_.jpg"
+
+B0188SBX8I:
+  title: "リレータッチボード(ドライバ有り)"
+  image: "https://m.media-amazon.com/images/I/512sLPKUkqL._AC_.jpg"
+
+B0196BLLLK:
+  title: "Linkcool Google Cardboard（グーグル・カードボード）3Dメガネ VR 簡易組み立て式 ベルト付き"
+  image: "https://m.media-amazon.com/images/I/710txCaiPqL._AC_SX679_.jpg"
+
+B01B2CPQPI:
+  title: "アイリスオーヤマ 珪藻土バスマット Lサイズ 約60×39cm SKBM-6039"
+  image: "https://m.media-amazon.com/images/I/518Kmv+FpaL._AC_SX679_.jpg"
+
+B01ICQ4PAY:
+  title: "リレータッチボード(ドライバ無し)"
+  image: "https://m.media-amazon.com/images/I/41-PZQbYQhL._AC_SY300_SX300_QL70_ML2_.jpg"
+
+B01KUNSFUS:
+  title: "RASBEE Digispark Kickstarter ATTINY85 Micro USB 超小型開発ボード"
+  image: "https://m.media-amazon.com/images/I/61J4GBxxpQL._AC_SX679_.jpg"
+
+B01M3O1FTK:
+  title: "RICOH 360度カメラ RICOH THETA SC (ブルー) 全天球カメラ"
+  image: "https://m.media-amazon.com/images/I/7187tdrGleL._AC_SY879_.jpg"
+
+B01MG1VA56:
+  title: "シャープ タテ型洗濯乾燥機 穴なし槽 5.5kg ピンク ES-TX5A-P"
+  image: "https://m.media-amazon.com/images/I/71vnWCadR4L._AC_SX342_SY445_QL70_ML2_.jpg"
+
+B01N4L3UT1:
+  title: "DORIS ソファーベッド 3人掛け 2way 幅165cm シャンブル ブラウン"
+  image: "https://m.media-amazon.com/images/I/61ngQMZxnOL._AC_SX679_.jpg"
+
+B01N5JQQ6H:
+  title: "ハイアール 121L 2ドア冷凍冷蔵庫 ブラック JR-N121A-K"
+  image: "https://m.media-amazon.com/images/I/51+IAMGCsCL._AC_SX342_SY445_QL70_ML2_.jpg"
+
+B01NBVY9DP:
+  title: "山善(YAMAZEN) 折りたたみベッド すのこ シングル 耐荷重90kg HS-1S"
+  image: "https://m.media-amazon.com/images/I/81v9E3DuiCL._AC_SX679_.jpg"
+
+B06VV637XD:
+  title: "ショップジャパン 【公式】カラーラ ノンフライヤー"
+  image: "https://m.media-amazon.com/images/I/61y3yb5bONL._AC_SX679_.jpg"
+
+B06WRS81D3:
+  title: "NuAns NEO [Reloaded] CORE SIMフリースマートフォン Android7.1 NA-CORE2-JP"
+  image: "https://m.media-amazon.com/images/I/518whH1mfQL._AC_SX679_.jpg"
+
+B06WRS87KC:
+  title: "NuAns NEO TWOTONE トップカバー ストーン NA-2TONE-TST"
+  image: "https://m.media-amazon.com/images/I/710us149gbL._AC_SY450_.jpg"
 
 B0718T232Z:
   title: "HiLetgo ESP32 ESP-32 NodeMCU開発ボード2.4GHz WiFi + Bluetoothデュアルモード"
   image: "https://m.media-amazon.com/images/I/61oLjkzaIIL._AC_SX679_.jpg"
 
-# 旧ASIN B07BW2BLY1 (M5Stack Basic) は販売終了のため後継品に差し替え (2026-09-16)
+B072KBG9W4:
+  title: "Anker PowerPort I PD (Power Delivery対応 60W 5ポート USB-C急速充電器)"
+  image: "https://m.media-amazon.com/images/I/81TihwOX-zL._AC_SY606_.jpg"
+
+B0765RKN8R:
+  title: "TOKYO SELECTION 宅配ボックス ネイビー 折りたたみ 保冷タイプ 大容量75L"
+  image: "https://m.media-amazon.com/images/I/81-vrHY0UBL._AC_SX679_.jpg"
+
+B0773DZ3HS:
+  title: "YOYO USB3.0 1080P 60fps ビデオキャプチャーボックス ezcap287"
+  image: "https://m.media-amazon.com/images/I/71t5qD7cbBL._AC_SX679_.jpg"
+
+B077QDQWMJ:
+  title: "ORVIBO MagicCube Wi-Fi 赤外線スマートリモコン CT10W"
+  image: "https://m.media-amazon.com/images/I/41PDTe-DWxL._AC_SX679_.jpg"
+
+B0794RJSSY:
+  title: "Echo Plus (エコープラス) 第2世代 スマートスピーカー with Alexa チャコール"
+  image: "https://m.media-amazon.com/images/I/6114rYkZa+L._AC_SX679_.jpg"
+
+B07BF9Q2RG:
+  title: "【任天堂公式ライセンス】Anker PowerCore 13400 Nintendo Switch Edition"
+  image: "https://m.media-amazon.com/images/I/61eJlS2RcnL._AC_SX679_.jpg"
+
+B07CNDV7J4:
+  title: "【PS4】Marvel's Spider-Man"
+  image: "https://m.media-amazon.com/images/I/812hcQ3sHwL._AC_SX569_.jpg"
+
+B07H673FGF:
+  title: "R3206SBM #00107172-3"
+  image: "https://m.media-amazon.com/images/I/311bdySJTkL._AC_.jpg"
+
+B07H97RWH8:
+  title: "Novoo PowerCube 10000mAh モバイルバッテリー 軽量超小型 18W出力 PD対応"
+  image: "https://m.media-amazon.com/images/I/51+6K0iTkaL._AC_SX679_.jpg"
+
+B07JP9XGH1:
+  title: "waves LED WS2812B 93個 円形リング 5V PCBモジュール シリアルLED アドレッサブル"
+  image: "https://m.media-amazon.com/images/I/71si0nSLnkL._AC_SX679_.jpg"
+
+B07NJQQRC4:
+  title: "シャープ(SHARP) AQUOS R2 compact SH-M09 (ピュアブラック) 4GB/64GB SIMフリー"
+  image: "https://m.media-amazon.com/images/I/31EO1ogj7AL._AC_.jpg"
+
 B07PWJMNRN:
   title: "M5Stack ESP32 基本コア開発キット V2.7 拡張可能なマイクロコントローラ WiFi BLE IoT プロトタイプボード"
   image: "https://m.media-amazon.com/images/I/31x4Vcji19L._AC_.jpg"
+
+B07R1QDVWF:
+  title: "M5StickC ESP32 PICOミニIoT開発ボード フィンガーコンピューター カラーLCD付き"
+  image: "https://m.media-amazon.com/images/I/61wrIx01kAL._AC_SY450_.jpg"
+
+B07R4812R9:
+  title: "DJI RoboMaster ロボマスター S1"
+  image: "https://m.media-amazon.com/images/I/51W5mniXuaL._AC_SX679_.jpg"
+
+B07Y5ZH5SM:
+  title: "Insta360 120cm自撮り棒 見えない自撮り棒"
+  image: "https://m.media-amazon.com/images/I/41g4YWdm+7L._AC_SY300_SX300_QL70_ML2_.jpg"
+
+B081SSR8ST:
+  title: "WINGONEER 10個 ミニアナログギアマイクロサーボ9g RC飛行機ヘリコプター用"
+  image: "https://m.media-amazon.com/images/I/6119Vmq0MQL._AC_SX679_.jpg"
+
+B083JTVHB5:
+  title: "ANYCUBIC 3Dプリンター (300×300×305mm)"
+  image: "https://m.media-amazon.com/images/I/61Lx-+g+RRL._SX522_.jpg"
+
+B0861QM12F:
+  title: "TINMORRY シルクPLAフィラメント 1.75mm 3Dプリンター用 1kg シルクシルバー"
+  image: "https://m.media-amazon.com/images/I/71HXz0tPtYL._AC_SY300_SX300_QL70_ML2_.jpg"
+
+B08GLG4NGT:
+  title: "Plus ESP32-PICOミニIoT開発ボード iotキット フィンガーコンピューターカラーLCD"
+  image: "https://m.media-amazon.com/images/I/71HEHGFMjDS._SX522_.jpg"
+
+B0936D3NVM:
+  title: "ソニー(SONY) ポータブルスピーカー SRS-XB13 ブラック 防水・防塵IP67"
+  image: "https://m.media-amazon.com/images/I/516pSmUcztS._AC_SY300_SX300_QL70_ML2_.jpg"
+
+B0BD3MKLV9:
+  title: "生ジョッキ缶 スーパードライ アサヒビール 485ml×24本"
+  image: "https://m.media-amazon.com/images/I/717SYk7HrmL._AC_SX342_SY445_QL70_ML2_.jpg"
+
+B0BFH1NGWV:
+  title: "ブリタ 水筒 携帯用浄水ボトル 600ml アクティブ ブルー マイクロディスクフィルター3個付"
+  image: "https://m.media-amazon.com/images/I/61IfqQKHjWL._AC_SX679_.jpg"
+
+B0BHSWW5KQ:
+  title: "HUAWEI WATCH GT 3 SE スマートウォッチ ワイルドネスグリーン"
+  image: "https://m.media-amazon.com/images/I/61hnG7nz5tL._AC_SX679_.jpg"
+
+B0C5MCF7H3:
+  title: "3PCS 1S 3.8V 80C 600mAh リチウム電池 JST-PH2.0 マイクロFPVレーシングドローン用バッテリー"
+  image: "https://m.media-amazon.com/images/I/61uBI2qScGL._AC_SX679_.jpg"
+
+B0CF1DLZPY:
+  title: "Meta Quest 3 512GB (旧Oculus) VRゴーグル PCVR対応"
+  image: "https://m.media-amazon.com/images/I/612ZGTBCORL._AC_SX679_.jpg"
+
+B0CJTCRB1H:
+  title: "エレコム JC-GP20SBK ゲームパッド 有線 PS系配置 ブラック"
+  image: "https://m.media-amazon.com/images/I/61MD+sFmOXL._AC_SX522_.jpg"
+
+B0CRYJBKQQ:
+  title: "Bambu Lab A1 mini 3Dプリンター 造形サイズ180×180×180mm"
+  image: "https://m.media-amazon.com/images/I/71X5s5izhsL._AC_SY300_SX300_QL70_ML2_.jpg"
+
+B0D3C1VCPC:
+  title: "Bluetoothモジュール HC-05/06 3.3V"
+  image: "https://m.media-amazon.com/images/I/612QBMwDrlL._AC_SX679_.jpg"
+
+B0D72HWFQ1:
+  title: "M5Stamp Pico DIY Kit"
+  image: "https://m.media-amazon.com/images/I/51XkVPMV0yL._AC_SX679_.jpg"
+
+B0DCVLVWHL:
+  title: "Magtame USB-Cケーブル 急速充電60W/PD対応 1M 磁力吸着"
+  image: "https://m.media-amazon.com/images/I/81y1J6BbBkL._AC_SX679_.jpg"
+
+B0F3XQ22XS:
+  title: "M5Stack 公式 M5StickC PLUS2 ESP32-PICO-V3-02 Mini IoT開発キット"
+  image: "https://m.media-amazon.com/images/I/51-SwqSQHNL._AC_SY300_SX300_QL70_ML2_.jpg"
+
+B0F66LKTV6:
+  title: "ECOVACS(エコバックス) DEEBOT T80 OMNI ロボット掃除機 水拭き両用"
+  image: "https://m.media-amazon.com/images/I/61H9JF-kJsL._AC_SX679_.jpg"
+
+B0FDKSSX5Q:
+  title: "Motorola(モトローラ) motorola edge 60pro PANTONE｜12GB/256GB｜ダーズブルー"
+  image: "https://m.media-amazon.com/images/I/81P4VWdeLUL._AC_SL1500_.jpg"
+
+B0G4RCWX4V:
+  title: "AIMIBO ワイヤレスHDMI送受信機 5G超低遅延 100M安定無線伝送"
+  image: "https://m.media-amazon.com/images/I/517f+iUrA-L._AC_SY450_.jpg"
+
+B0GVS1F4KK:
+  title: "Bambu Lab P1S Combo 3Dプリンター AMS2 Pro付き CoreXY 多色造形"
+  image: "https://m.media-amazon.com/images/I/61JB5K2JUuL._AC_SX679_.jpg"

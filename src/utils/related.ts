@@ -2,10 +2,18 @@ import type { CollectionEntry } from 'astro:content';
 
 type BlogPost = CollectionEntry<'blog'>;
 
-// 同じカテゴリを持つ記事を新しい順に返す（記事詳細ページの「関連記事」用）
+// 同じカテゴリを持つ記事を新しい順に返す（記事詳細ページの「関連記事」用）。
+// カテゴリ未設定の記事は、他のカテゴリ未設定記事の中から日付が近い順に拾う
+// （連載記事など、カテゴリはないが内容的に関連が深いものを拾い上げるため）。
 export function relatedPosts(post: BlogPost, allPosts: BlogPost[], limit = 3): BlogPost[] {
   const categories = post.data.categories ?? [];
-  if (!categories.length) return [];
+  if (!categories.length) {
+    const postTime = post.data.date.valueOf();
+    return allPosts
+      .filter((p) => p.id !== post.id && (p.data.categories ?? []).length === 0)
+      .sort((a, b) => Math.abs(a.data.date.valueOf() - postTime) - Math.abs(b.data.date.valueOf() - postTime))
+      .slice(0, limit);
+  }
   return allPosts
     .filter((p) => p.id !== post.id && (p.data.categories ?? []).some((c) => categories.includes(c)))
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())

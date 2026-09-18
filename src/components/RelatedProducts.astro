@@ -1,19 +1,15 @@
 ---
 // 記事の「関連商品」セクション。frontmatterのrelatedProducts (ASIN配列) を
 // src/data/amazon-products.yml のマスタと突き合わせてカード表示する。
-// relatedProducts未指定（または5件未満）の記事は、カテゴリに応じたプールから
-// 自動でASINを補完する（新規記事投稿時に手動設定しなくても表示される仕組み）。
+// ここでは自動補完・ランダム選出は一切行わない（関連商品の選定は記事執筆時に
+// 内容を踏まえて明示的にfrontmatterへ書くこと。ルールはCLAUDE.md参照）。
 import amazonProducts from '../data/amazon-products.yml';
-import { resolveRelatedProducts } from '../data/product-pools';
 
 interface Props {
-  postId: string;
-  categories?: string[];
-  explicitAsins?: string[];
+  asins: string[];
 }
 
-const { postId, categories, explicitAsins } = Astro.props;
-const asins = resolveRelatedProducts(postId, categories, explicitAsins);
+const { asins } = Astro.props;
 
 const AFFILIATE_TAG = 'sin1n24-22';
 

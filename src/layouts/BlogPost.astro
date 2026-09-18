@@ -7,7 +7,6 @@ import { SITE } from '../data/site';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
-  postId: string;
   title: string;
   date: Date;
   description?: string;
@@ -19,7 +18,7 @@ interface Props {
   noindex?: boolean;
 }
 
-const { postId, title, date, description, categories, prevPost, nextPost, related = [], relatedProducts, noindex = false } = Astro.props;
+const { title, date, description, categories, prevPost, nextPost, related = [], relatedProducts = [], noindex = false } = Astro.props;
 
 // 現行サイト踏襲のフォーマット: YYYY年MM月DD日
 const y = date.getFullYear();
@@ -70,7 +69,7 @@ const xIcon = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><
         </a>
       </div>
 
-      <RelatedProducts postId={postId} categories={categories} explicitAsins={relatedProducts} />
+      <RelatedProducts asins={relatedProducts} />
 
       {related.length > 0 && (
         <section class="post-related" data-pagefind-ignore>

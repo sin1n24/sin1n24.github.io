@@ -3,6 +3,10 @@
 # リンク先は https://www.amazon.co.jp/dp/{ASIN}/?tag=sin1n24-22 を各所で組み立てる。
 # 2026-09-17: 全記事展開の一次バッチで既存アフィリエイトリンク・頻出提案商品を一括登録。
 
+"4422500015":
+  title: "未来を変えるロボット図鑑"
+  image: "https://m.media-amazon.com/images/I/71uy7JPI10L._SY385_.jpg"
+
 "4798184853":
   title: "Androidアプリ開発のためのセキュリティ入門 体験して学ぶ16の脆弱性とその対策"
   image: "https://m.media-amazon.com/images/I/51sbjLQPz9L._SX342_SY445_ML2_.jpg"

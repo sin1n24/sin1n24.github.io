@@ -3,6 +3,10 @@
 sin1's studio (https://sin1.studio) のソースリポジトリ。Astro製の静的サイト。
 ブログ記事は `src/content/blog/*.md`、商品マスタは `src/data/amazon-products.yml`。
 
+**呼称について**: ユーザーはこのサイト・プロジェクトを「SSS」「sin1's studio」
+「sin1studio」などと略して呼ぶことがある。いずれも本リポジトリ・本サイトを指す
+（別プロジェクトと混同しないこと）。
+
 ## ブログ記事を新規に書くとき（文体）
 
 **新規記事の文体は同人誌『AI相棒とつくる（仮）』の執筆スタイルガイド

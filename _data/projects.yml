@@ -79,13 +79,13 @@
   description: "高専の時に最初に作ったアクションミニゲームをAIで再現。"
   tags: ["Vanilla JS", "Canvas 2D", "Game"]
 
-- title: "顔スクイッシュトイ"
+- title: "変顔クリエーター"
   category: software
   url: "https://sin1.studio/squish-toy/"
   url_label: "使ってみる"
   image: "/img/13_SquishToy.png"
-  description: "好きな画像の顔パーツをつまんで伸ばして変顔にできるインタラクティブトイ。画像はブラウザ内だけで処理し、ダウンロード・シェアも可能。"
-  tags: ["Vanilla JS", "Canvas 2D", "Interactive"]
+  description: "好きな画像の顔パーツをつまんで伸ばして変顔にできるインタラクティブトイ。画像はシェアするまでブラウザ内だけで処理し、画像・動画でシェアも可能。"
+  tags: ["Vanilla JS", "WebGL", "Interactive"]
 
 - title: "同い年ロボット"
   category: software

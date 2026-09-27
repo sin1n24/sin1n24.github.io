@@ -153,7 +153,7 @@
   .daily-btn small { font-size: 11px; color: var(--ink-soft); font-weight: 700; }
   .corner { position: absolute; top: 10px; right: 16px; }
   .toggles { display: flex; gap: 8px; }
-  .studio { display: block; opacity: .75; line-height: 0; margin-top: -2px; }
+  .studio { display: block; opacity: .75; line-height: 0; margin-top: 18px; }
   .studio img { height: 44px; width: auto; }
   .studio:hover, .studio:focus-visible { opacity: 1; }
 
@@ -1411,7 +1411,7 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
     const tipEl = $('#tip');
     const tipH = (S.mode === 'play' && !tipEl.hidden) ? tipEl.offsetHeight + 12 : 0;
     if (S.mode === 'play') { topR = 62; botR = 80 + tipH; skyH = clamp(h * 0.17, 96, 150); }
-    else if (S.mode === 'title') { topR = 0; botR = 160; skyH = clamp(h * 0.38, 220, 330); }
+    else if (S.mode === 'title') { topR = 0; botR = 180; skyH = clamp(h * 0.38, 220, 330); }
     else { topR = 0; botR = h * 0.72; skyH = clamp(h * 0.22, 130, 210); }
     const horizonY = topR + skyH;
     const availW = w - 32;

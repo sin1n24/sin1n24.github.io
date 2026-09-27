@@ -5,7 +5,7 @@ categories: ["技術"]
 relatedProducts: ["4065128447", "4297110857", "4877833757", "B0H1M3D1BX", "B08KG1RXCX"]
 ---
 
-※この記事は制作時の会話を元にClaudeに書いてもらいました。
+※この記事は制作時の会話を元にClaudeに書いてもらい、最後に人間が校正しました。
 
 おひさまをドラッグして影を動かし、日かげしか歩けないねこをおうちまで連れていくスマホ向けパズル「[ひかげねこ](https://sin1.studio/hikageneko/)」を作りました！ブラウザで開くだけで遊べて、インストールや登録はいりません。
 
@@ -13,7 +13,7 @@ relatedProducts: ["4065128447", "4297110857", "4877833757", "B0H1M3D1BX", "B08KG
 
 <video src="/hikageneko/pv.mp4" poster="/img/blog/hikageneko-pv-poster.jpg" controls playsinline preload="none" style="display:block;width:100%;max-width:360px;margin:1.2rem auto;border-radius:8px;"></video>
 
-「シンプルだけど、まだ誰も作っていないスマホ向けパズル」をClaude（相棒）に5案出してもらい、その1案目を形にしたものです。コードはほぼClaudeが書いていて、私は遊んでみて「ここを直して」「これを足して」と伝える係でした。作り始めてから最初の公開まで、半日ほどです。
+「シンプルだけど、まだ誰も作っていないスマホ向けパズル」をClaudeに5案出してもらい、その1案目を形にしたものです。コードはほぼClaudeが書いていて、私は遊んでみて「ここを直して」「これを足して」と伝える係でした。作り始めてから最初の公開まで、半日ほどです。
 
 この記事では、遊び方を簡単に紹介したあと、中の仕組みを中心に書いていきます。
 
@@ -138,7 +138,7 @@ const detour = dS[k] + dG[k] - opt;
 
 ## ショップと動画ボーナス
 
-メダルは、ステージの初クリアで1枚、かくしメダルで1枚、きょうのおさんぽのクリアで1枚もらえます。貯まった枚数に応じて、ショップで着せ替え・模様・声がアンロックされます（使って減る方式ではなく、枚数に達したら解放）。
+メダルは、ステージの初クリアで1枚、かくしメダルで1枚、きょうのおさんぽのクリアで1枚もらえます。貯まった枚数に応じて、ショップで着せ替え・模様・声がアンロックされます（管理が面倒な使って減る方式ではなく、枚数に達したら解放）。
 
 さらに、1日1回だけ動画を最後まで見ると10枚もらえます。ここはGoogleのH5 Games Ads（Webゲーム向けの広告の仕組み）の Ad Placement API で実装しました。
 
@@ -151,7 +151,7 @@ adBreak({
 });
 ```
 
-ただ、現時点ではまだ広告の配信が始まっていないので、代わりにひかげねこのPVが流れるようにしてあります。広告を見てもらうつもりが、自分のゲームの宣伝を見てもらう形になりました。
+ただ、現時点ではまだ広告の配信が始まっていないので、代わりにひかげねこのPVが流れるようにしてあります。広告を見てもらうつもりが、自分のゲームの宣伝を見てもらう形になりました。（広告案件募集中です！笑）
 
 ## PVも同じコードで録画
 
@@ -177,6 +177,6 @@ window.requestAnimationFrame = cb => { F.raf.push(cb); return F.raf.length; };
 
 ルールはシンプルですが、後半のステージは私もヒントなしだと結構悩みます。スマホのブラウザですぐ遊べますので、よかったら遊んでみて下さい。
 
-[ひかげねこ（https://sin1.studio/hikageneko/）](https://sin1.studio/hikageneko/)
+<a class="link-card" href="https://sin1.studio/hikageneko/" style="flex-direction:column;align-items:stretch;gap:0.6rem;max-width:560px;margin-left:auto;margin-right:auto;"><img class="link-card-image" src="/img/hikageneko-ogp.png" alt="ひかげねこ" loading="lazy" style="width:100%;height:auto;aspect-ratio:1200/630;" /><span class="link-card-body"><span class="link-card-title">ひかげねこ｜太陽を動かして影でねこを導くパズルゲーム</span><span class="link-card-domain">sin1.studio/hikageneko/</span></span></a>
 
 「影を足場にする」という1つのルールを状態グラフにしたことで、ソルバー・ステージ生成・ヒント・メダル配置・PVまで同じ仕組みを使い回せたのが、作っていて一番面白かったところです。時刻の代わりに潮の満ち引きや照明のON/OFFにしても、同じ作り方で別のパズルが作れそうです。

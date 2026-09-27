@@ -3,6 +3,14 @@
 # リンク先は https://www.amazon.co.jp/dp/{ASIN}/?tag=sin1n24-22 を各所で組み立てる。
 # 2026-09-17: 全記事展開の一次バッチで既存アフィリエイトリンク・頻出提案商品を一括登録。
 
+"4065128447":
+  title: "問題解決力を鍛える!アルゴリズムとデータ構造 (KS情報科学専門書)"
+  image: "https://m.media-amazon.com/images/I/51OK2x1LvbL._SY445_SX342_ML2_.jpg"
+
+"4297110857":
+  title: "[ゲーム&モダンJavaScript文法で2倍楽しい]グラフィックスプログラミング入門 ——リアルタイムに動く画面を描く。プログラマー直伝の基本 (WEB+DB PRESS plus)"
+  image: "https://m.media-amazon.com/images/I/51kaNsZ+KjL._SX342_SY445_ML2_.jpg"
+
 "4422500015":
   title: "未来を変えるロボット図鑑"
   image: "https://m.media-amazon.com/images/I/71uy7JPI10L._SY385_.jpg"
@@ -14,6 +22,10 @@
 "4800713587":
   title: "はじめて学ぶAutoCAD 2027 作図・操作ガイド"
   image: "https://m.media-amazon.com/images/I/81zUfSbI6nL._SY385_.jpg"
+
+"4877833757":
+  title: "HTML5+Web Audio APIによるオーディオデータプロセッシング: 「音」の理論から生成、分析、オリジナル電子楽器の開発まで"
+  image: "https://m.media-amazon.com/images/I/51Yh0G9KPWL._SX342_SY445_ML2_.jpg"
 
 "B000NMQWUM":
   title: "バロン (Baron) チェア 【ハイバック】 シルバーフレーム 可動肘 座メッシュ ブラック CP85CR FDH1"
@@ -251,6 +263,10 @@
   title: "Plus ESP32-PICOミニIoT開発ボード iotキット フィンガーコンピューターカラーLCD"
   image: "https://m.media-amazon.com/images/I/71HEHGFMjDS._SX522_.jpg"
 
+"B08KG1RXCX":
+  title: "STYRIA あったか わんにゃん ハウス 犬 猫 ペット ドーム 冬 通年 暖かい 洗える リバーシブル クッション (ピンク)"
+  image: "https://m.media-amazon.com/images/I/61CjWxkKhyL._AC_SX300_SY300_QL70_ML2_.jpg"
+
 "B0936D3NVM":
   title: "ソニー(SONY) ポータブルスピーカー SRS-XB13 ブラック 防水・防塵IP67"
   image: "https://m.media-amazon.com/images/I/516pSmUcztS._AC_SY300_SX300_QL70_ML2_.jpg"
@@ -382,6 +398,10 @@
 "B0GYDSWX7M":
   title: "M5Stack 公式 ATOM Matrix ESP32 開発キット MPU6886内蔵"
   image: "https://m.media-amazon.com/images/I/51-a5RXUfML._AC_SX679_.jpg"
+
+"B0H1M3D1BX":
+  title: "Claude Code実践入門［生成AI深掘りガイド］"
+  image: "https://m.media-amazon.com/images/I/51RJkq3Ra4L._SX342_SY445_QL70_ML2_.jpg"
 
 "B0H2WJ5PTR":
   title: "QUOカードPay Eメール送信 5,000円分"

@@ -10,6 +10,8 @@ export default defineConfig({
   integrations: [
     sitemap({
       filter: (page) => !page.includes('/admin/'),
+      // public/ 配下の静的ページ（Astro管理外）もサイトマップに載せる
+      customPages: ['https://sin1.studio/hikageneko/'],
     }),
   ],
   vite: {

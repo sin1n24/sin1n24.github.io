@@ -3,10 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ひかげねこ</title>
+<title>ひかげねこ｜太陽を動かして影でねこを導くパズルゲーム</title>
+<meta name="description" content="ひかげねこは、おひさまをドラッグして影を動かし、日かげしか歩けないねこをおうちまで連れていくスマホ向けパズルゲーム。全30ステージ＋毎日かわる「きょうのおさんぽ」。ブラウザですぐ無料で遊べます。">
+<link rel="canonical" href="https://sin1.studio/hikageneko/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="sin1's studio">
+<meta property="og:title" content="ひかげねこ｜太陽を動かして影でねこを導くパズル">
+<meta property="og:description" content="おひさまを動かして、ねこを日かげでおうちへ。スマホのブラウザですぐ遊べる無料パズル。">
+<meta property="og:url" content="https://sin1.studio/hikageneko/">
+<meta property="og:image" content="https://sin1.studio/img/15_Hikageneko_ogp.png">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sin1.studio/img/15_Hikageneko_ogp.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"ひかげねこ","alternateName":"Hikage Neko","url":"https://sin1.studio/hikageneko/","image":"https://sin1.studio/img/15_Hikageneko_ogp.png","description":"おひさまをドラッグして影を動かし、日かげしか歩けないねこをおうちまで連れていくパズルゲーム。","genre":"パズル","gamePlatform":"Web browser","applicationCategory":"Game","operatingSystem":"Any","inLanguage":"ja","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"author":{"@type":"Person","name":"sin1","url":"https://sin1.studio/"}}</script>
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);box-sizing:border-box}[hidden]{display:none!important}img{max-width:100%}</style>
 
-<meta name="description" content="おひさまをドラッグして影をうごかし、ねこを日かげだけでおうちまで連れていくパズル。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Zen+Maru+Gothic:wght@500;700;900&display=swap">
@@ -143,7 +154,7 @@
   .corner { position: absolute; top: 10px; right: 16px; }
   .toggles { display: flex; gap: 8px; }
   .studio { display: block; opacity: .75; line-height: 0; margin-top: -2px; }
-  .studio img { height: 22px; width: auto; }
+  .studio img { height: 44px; width: auto; }
   .studio:hover, .studio:focus-visible { opacity: 1; }
 
   /* ---------- level select ---------- */
@@ -243,6 +254,7 @@
 
 </head>
 <body>
+<noscript><h1>ひかげねこ</h1><p>おひさまをドラッグして影を動かし、日かげしか歩けないねこをおうちまで連れていくパズルゲームです。JavaScriptを有効にして遊んでください。</p></noscript>
 <div id="app">
   <canvas id="cv" aria-label="ゲーム画面"></canvas>
 
@@ -255,10 +267,7 @@
     <div class="corner toggles"><button class="btn round" id="musicBtnTitle" aria-label="BGM"></button><button class="btn round" id="soundBtnTitle" aria-label="効果音"></button></div>
     <div class="title-actions">
       <button class="btn primary big" id="playBtn">あそぶ</button>
-      <div class="row">
-        <button class="btn daily-btn" id="dailyBtnTitle">きょうのおさんぽ<small id="dailyStatusTitle"></small></button>
-      </div>
-      <a class="studio" href="https://sin1.studio/" target="_blank" rel="noopener" aria-label="sin1's studio（作品一覧）"><img src="/img/sss_logo_3x1_black.png" alt="sin1's studio" width="72" height="24"></a>
+      <a class="studio" href="https://sin1.studio/" target="_blank" rel="noopener" aria-label="sin1's studio（作品一覧）"><img src="/img/sss_logo_3x1_black.png" alt="sin1's studio" width="132" height="44"></a>
     </div>
   </section>
 
@@ -876,6 +885,7 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
       undo() { tone(900, 0.14, 'triangle', 0.06, 0, 520); tone(660, 0.1, 'sine', 0.03, 0.06, 440); },
       reset() { [1047, 784, 659, 523].forEach((f, j) => tone(f, 0.1, 'triangle', 0.05, j * 0.05)); },
       hint() { tone(1318.5, 0.5, 'sine', 0.07); tone(1975.5, 0.55, 'sine', 0.06, 0.12); tone(3951, 0.2, 'sine', 0.012, 0.12); },
+      start() { tone(659.25, 0.12, 'triangle', 0.09, 0.03); tone(987.77, 0.12, 'triangle', 0.09, 0.11); tone(1318.5, 0.28, 'triangle', 0.09, 0.19); tone(2637, 0.2, 'sine', 0.02, 0.19); voice('mew', 1.05, 0.12, 0.3); },
       enter() { tone(784, 0.12, 'triangle', 0.06); tone(1175, 0.22, 'triangle', 0.06, 0.1); },
       swish() { hiss(0.2, 0.035, 0, 'bandpass', 600, 1.2, 2600); },
       star(k, on, delay) {
@@ -1401,7 +1411,7 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
     const tipEl = $('#tip');
     const tipH = (S.mode === 'play' && !tipEl.hidden) ? tipEl.offsetHeight + 12 : 0;
     if (S.mode === 'play') { topR = 62; botR = 80 + tipH; skyH = clamp(h * 0.17, 96, 150); }
-    else if (S.mode === 'title') { topR = 0; botR = 180; skyH = clamp(h * 0.38, 220, 330); }
+    else if (S.mode === 'title') { topR = 0; botR = 160; skyH = clamp(h * 0.38, 220, 330); }
     else { topR = 0; botR = h * 0.72; skyH = clamp(h * 0.22, 130, 210); }
     const horizonY = topR + skyH;
     const availW = w - 32;
@@ -2261,7 +2271,6 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
     $('#modal').hidden = true;
     startDemo();
     setMode('title');
-    $('#dailyStatusTitle').textContent = dailyStatus();
   }
   function showSelect() {
     $('#modal').hidden = true;
@@ -2383,8 +2392,7 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
   }
 
   // ------------------------------------------------------------------ wiring
-  $('#playBtn').addEventListener('click', () => { Sfx.unlock(); Sfx.swish(); showSelect(); });
-  $('#dailyBtnTitle').addEventListener('click', () => { Sfx.unlock(); startDaily(); });
+  $('#playBtn').addEventListener('click', () => { Sfx.unlock(); Sfx.start(); showSelect(); });
   $('#soundBtnTitle').addEventListener('click', () => { Sfx.unlock(); toggleSound(); });
   $('#musicBtnTitle').addEventListener('click', () => { toggleMusic(); });
   $('#selectBack').addEventListener('click', () => { Sfx.swish(); showTitle(); });
@@ -2406,7 +2414,6 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
   startDemo();
   resize();
   setMode('title');
-  $('#dailyStatusTitle').textContent = dailyStatus();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => computeLayout());
   requestAnimationFrame(frame);
 })();

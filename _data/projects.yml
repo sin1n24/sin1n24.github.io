@@ -87,6 +87,14 @@
   description: "好きな画像の顔パーツをつまんで伸ばして変顔にできるインタラクティブトイ。画像はシェアするまでブラウザ内だけで処理し、画像・動画でシェアも可能。"
   tags: ["Vanilla JS", "WebGL", "Interactive"]
 
+- title: "ひかげねこ"
+  category: software
+  url: "https://sin1.studio/hikageneko/"
+  url_label: "あそぶ"
+  image: "/img/15_Hikageneko.png"
+  description: "おひさまをドラッグして影を動かし、日かげしか歩けないねこをおうちまで連れていくスマホ向けパズル。全30ステージ＋毎日かわる「きょうのおさんぽ」。"
+  tags: ["Vanilla JS", "Canvas 2D", "Game"]
+
 - title: "同い年ロボット"
   category: software
   url: "https://sin1.studio/onaidoshi-robot/"

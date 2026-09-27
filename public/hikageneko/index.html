@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ひかげねこ｜太陽を動かして影でねこを導くパズルゲーム</title>
-<meta name="description" content="ひかげねこは、おひさまをドラッグして影を動かし、日かげしか歩けないねこをおうちまで連れていくスマホ向けパズルゲーム。全30ステージ＋毎日かわる「きょうのおさんぽ」。ブラウザですぐ無料で遊べます。">
+<meta name="description" content="ひかげねこは、おひさまをドラッグして影を動かし、日かげしか歩けないねこをおうちまで連れていくスマホ向けパズルゲーム。全30ステージ＋毎日かわる「きょうのおさんぽ」。メダルを集めて、ねこの きせかえ・もよう・こえを かえられます。ブラウザですぐ無料で遊べます。">
 <link rel="canonical" href="https://sin1.studio/hikageneko/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="sin1's studio">
@@ -17,7 +17,6 @@
 <meta name="twitter:image" content="https://sin1.studio/img/15_Hikageneko_ogp.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"ひかげねこ","alternateName":"Hikage Neko","url":"https://sin1.studio/hikageneko/","image":"https://sin1.studio/img/15_Hikageneko_ogp.png","description":"おひさまをドラッグして影を動かし、日かげしか歩けないねこをおうちまで連れていくパズルゲーム。","genre":"パズル","gamePlatform":"Web browser","applicationCategory":"Game","operatingSystem":"Any","inLanguage":"ja","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"author":{"@type":"Person","name":"sin1","url":"https://sin1.studio/"}}</script>
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);box-sizing:border-box}[hidden]{display:none!important}img{max-width:100%}</style>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Zen+Maru+Gothic:wght@500;700;900&display=swap">
@@ -152,6 +151,7 @@
   .daily-btn { flex-direction: column; gap: 2px; padding: 9px 18px; }
   .daily-btn small { font-size: 11px; color: var(--ink-soft); font-weight: 700; }
   .corner { position: absolute; top: 10px; right: 16px; }
+  .corner-left { position: absolute; top: 10px; left: 16px; }
   .toggles { display: flex; gap: 8px; }
   .studio { display: block; opacity: .75; line-height: 0; margin-top: 18px; }
   .studio img { height: 44px; width: auto; }
@@ -247,6 +247,89 @@
   }
   @keyframes toast { 0% { opacity: 0; transform: translate(-50%, 10px); } 12%, 80% { opacity: 1; transform: translate(-50%, 0); } 100% { opacity: 0; } }
   .loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font: 400 16px var(--font-display); }
+
+  /* ---------- medals ---------- */
+  .medal-chip {
+    position: absolute; top: 10px; right: 16px; z-index: 15;
+    display: flex; align-items: center; gap: 4px;
+    background: var(--cream); border: 2.5px solid var(--ink); border-radius: 999px;
+    padding: 4px 12px 4px 6px; box-shadow: 0 3px 0 var(--ink);
+    font: 400 18px/1 var(--font-display); color: var(--ink); font-variant-numeric: tabular-nums;
+    cursor: pointer; min-width: 78px; height: 44px; box-sizing: border-box;
+  }
+  .medal-chip:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--ink); }
+  .medal-chip:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+  .medal-chip .mi { width: 30px; height: 30px; display: block; }
+  .medal-chip.bump { animation: bump .55s cubic-bezier(.2,1.8,.4,1); }
+  @keyframes bump { 0% { transform: scale(1); } 35% { transform: scale(1.25); } 100% { transform: scale(1); } }
+  .chip-space { width: 78px; flex: none; }
+  #play .counter { position: absolute; top: 62px; right: 16px; padding: 3px 9px 3px 5px; gap: 4px; pointer-events: none; box-shadow: 0 2px 0 var(--ink); border-width: 2px; }
+  #play .counter svg { width: 18px; height: 18px; }
+  #play .counter .n { font-size: 16px; min-width: 1em; }
+  #play .counter .par { font-size: 11px; line-height: 1; white-space: nowrap; }
+  .fly-medal { position: absolute; width: 40px; height: 40px; z-index: 40; pointer-events: none; transform: scale(.2); transition: transform .38s cubic-bezier(.2,1.7,.4,1); }
+  .fly-medal.pop { transform: translateY(-24px) scale(1.25); }
+  .fly-medal.go { transition: transform .7s cubic-bezier(.55,0,.75,.4); }
+  .fly-medal svg { width: 100%; height: 100%; }
+  .medal-card .medal-big { display: flex; align-items: center; gap: 6px; font: 400 40px/1 var(--font-display); font-variant-numeric: tabular-nums; }
+  .medal-card .medal-big svg { width: 54px; height: 54px; }
+  .medal-card .medal-big span { font-size: 16px; font-family: var(--font-body); font-weight: 900; margin-top: 12px; }
+  .medal-list { list-style: none; margin: 0; padding: 0; width: 100%; display: flex; flex-direction: column; gap: 6px; }
+  .medal-list li { display: flex; justify-content: space-between; align-items: center; background: #fff; border: 2px solid rgba(91,70,55,.25); border-radius: 12px; padding: 8px 12px; font-size: 14px; }
+  .medal-list b { font: 400 16px/1 var(--font-display); font-variant-numeric: tabular-nums; }
+  .card .note.next-unlock { color: var(--ink); }
+  .card .note b { font-family: var(--font-display); font-weight: 400; }
+  .card .actions.col { flex-direction: column; }
+  .medal-lines { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 14px; }
+  .medal-get { display: inline-flex; align-items: center; gap: 6px; background: #FFF1C2; border: 2px solid var(--ink); border-radius: 999px; padding: 4px 12px 4px 6px; }
+  .medal-get svg { width: 26px; height: 26px; }
+  .hidden-status { color: var(--ink-soft); }
+  .hidden-status b { color: var(--ink); }
+  .lv { position: relative; }
+  .lv .hm { position: absolute; top: -8px; right: -6px; width: 22px; height: 22px; }
+  .lv .hm svg { width: 100%; height: 100%; }
+  /* ---------- tabs & shop ---------- */
+  .tabs { display: flex; background: var(--cream-2); border: 2.5px solid var(--ink); border-radius: 999px; padding: 3px; gap: 2px; }
+  .tab { font: 400 16px/1 var(--font-display); color: var(--ink); background: transparent; border: 0; border-radius: 999px; padding: 9px 16px; cursor: pointer; }
+  .tab[aria-selected="true"] { background: var(--sun); box-shadow: inset 0 0 0 2px var(--ink); }
+  .tab:focus-visible, .seg-btn:focus-visible, .item:focus-visible { outline: 3px solid var(--sun-deep); outline-offset: 2px; }
+  .stars-total { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-soft); }
+  .stars-total svg { width: 18px; height: 18px; }
+  .stars-total b { font: 400 15px var(--font-display); color: var(--ink); }
+  .shop-top { display: flex; align-items: center; gap: 12px; border: 2.5px solid var(--ink); border-radius: 18px; padding: 8px 12px 8px 6px; background: linear-gradient(#DDF0FA, #FFF3DC); box-shadow: 0 3px 0 var(--ink); }
+  .shop-top canvas { width: 120px; height: 120px; flex: none; }
+  .shop-info { display: flex; flex-direction: column; gap: 6px; min-width: 0; font-size: 13px; }
+  .shop-info b { font: 400 15px var(--font-display); }
+  .shop-info .now { line-height: 1.45; }
+  .shop-info .have { display: inline-flex; align-items: center; gap: 4px; }
+  .shop-info .have svg { width: 22px; height: 22px; }
+  .shop-info .have b { font-size: 18px; }
+  .shop-info .btn { align-self: flex-start; padding: 7px 12px; font-size: 13px; }
+  .seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .seg-btn { font: 700 14px/1 var(--font-body); color: var(--ink); background: #fff; border: 2px solid var(--ink); border-radius: 12px; padding: 10px 4px; cursor: pointer; }
+  .seg-btn[aria-selected="true"] { background: var(--ink); color: var(--cream); }
+  .shop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .item { position: relative; border: 2.5px solid var(--ink); border-radius: 14px; background: #fff; box-shadow: 0 3px 0 var(--ink); display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 4px 8px; font: 700 12px/1.3 var(--font-body); color: var(--ink); cursor: pointer; }
+  .item:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--ink); }
+  .item canvas { width: 64px; height: 64px; }
+  .item .voice-pic { width: 64px; height: 64px; display: grid; place-items: center; }
+  .item .voice-pic svg { width: 36px; height: 36px; }
+  .item .nm { text-align: center; }
+  .item .state { font-size: 11px; color: var(--ink-soft); display: inline-flex; align-items: center; gap: 2px; }
+  .item .state svg { width: 12px; height: 12px; }
+  .item.on { background: #FFF1C2; }
+  .item.on .state { color: var(--ink); font-weight: 900; }
+  .item.locked { background: var(--cream-2); box-shadow: 0 3px 0 rgba(91,70,55,.35); border-color: rgba(91,70,55,.4); }
+  .item.locked canvas, .item.locked .voice-pic { filter: grayscale(1); opacity: .45; }
+  .shop-note { margin: 0; font-size: 12px; line-height: 1.6; color: var(--ink-soft); text-wrap: pretty; }
+  .shop-note b { font: 400 14px var(--font-display); color: var(--ink); }
+  /* ---------- promo video (shown when no ad is available) ---------- */
+  .ad-layer { position: absolute; inset: 0; z-index: 50; background: rgba(30,22,18,.88); display: flex; align-items: center; justify-content: center; padding: 16px; }
+  .ad-box { width: min(360px, 100%); display: flex; flex-direction: column; gap: 10px; color: var(--cream); }
+  .ad-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; font: 400 15px var(--font-display); }
+  .ad-head .btn.round { width: 40px; height: 40px; font-size: 20px; }
+  .ad-box video { width: 100%; max-height: 68vh; aspect-ratio: 9 / 16; object-fit: contain; background: #000; border-radius: 16px; }
+  .ad-box p { margin: 0; text-align: center; font-size: 14px; }
   @media (prefers-reduced-motion: reduce) {
     .lv.next, .tip, .sheet, .card, .stars svg { animation: none; }
   }
@@ -264,7 +347,7 @@
       <h1 class="logo">ひ<span class="k">か</span>げねこ</h1>
       <div class="tagline">おひさまを うごかして、ねこを 日かげで おうちへ</div>
     </div>
-    <div class="corner toggles"><button class="btn round" id="musicBtnTitle" aria-label="BGM"></button><button class="btn round" id="soundBtnTitle" aria-label="効果音"></button></div>
+    <div class="corner-left toggles"><button class="btn round" id="musicBtnTitle" aria-label="BGM"></button><button class="btn round" id="soundBtnTitle" aria-label="効果音"></button></div>
     <div class="title-actions">
       <button class="btn primary big" id="playBtn">あそぶ</button>
       <a class="studio" href="https://sin1.studio/" target="_blank" rel="noopener" aria-label="sin1's studio（作品一覧）"><img src="/img/sss_logo_3x1_black.png" alt="sin1's studio" width="132" height="44"></a>
@@ -278,8 +361,8 @@
     </button>
     <div class="sheet" role="dialog" aria-label="ステージをえらぶ">
       <div class="sheet-head">
-        <h2>ステージ</h2>
-        <div class="total" id="totalStars"></div>
+        <div class="tabs" role="tablist" aria-label="メニュー"><button class="tab" role="tab" id="tabStage" aria-selected="true">ステージ</button><button class="tab" role="tab" id="tabShop" aria-selected="false">ショップ</button></div>
+        <div class="toggles"><button class="btn round" id="musicBtnSelect" aria-label="BGM"></button><button class="btn round" id="soundBtnSelect" aria-label="効果音"></button></div>
       </div>
       <div class="sheet-body" id="worlds"></div>
     </div>
@@ -292,11 +375,12 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
       </button>
       <div class="stage-label"><span class="num" id="stageNum"></span><span class="name" id="stageName"></span></div>
-      <div class="counter" aria-live="polite">
+      <div class="chip-space" aria-hidden="true"></div>
+    </div>
+    <div class="counter" aria-live="polite">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5.2" fill="#FFCB47" stroke="#5B4637" stroke-width="2"/><g stroke="#F5A23A" stroke-width="2.4" stroke-linecap="round"><path d="M12 1.8v2.6M12 19.6v2.6M1.8 12h2.6M19.6 12h2.6M4.8 4.8l1.8 1.8M17.4 17.4l1.8 1.8M4.8 19.2l1.8-1.8M17.4 6.6l1.8-1.8"/></g></svg>
         <span class="n" id="stepCount">0</span>
-        <span class="par">めやす<br><span id="parCount">0</span>回</span>
-      </div>
+        <span class="par">/ めやす <span id="parCount">0</span></span>
     </div>
     <div class="hud-bottom" style="pointer-events:auto">
       <button class="btn" id="undoBtn" aria-label="ひとつもどす">
@@ -315,7 +399,15 @@
     <div id="tip" class="tip" hidden style="pointer-events:auto"></div>
   </section>
 
+  <button class="medal-chip" id="medalChip" aria-label="メダル"><span class="mi"></span><span id="medalCount">0</span></button>
   <div id="modal" class="modal" hidden></div>
+  <div id="adLayer" class="ad-layer" hidden>
+    <div class="ad-box" role="dialog" aria-label="しょうかい どうが">
+      <div class="ad-head"><span>ひかげねこ しょうかい どうが</span><button class="btn round" id="adClose" aria-label="とじる">×</button></div>
+      <video id="adVideo" playsinline preload="none"></video>
+      <p id="adMsg"></p>
+    </div>
+  </div>
   <div id="toastHost"></div>
 </div>
 
@@ -684,7 +776,7 @@
 
 </script>
 <script>
-window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S","....."],"t0":1,"par":0},{"map":["....G","...1.",".....","...1.","...S.","....."],"t0":4,"par":2},{"map":[".....","..2.G",".....",".....","..1..","S...2","....."],"t0":6,"par":4},{"map":["....G","..1..","3....",".....",".....",".....","1.2.S"],"t0":0,"par":4},{"map":[".1.G..","...3..","......","....3.","..3..1","......","....S."],"t0":2,"par":4},{"map":["2..31.","...1G.","......","......",".1....","......",".3S...","......"],"t0":1,"par":5},{"map":["G.....","..2...",".....1","......","3.1...","..3...","...3..","..1..S"],"t0":2,"par":5},{"map":["...3.G","......","......",".21...","......","1..1..","1.....","S.1..."],"t0":4,"par":6},{"map":["..1..G","...1..","......","...3..","..3.2.",".1.2..","....S1","......"],"t0":5,"par":7},{"map":["3.....","2...G.",".....3","......","..2...","1..2..",".....1","S.2...",".....3"],"t0":6,"par":8},{"map":[".1....","....G3","......","......","...~2.","..1..3","..1...","..S..."],"t0":4,"par":4},{"map":["......","G..1..",".2....","...~.2","~....2","..2...",".~.S..","......"],"t0":4,"par":4},{"map":["G3....",".....~","...3..","......",".~1...",".....2","1.2...","....S."],"t0":4,"par":6},{"map":[".G..1.","....1.","......","....2.","......","..~2..","1..11.","..S...","....3."],"t0":4,"par":6},{"map":["2.G...","..1...","~1.3..","......","......","~...3.","....21","....S.","......"],"t0":3,"par":7},{"map":[".1.....","...~1G.",".....2.","...1.2.",".......","...2~..","..2....",".......",".~..S.."],"t0":2,"par":8},{"map":[".2.....","..G....","....3..",".......",".3.3...","..1.3..",".1.2...","....S.2",".....~."],"t0":5,"par":8},{"map":["......3","G.....3","...3...","2.3.~..",".2.....","...1...",".....1.","3.3.S..","......."],"t0":0,"par":8},{"map":[".G..1..",".......","...1...","3......",".......",".3...2.","..~....","2..~..1","S....2~"],"t0":3,"par":11},{"map":["....1..","2.G3...","....~..","...~...",".....1.",".2.3...","...~..1",".....2.","3......",".S....."],"t0":2,"par":14},{"map":[".2....","..2G..",".1....",".p....",".1....","..2...",".1....","....S."],"t0":2,"par":4},{"map":["..~G.~","..2...","...1..","......",".2..3p","......","......","..3S.."],"t0":2,"par":5},{"map":["G....2","...2..","....2p","......",".....1",".....1","....2.","...S~.","....p."],"t0":4,"par":6},{"map":[".....G",".~3...","1.....","......","......",".2....",".p...p","..2S..","..3..3"],"t0":0,"par":7},{"map":["......p",".p.G...",".....3.",".......","..2....",".......","2....2.",".S.2...",".2..3~."],"t0":5,"par":8},{"map":["G......",".2..1.3",".......","...1...",".......","....1..","....1.2","..p1.1.",".S1...."],"t0":4,"par":8},{"map":["~33..23","2....G.",".......",".p.....",".....1.","....3..","~......",".S3....","......."],"t0":4,"par":10},{"map":["....1.~",".....3G",".......",".......",".~.3.~.","....1..",".2....~",".......","..1....","3p...S."],"t0":0,"par":10},{"map":["..2....","..G..2.","..p~~..",".......",".2....p","....1.1","....3..","......1","S..3...","......."],"t0":5,"par":11},{"map":[".23....","..2.G.1","....1..",".......",".1p...2",".....2.","...~...","......2","..3..1.","S......"],"t0":4,"par":14}];
+window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","2..2S","....."],"t0":1,"par":0,"medal":25},{"map":["....G","...1.",".....","...1.","2..S.","....."],"t0":4,"par":2,"medal":20},{"map":[".....","..2.G",".....",".....","..1..","S...2","....."],"t0":6,"par":4,"medal":29},{"map":["....G","..1..","3....",".2...",".....",".....","1.2.S"],"t0":0,"par":4,"medal":30},{"map":[".1.G..","...3..","......","....32","..3..1","......","....S."],"t0":2,"par":4,"medal":23},{"map":["2..31.","...1G.","......","......",".1....",".....2",".3S...","......"],"t0":1,"par":5,"medal":35},{"map":["G....1","..2...",".....1","......","3.1...","..3...","...3..","..1..S"],"t0":2,"par":5,"medal":5},{"map":["...3.G","......","......",".21...","......","1..1..","1.....","S.1..1"],"t0":4,"par":6,"medal":47},{"map":["..1..G","...1..","......","...3..","..3.2.",".1.2..","..1.S1","......"],"t0":5,"par":7,"medal":31},{"map":["3.....","2...G.",".....3",".....1","..2...","1..2..",".....1","S.2...",".....3"],"t0":6,"par":8,"medal":23},{"map":[".1....","....G3","......","......","...~21","..1..3","..1...","..S..."],"t0":4,"par":4,"medal":29},{"map":["......","G..1..",".2....","...~12","~....2","..2...",".~.S..","......"],"t0":4,"par":4,"medal":23},{"map":["G3....",".....~","...3..","......",".~1...",".....2","1.2...",".1..S."],"t0":4,"par":6,"medal":36},{"map":[".G..1.","....1.",".1....","....2.","......","..~2..","1..11.","..S...","....3."],"t0":4,"par":6,"medal":13},{"map":["2.G...","..1...","~1.3..","......","......","~...3.","....21","....S.","......"],"t0":3,"par":7,"medal":41},{"map":[".1.1...","...~1G.",".....2.","...1.2.",".......","...2~..","..2....",".......",".~..S.."],"t0":2,"par":8,"medal":1},{"map":[".2.....","1.G....","....3..",".......",".3.3...","..1.3..",".1.2...","....S.2",".....~."],"t0":5,"par":8,"medal":7},{"map":["......3","G.....3",".1.3...","2.3.~..",".2.....","...1...",".....1.","3.3.S..","......."],"t0":0,"par":8,"medal":21},{"map":[".G..1..",".......","...1...","3......",".......",".3...2.","..~....","2..~..1","S....2~"],"t0":3,"par":11,"medal":40},{"map":["....1..","2.G3.1.","....~..","...~...",".....1.",".2.3...","...~..1",".....2.","3......",".S....."],"t0":2,"par":14,"medal":4},{"map":[".2....","..2G..",".1....",".p....","11....","..2...",".1....","....S."],"t0":2,"par":4,"medal":1},{"map":["..~G.~","..2...","...1..","......",".2..3p","......","......","..3S.."],"t0":2,"par":5,"medal":25},{"map":["G..1.2","...2..","....2p","......",".....1",".....1","....2.","...S~.","....p."],"t0":4,"par":6,"medal":5},{"map":["2....G",".~3...","1.....","......","......",".2....",".p...p","..2S..","..3..3"],"t0":0,"par":7,"medal":0},{"map":["2.....p",".p.G...",".....3.",".......","..2....",".......","2....2.",".S.2...",".2..3~."],"t0":5,"par":8,"medal":0},{"map":["G......",".2..1.3",".......","...1...",".2.....","....1..","....1.2","..p1.1.",".S1...."],"t0":4,"par":8,"medal":48},{"map":["~33..23","2....G.",".......",".p.....",".....1.","....3..","~......",".S3....","......."],"t0":4,"par":10,"medal":6},{"map":["2...1.~",".....3G",".......",".......",".~.3.~.","....1..",".2....~",".......","..1....","3p...S."],"t0":0,"par":10,"medal":0},{"map":["..2....","..G..2.","..p~~..",".......","22....p","....1.1","....3..","......1","S..3...","......."],"t0":5,"par":11,"medal":28},{"map":[".23...2","..2.G.1","....1..",".......",".1p...2",".....2.","...~...","......2","..3..1.","S......"],"t0":4,"par":14,"medal":6}];
 </script>
 <script>
 (function () {
@@ -745,9 +837,58 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
 
   // ------------------------------------------------------------------ save data
   const SAVE_KEY = 'hikageneko.v1';
-  const save = { stars: {}, daily: {}, sound: true, music: false, tips: {} };
+  const save = { stars: {}, daily: {}, sound: true, music: false, tips: {}, medals: null, equip: null };
   try { const raw = localStorage.getItem(SAVE_KEY); if (raw) Object.assign(save, JSON.parse(raw)); } catch (e) { /* storage unavailable */ }
   function persist() { try { localStorage.setItem(SAVE_KEY, JSON.stringify(save)); } catch (e) { /* ignore */ } }
+  save.medals = Object.assign({ clear: {}, hidden: {}, daily: {}, ad: {} }, save.medals || {});
+  save.equip = Object.assign({ outfit: 'none', pattern: 'tabby', voice: 'normal' }, save.equip || {});
+  // earlier versions kept only stars: count those clears as medals
+  for (const k in save.stars) if (save.stars[k] > 0) save.medals.clear[k] = 1;
+  for (const k in save.daily) save.medals.daily[k] = 1;
+
+  // ------------------------------------------------------------------ medals & shop
+  const AD_CLIENT = 'ca-pub-8274345994743020';
+  const AD_REWARD = 10;
+  function medalCounts() {
+    const m = save.medals, n = o => Object.keys(o).length;
+    let ad = 0; for (const k in m.ad) ad += m.ad[k];
+    const r = { clear: n(m.clear), hidden: n(m.hidden), daily: n(m.daily), ad };
+    r.total = r.clear + r.hidden + r.daily + r.ad;
+    return r;
+  }
+  const SHOP = {
+    outfit: [
+      { id: 'none', name: 'なし', need: 0 }, { id: 'ribbon', name: 'リボン', need: 2 }, { id: 'bell', name: 'すずの くびわ', need: 4 },
+      { id: 'bandana', name: 'バンダナ', need: 7 }, { id: 'flower', name: 'はなかんむり', need: 10 }, { id: 'straw', name: 'むぎわらぼうし', need: 14 },
+      { id: 'glasses', name: 'サングラス', need: 18 }, { id: 'beret', name: 'ベレーぼう', need: 24 }, { id: 'crown', name: 'おうかん', need: 32 },
+    ],
+    pattern: [
+      { id: 'tabby', name: 'ちゃトラ', need: 0 }, { id: 'white', name: 'しろねこ', need: 3 }, { id: 'black', name: 'くろねこ', need: 5 },
+      { id: 'saba', name: 'サバトラ', need: 8 }, { id: 'tuxedo', name: 'ハチワレ', need: 12 }, { id: 'calico', name: 'みけねこ', need: 16 },
+      { id: 'siamese', name: 'シャム', need: 21 }, { id: 'cow', name: 'うしがら', need: 27 }, { id: 'dream', name: 'ゆめいろ', need: 36 },
+    ],
+    voice: [
+      { id: 'normal', name: 'ふつう', need: 0 }, { id: 'kitten', name: 'こねこ', need: 4 }, { id: 'big', name: 'おおねこ', need: 9 },
+      { id: 'sleepy', name: 'ねむねこ', need: 14 }, { id: 'chatty', name: 'おしゃべり', need: 20 }, { id: 'robot', name: 'ロボねこ', need: 26 },
+      { id: 'opera', name: 'オペラ', need: 40 },
+    ],
+  };
+  function nextUnlock(total) {
+    let best = null;
+    for (const k in SHOP) for (const it of SHOP[k]) if (it.need > total && (!best || it.need < best.need)) best = it;
+    return best;
+  }
+  const PATTERNS = {
+    tabby: { base: '#F6A85B', dark: '#DD8A3E', belly: '#FFEBD0', stripes: true },
+    white: { base: '#FFF9F2', dark: '#E9DDD0', belly: '#FFFFFF' },
+    black: { base: '#4B4452', dark: '#3A3440', belly: '#5D5566', iris: '#F4D35E', line: '#E8DCE8', ear: '#E89AAE' },
+    saba: { base: '#A9ABB7', dark: '#6F7180', belly: '#ECEBF1', stripes: true },
+    tuxedo: { base: '#4B4452', dark: '#3A3440', belly: '#FFFFFF', iris: '#B8E07A', line: '#5B4637', ear: '#E89AAE', face: 'tuxedo', feet: '#FFFFFF' },
+    calico: { base: '#FFF9F2', dark: '#E9DDD0', belly: '#FFFFFF', patches: ['#F6A85B', '#4B4452'] },
+    siamese: { base: '#F3E6D2', dark: '#6E5347', belly: '#FBF3E8', iris: '#8EC9F2', face: 'mask', tail: '#6E5347', feet: '#8A6B5C', earOuter: '#6E5347', line: '#F3E6D2' },
+    cow: { base: '#FFF9F2', dark: '#E9DDD0', belly: '#FFFFFF', patches: ['#4B4452', '#4B4452'], cow: true },
+    dream: { base: '#F8C8DC', dark: '#B9A6EE', belly: '#FFF2F8', stripes: true, ear: '#FFFFFF' },
+  };
 
   // ------------------------------------------------------------------ audio
   // One AudioContext, two buses (effects / music) into a gentle compressor.
@@ -817,29 +958,48 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
       happy: { dur: 0.62, f: [[0, 470], [0.14, 820], [0.34, 760], [0.62, 560]], fc: [[0, 900], [0.14, 2200], [0.4, 1800], [0.62, 1100]], vib: 9 },
       hot: { dur: 0.3, f: [[0, 900], [0.05, 1250], [0.3, 760]], fc: [[0, 1600], [0.05, 2800], [0.3, 1500]] },
     };
-    function voice(kind, p, vol, delay) {
+    const PROFILES = {
+      normal: { p: 1, f: 1, d: 1 },
+      kitten: { p: 1.38, f: 1.22, d: 0.78 },
+      big: { p: 0.66, f: 0.78, d: 1.3 },
+      sleepy: { p: 0.88, f: 0.92, d: 1.55, vib: 7 },
+      chatty: { p: 1.12, f: 1.08, d: 0.62, twice: true },
+      robot: { p: 1, f: 1, d: 1, wave: 'square', steps: true },
+      opera: { p: 1.3, f: 1.12, d: 1.7, vib: 26 },
+    };
+    function voice(kind, p, vol, delay, prof, second) {
       const a = A(); if (!a) return;
-      const v = VOICE[kind], t = a.currentTime + (delay || 0), D = v.dur;
-      const o = a.createOscillator(); o.type = 'sawtooth';
-      o.frequency.setValueAtTime(v.f[0][1] * p, t);
-      for (const [tt, hz] of v.f.slice(1)) o.frequency.linearRampToValueAtTime(hz * p, t + tt);
+      const pr = PROFILES[prof || save.equip.voice] || PROFILES.normal;
+      const v = VOICE[kind], t = a.currentTime + (delay || 0), k = pr.d, D = v.dur * k, p0 = p;
+      p *= pr.p;
+      const o = a.createOscillator(); o.type = pr.wave || 'sawtooth';
+      const pts = v.f.map(([tt, hz]) => [tt * k, hz * p]);
+      o.frequency.setValueAtTime(pts[0][1], t);
+      if (pr.steps) {
+        for (let i = 1; i < pts.length; i++) {
+          const [t0, h0] = pts[i - 1], [t1, h1] = pts[i];
+          for (let q = 1; q <= 3; q++) o.frequency.setValueAtTime(h0 + (h1 - h0) * q / 3, t + t0 + (t1 - t0) * q / 3);
+        }
+      } else for (const [tt, hz] of pts.slice(1)) o.frequency.linearRampToValueAtTime(hz, t + tt);
       const f1 = a.createBiquadFilter(), f2 = a.createBiquadFilter();
-      f1.type = f2.type = 'bandpass'; f1.Q.value = 5.5; f2.Q.value = 8;
-      f1.frequency.setValueAtTime(v.fc[0][1], t); f2.frequency.setValueAtTime(v.fc[0][1] * 1.85, t);
-      for (const [tt, hz] of v.fc.slice(1)) { f1.frequency.linearRampToValueAtTime(hz, t + tt); f2.frequency.linearRampToValueAtTime(hz * 1.85, t + tt); }
+      f1.type = f2.type = 'bandpass'; f1.Q.value = pr.steps ? 3 : 5.5; f2.Q.value = 8;
+      f1.frequency.setValueAtTime(v.fc[0][1] * pr.f, t); f2.frequency.setValueAtTime(v.fc[0][1] * 1.85 * pr.f, t);
+      for (const [tt, hz] of v.fc.slice(1)) { f1.frequency.linearRampToValueAtTime(hz * pr.f, t + tt * k); f2.frequency.linearRampToValueAtTime(hz * 1.85 * pr.f, t + tt * k); }
       const g = a.createGain(), g2 = a.createGain(); g2.gain.value = 0.3;
-      vol *= 3; // formant filters eat most of the level
+      vol *= pr.steps ? 1.6 : 3; // formant filters eat most of the level
       g.gain.setValueAtTime(0.0001, t);
       g.gain.exponentialRampToValueAtTime(vol, t + Math.min(0.045, D * 0.25));
       g.gain.setValueAtTime(vol, t + D * 0.55);
       g.gain.exponentialRampToValueAtTime(0.0001, t + D);
       o.connect(f1).connect(g); o.connect(f2).connect(g2).connect(g); g.connect(Snd.sfx);
       o.start(t); o.stop(t + D + 0.05);
-      if (v.vib) {
+      const vib = (v.vib || 0) + (pr.vib || 0);
+      if (vib) {
         const l = a.createOscillator(), lg = a.createGain();
-        l.frequency.value = 6.5; lg.gain.value = v.vib * p;
+        l.frequency.value = 6.5; lg.gain.value = vib * p;
         l.connect(lg).connect(o.frequency); l.start(t + D * 0.3); l.stop(t + D + 0.05);
       }
+      if (pr.twice && !second) voice(kind, p0 * 1.12, vol / 3 * 0.85, (delay || 0) + D * 0.85, prof, true);
     }
     function purr(delay, dur, vol) {
       const a = A(); if (!a) return;
@@ -876,6 +1036,12 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
       },
       meow() { voice('long', 1, 0.17); purr(0.35, 1.1, 0.2); },
       idle() { voice('happy', 0.82, 0.08); },
+      hear(prof) { voice('long', 1, 0.17, 0, prof); },
+      meowWith(prof) { voice('short', 1, 0.15, 0.05, prof); },
+      yay() { voice('happy', 1.05, 0.15, 0.25); },
+      coin() { [1318.5, 1760, 2637].forEach((fq, j) => tone(fq, 0.2, 'triangle', 0.07, j * 0.07)); tone(3520, 0.35, 'sine', 0.02, 0.2); },
+      sniff() { hiss(0.06, 0.06, 0, 'bandpass', 3200, 3); hiss(0.06, 0.06, 0.13, 'bandpass', 3500, 3); },
+      grant(n) { for (let j = 0; j < n; j++) tone(1568 + (j % 3) * 262, 0.12, 'triangle', 0.05, j * 0.07); tone(2093, 0.5, 'sine', 0.04, n * 0.07); },
       sad() { voice('sad', 1, 0.14); },
       splash() { tone(1500, 0.08, 'sine', 0.09, 0, 420); tone(1050, 0.1, 'sine', 0.06, 0.06, 320); hiss(0.14, 0.03, 0.02, 'highpass', 2500, 0.7); voice('mew', 0.85, 0.08, 0.16); },
       bonk() { tone(560, 0.07, 'triangle', 0.09, 0, 380); hiss(0.05, 0.04, 0, 'bandpass', 900, 2); },
@@ -1265,11 +1431,13 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
   // ------------------------------------------------------------------ cat
   function drawCat(c, x, y, s, o) {
     const f = o.face || 1, t = o.t || 0;
+    const look = o.look || save.equip;
+    const P = PATTERNS[look.pattern] || PATTERNS.tabby;
     const moving = o.moving;
     const hop = o.hop || 0;
     const bob = moving ? Math.abs(Math.sin(o.walk)) * s * 0.05 : Math.sin(t * 2.2) * s * 0.006;
     const lw = Math.max(1.3, s * 0.035);
-    const OR = '#F6A85B', OR_D = '#DD8A3E', CR = '#FFEBD0', PK = '#FF9DA8';
+    const OR = P.base, OR_D = P.dark, CR = P.belly, PK = P.ear || '#FF9DA8', LINE = P.line || INK;
     c.save();
     c.translate(x, y);
     if (o.alpha !== undefined) c.globalAlpha = o.alpha;
@@ -1278,14 +1446,13 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
     if (o.scale !== undefined) c.scale(o.scale, o.scale);
     c.lineJoin = 'round'; c.lineCap = 'round'; c.strokeStyle = INK;
     if (o.mood === 'sleep') {
-      // curled up loaf
       c.lineWidth = lw;
       ell(c, 0, -s * 0.14, s * 0.28, s * 0.15); fs(c, OR);
-      c.beginPath(); c.moveTo(s * 0.24, -s * 0.06); c.quadraticCurveTo(s * 0.1, s * 0.04, -s * 0.18, -s * 0.02); c.lineWidth = s * 0.08 + lw * 2; c.stroke(); c.lineWidth = s * 0.08; c.strokeStyle = OR; c.stroke(); c.strokeStyle = INK; c.lineWidth = lw;
+      c.beginPath(); c.moveTo(s * 0.24, -s * 0.06); c.quadraticCurveTo(s * 0.1, s * 0.04, -s * 0.18, -s * 0.02); c.lineWidth = s * 0.08 + lw * 2; c.stroke(); c.lineWidth = s * 0.08; c.strokeStyle = P.tail || OR; c.stroke(); c.strokeStyle = INK; c.lineWidth = lw;
       const hx = -s * 0.14, hy = -s * 0.2;
-      for (const d of [-1, 1]) { c.beginPath(); c.moveTo(hx + d * s * 0.15, hy - s * 0.02); c.lineTo(hx + d * s * 0.13, hy - s * 0.2); c.lineTo(hx + d * s * 0.02, hy - s * 0.12); c.closePath(); fs(c, OR); }
+      for (const d of [-1, 1]) { c.beginPath(); c.moveTo(hx + d * s * 0.15, hy - s * 0.02); c.lineTo(hx + d * s * 0.13, hy - s * 0.2); c.lineTo(hx + d * s * 0.02, hy - s * 0.12); c.closePath(); fs(c, P.earOuter || OR); }
       ell(c, hx, hy, s * 0.17, s * 0.14); fs(c, OR);
-      c.lineWidth = lw * 0.9;
+      c.lineWidth = lw * 0.9; c.strokeStyle = LINE;
       for (const d of [-1, 1]) { c.beginPath(); c.arc(hx + d * s * 0.065, hy + s * 0.005, s * 0.03, 0.15 * Math.PI, 0.85 * Math.PI); c.stroke(); }
       c.fillStyle = PK; c.globalAlpha *= 0.6; for (const d of [-1, 1]) { ell(c, hx + d * s * 0.11, hy + s * 0.05, s * 0.03, s * 0.02); c.fill(); }
       c.restore();
@@ -1296,32 +1463,55 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
     c.beginPath(); c.moveTo(-f * s * 0.17, -s * 0.12);
     c.quadraticCurveTo(-f * s * 0.42, -s * 0.12, -f * (s * 0.33 + sway * s * 0.07), -s * 0.44);
     c.lineWidth = s * 0.09 + lw * 2; c.stroke();
-    c.lineWidth = s * 0.09; c.strokeStyle = OR; c.stroke();
+    c.lineWidth = s * 0.09; c.strokeStyle = P.tail || OR; c.stroke();
     c.strokeStyle = INK; c.lineWidth = lw;
     // body
     ell(c, 0, -s * 0.17, s * 0.215, s * 0.16); fs(c, OR);
+    c.save(); ell(c, 0, -s * 0.17, s * 0.215, s * 0.16); c.clip();
+    if (P.patches) {
+      c.fillStyle = P.patches[0]; ell(c, -f * s * 0.1, -s * 0.24, s * 0.12, s * 0.09); c.fill();
+      c.fillStyle = P.patches[1]; ell(c, f * s * 0.13, -s * 0.1, s * 0.07, s * 0.06); c.fill();
+    }
     c.fillStyle = CR; ell(c, f * s * 0.05, -s * 0.13, s * 0.1, s * 0.09); c.fill();
-    c.save(); c.strokeStyle = OR_D; c.lineWidth = lw * 1.1;
-    for (const k of [0, 1]) { c.beginPath(); c.moveTo(-f * s * (0.02 + k * 0.08), -s * 0.31); c.lineTo(-f * s * (0.04 + k * 0.08), -s * 0.24); c.stroke(); }
     c.restore();
+    ell(c, 0, -s * 0.17, s * 0.215, s * 0.16); c.stroke();
+    if (P.stripes) {
+      c.save(); c.strokeStyle = OR_D; c.lineWidth = lw * 1.1;
+      for (const k of [0, 1]) { c.beginPath(); c.moveTo(-f * s * (0.02 + k * 0.08), -s * 0.31); c.lineTo(-f * s * (0.04 + k * 0.08), -s * 0.24); c.stroke(); }
+      c.restore();
+    }
     // feet
     const ph = moving ? Math.sin(o.walk) : 0;
-    for (const d of [-1, 1]) { ell(c, d * s * 0.1, -s * 0.025 - Math.max(0, d * ph) * s * 0.05, s * 0.06, s * 0.042); fs(c, CR); }
+    for (const d of [-1, 1]) { ell(c, d * s * 0.1, -s * 0.025 - Math.max(0, d * ph) * s * 0.05, s * 0.06, s * 0.042); fs(c, P.feet || CR); }
     // head
     const hx = f * s * 0.035, hy = -s * 0.44;
     for (const d of [-1, 1]) {
-      c.beginPath(); c.moveTo(hx + d * s * 0.22, hy - s * 0.04); c.lineTo(hx + d * s * 0.19, hy - s * 0.29); c.lineTo(hx + d * s * 0.03, hy - s * 0.18); c.closePath(); fs(c, OR);
+      c.beginPath(); c.moveTo(hx + d * s * 0.22, hy - s * 0.04); c.lineTo(hx + d * s * 0.19, hy - s * 0.29); c.lineTo(hx + d * s * 0.03, hy - s * 0.18); c.closePath(); fs(c, P.earOuter || OR);
       c.beginPath(); c.moveTo(hx + d * s * 0.18, hy - s * 0.08); c.lineTo(hx + d * s * 0.175, hy - s * 0.22); c.lineTo(hx + d * s * 0.08, hy - s * 0.16); c.closePath(); c.fillStyle = PK; c.fill();
     }
-    ell(c, hx, hy, s * 0.25, s * 0.205); fs(c, OR);
-    c.fillStyle = CR; ell(c, hx + f * s * 0.02, hy + s * 0.085, s * 0.12, s * 0.075); c.fill();
-    c.save(); c.strokeStyle = OR_D; c.lineWidth = lw * 1.15;
-    for (const k of [-1, 0, 1]) { c.beginPath(); c.moveTo(hx + k * s * 0.05, hy - s * 0.19); c.lineTo(hx + k * s * 0.045, hy - s * 0.12 + Math.abs(k) * s * 0.02); c.stroke(); }
+    ell(c, hx, hy, s * 0.25, s * 0.205); c.fillStyle = OR; c.fill();
+    c.save(); ell(c, hx, hy, s * 0.25, s * 0.205); c.clip();
+    if (P.patches) {
+      c.fillStyle = P.patches[0]; ell(c, hx - s * (P.cow ? 0.02 : 0.14), hy - s * 0.1, s * 0.12, s * 0.1); c.fill();
+      if (!P.cow) { c.fillStyle = P.patches[1]; ell(c, hx + s * 0.16, hy - s * 0.12, s * 0.1, s * 0.08); c.fill(); }
+      else { ell(c, hx + s * 0.2, hy + s * 0.04, s * 0.07, s * 0.06); c.fill(); }
+    }
+    if (P.face === 'tuxedo') {
+      c.fillStyle = '#FFFFFF'; c.beginPath(); c.moveTo(hx + f * s * 0.01, hy - s * 0.1); c.lineTo(hx + s * 0.19, hy + s * 0.24); c.lineTo(hx - s * 0.19, hy + s * 0.24); c.closePath(); c.fill();
+    }
+    if (P.face !== 'mask') { c.fillStyle = CR; ell(c, hx + f * s * 0.02, hy + s * 0.085, s * 0.12, s * 0.075); c.fill(); }
+    else { c.fillStyle = P.dark; c.globalAlpha *= 0.9; ell(c, hx + f * s * 0.02, hy + s * 0.07, s * 0.16, s * 0.13); c.fill(); }
     c.restore();
+    ell(c, hx, hy, s * 0.25, s * 0.205); c.lineWidth = lw; c.stroke();
+    if (P.stripes) {
+      c.save(); c.strokeStyle = OR_D; c.lineWidth = lw * 1.15;
+      for (const k of [-1, 0, 1]) { c.beginPath(); c.moveTo(hx + k * s * 0.05, hy - s * 0.19); c.lineTo(hx + k * s * 0.045, hy - s * 0.12 + Math.abs(k) * s * 0.02); c.stroke(); }
+      c.restore();
+    }
     if (o.mood === 'hot') { c.fillStyle = 'rgba(255,90,60,.28)'; ell(c, hx, hy, s * 0.25, s * 0.205); c.fill(); }
     // eyes
     const ex = s * 0.095, ey = hy + s * 0.005;
-    c.lineWidth = lw * 1.05;
+    c.lineWidth = lw * 1.05; c.strokeStyle = LINE;
     for (const d of [-1, 1]) {
       const px = hx + d * ex + f * s * 0.015;
       if (o.mood === 'hot') {
@@ -1330,6 +1520,11 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
         c.beginPath(); c.arc(px, ey + s * 0.02, s * 0.035, 1.15 * Math.PI, 1.85 * Math.PI); c.stroke();
       } else if (o.blink) {
         c.beginPath(); c.moveTo(px - s * 0.03, ey + s * 0.005); c.lineTo(px + s * 0.03, ey + s * 0.005); c.stroke();
+      } else if (P.iris) {
+        c.fillStyle = P.iris; ell(c, px, ey, s * 0.037, s * 0.05); c.fill();
+        c.save(); c.strokeStyle = INK; c.lineWidth = lw * 0.6; c.stroke(); c.restore();
+        c.fillStyle = INK; ell(c, px, ey + s * 0.004, s * 0.015, s * 0.038); c.fill();
+        c.fillStyle = '#fff'; ell(c, px + s * 0.012, ey - s * 0.018, s * 0.011, s * 0.011); c.fill();
       } else {
         c.fillStyle = INK; ell(c, px, ey, s * 0.033, s * 0.047); c.fill();
         c.fillStyle = '#fff'; ell(c, px + s * 0.011, ey - s * 0.017, s * 0.012, s * 0.012); c.fill();
@@ -1337,20 +1532,67 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
     }
     // nose & mouth
     const nx = hx + f * s * 0.02, ny = hy + s * 0.058;
-    c.beginPath(); c.moveTo(nx - s * 0.018, ny - s * 0.01); c.lineTo(nx + s * 0.018, ny - s * 0.01); c.lineTo(nx, ny + s * 0.01); c.closePath(); c.fillStyle = PK; c.fill();
+    c.beginPath(); c.moveTo(nx - s * 0.018, ny - s * 0.01); c.lineTo(nx + s * 0.018, ny - s * 0.01); c.lineTo(nx, ny + s * 0.01); c.closePath(); c.fillStyle = PK === '#FFFFFF' ? '#FF9DA8' : PK; c.fill();
     c.lineWidth = lw * 0.85;
     if (o.mood === 'hot') { c.beginPath(); c.moveTo(nx - s * 0.04, ny + s * 0.045); for (let k = 1; k <= 4; k++) c.lineTo(nx - s * 0.04 + k * s * 0.02, ny + s * (k % 2 ? 0.03 : 0.045)); c.stroke(); }
     else { c.beginPath(); c.arc(nx - s * 0.018, ny + s * 0.012, s * 0.018, 0.1 * Math.PI, 0.9 * Math.PI); c.arc(nx + s * 0.018, ny + s * 0.012, s * 0.018, 0.1 * Math.PI, 0.9 * Math.PI); c.stroke(); }
     // cheeks & whiskers
-    c.save(); c.fillStyle = PK; c.globalAlpha *= o.mood === 'happy' ? 0.85 : 0.55;
+    c.save(); c.fillStyle = '#FF9DA8'; c.globalAlpha *= o.mood === 'happy' ? 0.85 : 0.55;
     for (const d of [-1, 1]) { ell(c, hx + d * s * 0.16, hy + s * 0.07, s * 0.043, s * 0.027); c.fill(); }
     c.restore();
     c.save(); c.globalAlpha *= 0.55; c.lineWidth = lw * 0.7;
     for (const d of [-1, 1]) { for (const w of [-0.015, 0.03]) { c.beginPath(); c.moveTo(hx + d * s * 0.2, hy + s * 0.06); c.lineTo(hx + d * s * 0.32, hy + s * (0.045 + w)); c.stroke(); } }
     c.restore();
+    c.strokeStyle = INK;
+    drawOutfit(c, look.outfit, hx, hy, s, f, lw, ex, ey);
     if (o.mood === 'hot') {
       c.fillStyle = '#8FD3F5'; c.lineWidth = lw * 0.8;
       for (const [dx, dy] of [[0.27, -0.62], [-0.3, -0.55]]) { c.beginPath(); const px = hx + dx * s, py = dy * s; c.moveTo(px, py - s * 0.06); c.quadraticCurveTo(px + s * 0.045, py, px, py + s * 0.02); c.quadraticCurveTo(px - s * 0.045, py, px, py - s * 0.06); c.fill(); c.stroke(); }
+    }
+    c.restore();
+  }
+
+  function drawOutfit(c, id, hx, hy, s, f, lw, ex, ey) {
+    if (!id || id === 'none') return;
+    c.save(); c.lineWidth = lw; c.strokeStyle = INK; c.lineJoin = 'round';
+    if (id === 'ribbon') {
+      const x0 = hx + s * 0.15, y0 = hy - s * 0.19;
+      for (const d of [-1, 1]) { c.beginPath(); c.moveTo(x0, y0); c.lineTo(x0 + d * s * 0.1, y0 - s * 0.065); c.lineTo(x0 + d * s * 0.1, y0 + s * 0.065); c.closePath(); fs(c, '#FF7A9C'); }
+      ell(c, x0, y0, s * 0.032, s * 0.032); fs(c, '#FF5C86');
+    } else if (id === 'bell') {
+      ell(c, hx * 0.6, hy + s * 0.2, s * 0.15, s * 0.035); fs(c, '#EE5A4A');
+      ell(c, hx * 0.6 + f * s * 0.01, hy + s * 0.245, s * 0.045, s * 0.045); fs(c, '#FFCB47');
+      c.beginPath(); c.moveTo(hx * 0.6 - s * 0.018, hy + s * 0.255); c.lineTo(hx * 0.6 + s * 0.028, hy + s * 0.255); c.stroke();
+    } else if (id === 'bandana') {
+      c.beginPath(); c.moveTo(hx * 0.6 - s * 0.17, hy + s * 0.18); c.lineTo(hx * 0.6 + s * 0.17, hy + s * 0.18); c.lineTo(hx * 0.6 + f * s * 0.03, hy + s * 0.34); c.closePath(); fs(c, '#6EB5E0');
+      c.fillStyle = '#FFFFFF'; for (const [dx, dy] of [[-0.08, 0.22], [0.07, 0.22], [0.0, 0.28]]) { ell(c, hx * 0.6 + dx * s, hy + dy * s, s * 0.016, s * 0.016); c.fill(); }
+    } else if (id === 'flower') {
+      const cols = ['#FF9CB5', '#FFD166', '#FFFFFF', '#B8A6F2', '#FF9CB5'];
+      for (let k = 0; k < 5; k++) {
+        const a = Math.PI * (1.12 + k * 0.19), px = hx + s * 0.23 * Math.cos(a), py = hy + s * 0.19 * Math.sin(a);
+        c.fillStyle = cols[k];
+        for (let q = 0; q < 5; q++) { const b = q * 1.2566; ell(c, px + Math.cos(b) * s * 0.028, py + Math.sin(b) * s * 0.028, s * 0.025, s * 0.025); c.fill(); }
+        c.fillStyle = '#FFB547'; ell(c, px, py, s * 0.018, s * 0.018); c.fill();
+      }
+    } else if (id === 'straw') {
+      ell(c, hx, hy - s * 0.15, s * 0.32, s * 0.075); fs(c, '#F2D48A');
+      const crown = () => { c.beginPath(); c.moveTo(hx - s * 0.16, hy - s * 0.16); c.bezierCurveTo(hx - s * 0.17, hy - s * 0.4, hx + s * 0.17, hy - s * 0.4, hx + s * 0.16, hy - s * 0.16); c.closePath(); };
+      crown(); fs(c, '#F6DC98');
+      c.save(); crown(); c.clip(); c.fillStyle = '#E4574B'; c.fillRect(hx - s * 0.2, hy - s * 0.225, s * 0.4, s * 0.055); c.restore();
+      crown(); c.stroke();
+    } else if (id === 'glasses') {
+      c.fillStyle = '#3B3340';
+      for (const d of [-1, 1]) { const px = hx + d * ex + f * s * 0.015; rr(c, px - s * 0.065, ey - s * 0.045, s * 0.13, s * 0.085, s * 0.035); c.fill(); }
+      c.lineWidth = lw * 0.9; c.beginPath(); c.moveTo(hx - ex + s * 0.06, ey - s * 0.02); c.lineTo(hx + ex - s * 0.04, ey - s * 0.02); c.stroke();
+      c.fillStyle = 'rgba(255,255,255,.55)'; for (const d of [-1, 1]) { const px = hx + d * ex + f * s * 0.015; rr(c, px - s * 0.045, ey - s * 0.032, s * 0.035, s * 0.015, 2); c.fill(); }
+    } else if (id === 'beret') {
+      c.translate(hx - f * s * 0.04, hy - s * 0.19); c.rotate(-f * 0.25);
+      ell(c, 0, 0, s * 0.21, s * 0.08); fs(c, '#E4574B');
+      rr(c, -s * 0.012, -s * 0.12, s * 0.024, s * 0.05, 2); fs(c, '#C9443A');
+    } else if (id === 'crown') {
+      const b = hy - s * 0.17;
+      c.beginPath(); c.moveTo(hx - s * 0.13, b); c.lineTo(hx - s * 0.13, b - s * 0.1); c.lineTo(hx - s * 0.065, b - s * 0.045); c.lineTo(hx, b - s * 0.13); c.lineTo(hx + s * 0.065, b - s * 0.045); c.lineTo(hx + s * 0.13, b - s * 0.1); c.lineTo(hx + s * 0.13, b); c.closePath(); fs(c, '#FFCB47');
+      c.fillStyle = '#EE5A4A'; for (const dx of [-0.13, 0, 0.13]) { ell(c, hx + dx * s, b - s * (dx ? 0.1 : 0.13), s * 0.02, s * 0.02); c.fill(); }
     }
     c.restore();
   }
@@ -1511,6 +1753,9 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
     S.reachA = new Float32Array(b.W * b.H);
     for (let i = 0; i < b.W * b.H; i++) S.shadeA[i] = b.shade[S.t][i];
     S.particles = []; S.bubble = null; S.flash = null; S.ouchT = 0; S.sunOuch = 0;
+    S.medalCell = lv.medal === undefined ? -1 : lv.medal;
+    S.medalFound = S.lvIndex >= 0 && !!save.medals.hidden[S.lvIndex];
+    S.glint = null; S.glintT = 3 + Math.random() * 3;
     updateReach();
     for (let i = 0; i < b.W * b.H; i++) S.reachA[i] = S.reach[i] ? 1 : 0;
   }
@@ -1592,12 +1837,30 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
   function tapCell(i) {
     const b = S.b, c = b.cells[i];
     if (i === S.cat.cell) { say('にゃ？', 0.9); Sfx.meow(); S.particles.push({ type: 'heart', x: catScreen()[0], y: catScreen()[1] - L.s * 0.8, vx: 0, vy: -30, life: 0, max: 0.9, size: L.s * 0.12 }); return; }
-    if (c.block) { Sfx.bonk(); return; }
+    if (c.block) {
+      const adj = HK.neighbors(b, S.cat.cell).includes(i);
+      const dx = (i % b.W) - (S.cat.cell % b.W); if (dx) S.cat.face = Math.sign(dx);
+      if (!adj) { Sfx.bonk(); say('ちかくで しらべよう', 1.0); return; }
+      if (i === S.medalCell && !S.medalFound) { pickMedal(i); return; }
+      Sfx.sniff(); say(['くんくん… なにもない', 'ここには ないみたい', 'ほこりだけ…'][Math.floor(Math.random() * 3)], 1.2); return;
+    }
     if (c.pond) { say('みずは にがて…', 1.2); Sfx.splash(); S.flash = { cell: i, life: 0, col: '120,170,230' }; return; }
     if (!b.safe[S.t][i]) { say('そこは あついにゃ', 1.2); Sfx.sad(); S.flash = { cell: i, life: 0, col: '255,140,60' }; return; }
     const path = HK.pathTo(S.reachPrev, i);
     if (!path) { say('とどかないにゃ', 1.2); Sfx.no(); S.flash = { cell: i, life: 0, col: '150,130,200' }; return; }
     startWalk(path);
+  }
+  function pickMedal(i) {
+    S.medalFound = true;
+    if (S.lvIndex >= 0) { save.medals.hidden[S.lvIndex] = 1; persist(); }
+    const [x, y] = cellXY(i), px = L.bx + (x + 0.5) * L.s, py = L.by + (y + 0.25) * L.s;
+    S.cat.mood = 'happy'; S.cat.moodT = 1.3; S.cat.hop = 1;
+    say('メダル みっけ！', 1.5); Sfx.coin(); Sfx.yay();
+    for (let k = 0; k < 12; k++) {
+      const a = Math.random() * Math.PI * 2, v = 50 + Math.random() * 90;
+      S.particles.push({ type: 'star', x: px, y: py, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 60, life: 0, max: 0.9 + Math.random() * 0.4, size: L.s * (0.06 + Math.random() * 0.05), rot: Math.random() * 6, col: '#FFCB47' });
+    }
+    flyMedal(px, py, () => refreshMedals(true));
   }
   function catScreen() { return [L.bx + (S.cat.x + 0.5) * L.s, L.by + (S.cat.y + 0.78) * L.s]; }
 
@@ -1611,6 +1874,10 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
       S.particles.push({ type: k % 3 ? 'heart' : 'star', x: hx, y: hy - L.s * 0.3, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 80, life: 0, max: 1.2 + Math.random() * 0.6, size: L.s * (0.08 + Math.random() * 0.07), rot: Math.random() * 6, col: ['#FF8FA3', '#FFC94A', '#9FD4F5', '#B8E0A0'][k % 4] });
     }
     if (S.mode !== 'play') return;
+    S.newMedal = false;
+    if (S.daily) { if (!save.medals.daily[S.daily.key]) { save.medals.daily[S.daily.key] = 1; S.newMedal = true; } }
+    else if (!save.medals.clear[S.lvIndex]) { save.medals.clear[S.lvIndex] = 1; S.newMedal = true; }
+    S.clearStars = stars;
     if (S.daily) {
       const prev = save.daily[S.daily.key];
       if (!prev || prev.steps > S.steps) save.daily[S.daily.key] = { steps: S.steps, stars, par: S.par, hist: S.history.slice() };
@@ -1669,6 +1936,12 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
       cat.scale = 1 - q * 0.75;
       if (S.winT > 0.7) cat.mood = 'gone';
     }
+    if (S.mode === 'play' && S.lvIndex === 0 && S.medalCell >= 0 && !S.medalFound && !S.won) {
+      S.glintT -= dt;
+      if (S.glintT <= 0) { S.glint = 0; S.glintT = 6 + Math.random() * 7; }
+    }
+    if (S.glint !== null && S.glint !== undefined) { S.glint += dt; if (S.glint > 0.8) S.glint = null; }
+    if (S.shopHappy > 0) S.shopHappy -= dt;
     if (S.ouchT > 0) S.ouchT -= dt;
     if (S.sunOuch > 0) S.sunOuch -= dt;
     if (S.bubble) { S.bubble.life += dt; if (S.bubble.life > S.bubble.max) S.bubble = null; }
@@ -1700,6 +1973,7 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
   // ------------------------------------------------------------------ title demo (autoplay)
   function startDemo() {
     setupBoard(LEVELS[2], 'town', 3);
+    S.medalCell = -1;
     S.seedK = 3;
     S.demo = { plan: HK.solve(S.b).plan.slice(), wait: 1.2, sunTo: null, done: 0 };
   }
@@ -2008,6 +2282,17 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
     c.restore();
   }
 
+  function drawGlint(c) {
+    if (S.glint === null || S.glint === undefined || S.medalCell < 0 || S.mode !== 'play') return;
+    const s = L.s, [x, y] = cellXY(S.medalCell), h = S.b.cells[S.medalCell].h;
+    const cx = L.bx + (x + 0.68) * s, cy = L.by + (y + 0.84) * s - s * (0.3 + 0.3 * h);
+    const k = Math.sin(Math.PI * S.glint / 0.8), r = s * 0.22 * k;
+    c.save(); c.translate(cx, cy); c.rotate(S.glint * 1.5);
+    c.fillStyle = `rgba(255,248,210,${0.9 * k})`;
+    c.beginPath(); c.moveTo(0, -r); c.quadraticCurveTo(0, 0, r, 0); c.quadraticCurveTo(0, 0, 0, r); c.quadraticCurveTo(0, 0, -r, 0); c.quadraticCurveTo(0, 0, 0, -r); c.fill();
+    c.fillStyle = `rgba(255,255,255,${k})`; ell(c, 0, 0, r * 0.18, r * 0.18); c.fill();
+    c.restore();
+  }
   function drawTheCat(c) {
     const [x, y] = catScreen();
     const cat = S.cat;
@@ -2107,6 +2392,7 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
       drawBoard(c);
       drawObjects(c);
       drawHintOverlay(c);
+      drawGlint(c);
       // warm light grading at dawn / dusk
       const w = warmth(S.tau);
       if (w > 0.01) { c.fillStyle = `rgba(255,140,80,${0.08 * w})`; c.fillRect(0, L.horizonY, L.w, L.h - L.horizonY); }
@@ -2222,9 +2508,129 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
     return r ? `${m}/${d} クリア ${'★'.repeat(r.stars)}${'☆'.repeat(3 - r.stars)}` : `${m}/${d} のステージ`;
   }
 
-  function buildSelect() {
-    $('#totalStars').innerHTML = STAR_SVG(true) + `<span>${totalStars()} / ${LEVELS.length * 3}</span>`;
+  const MEDAL_SVG = '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M9.5 1.5h4.6l3 8.5h-4.6z" fill="#6EB5E0" stroke="#5B4637" stroke-width="1.6" stroke-linejoin="round"/><path d="M22.5 1.5h-4.6l-3 8.5h4.6z" fill="#EE6B5F" stroke="#5B4637" stroke-width="1.6" stroke-linejoin="round"/><circle cx="16" cy="19.5" r="11" fill="#FFCB47" stroke="#5B4637" stroke-width="2.2"/><circle cx="16" cy="19.5" r="7.6" fill="none" stroke="#E9A43A" stroke-width="1.6"/><g fill="#C9892E"><ellipse cx="16" cy="21.8" rx="3.2" ry="2.6"/><circle cx="12.4" cy="18" r="1.3"/><circle cx="14.9" cy="16.1" r="1.3"/><circle cx="17.5" cy="16.1" r="1.3"/><circle cx="19.8" cy="18" r="1.3"/></g></svg>';
+  function refreshMedals(bump) {
+    $('#medalCount').textContent = medalCounts().total;
+    if (bump) { const el = $('#medalChip'); el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); }
+    if (S.mode === 'select' && S.selTab === 'shop') renderShop();
+  }
+  function flyMedal(x, y, done) {
+    const app = $('#app').getBoundingClientRect(), r = cv.getBoundingClientRect(), chip = $('#medalChip').getBoundingClientRect();
+    const d = document.createElement('div'); d.className = 'fly-medal'; d.innerHTML = MEDAL_SVG;
+    const sx = r.left - app.left + x - 20, sy = r.top - app.top + y - 20;
+    d.style.left = sx + 'px'; d.style.top = sy + 'px';
+    $('#app').appendChild(d);
+    requestAnimationFrame(() => {
+      d.classList.add('pop');
+      setTimeout(() => { d.classList.add('go'); d.style.transform = `translate(${chip.left - app.left + 4 - sx}px, ${chip.top - app.top + 2 - sy}px) scale(.75)`; }, 480);
+      setTimeout(() => { d.remove(); if (done) done(); }, 1250);
+    });
+  }
+
+  function showMedals() {
+    Sfx.tap();
+    const m = $('#modal'), mc = medalCounts(), used = !!save.medals.ad[todayKey()], nx = nextUnlock(mc.total);
+    m.innerHTML = `<div class="card medal-card" role="dialog" aria-label="メダル">
+      <div class="medal-big">${MEDAL_SVG}<b>${mc.total}</b><span>まい</span></div>
+      <ul class="medal-list">
+        <li><span>ステージクリア</span><b>${mc.clear} / ${LEVELS.length}</b></li>
+        <li><span>かくしメダル</span><b>${mc.hidden} / ${LEVELS.length}</b></li>
+        <li><span>きょうのおさんぽ</span><b>${mc.daily}</b></li>
+        <li><span>どうがボーナス</span><b>${mc.ad}</b></li>
+      </ul>
+      <p class="note">かくしメダルは どのステージにも 1まい。ねこが ものの となりに いるときに、その ものを タップして しらべよう。</p>
+      ${nx ? `<p class="note next-unlock">つぎの ごほうび「${nx.name}」まで あと <b>${nx.need - mc.total}</b> まい</p>` : ''}
+      <div class="actions col">
+        <button class="btn primary" id="adBtn" ${used ? 'disabled' : ''}>${used ? 'きょうの どうがボーナスは もらったよ' : '▶ どうがを見て メダル +' + AD_REWARD}</button>
+        <button class="btn" id="medalClose">とじる</button>
+      </div>
+    </div>`;
+    m.hidden = false;
+    $('#medalClose').addEventListener('click', () => { Sfx.tap(); closeMedals(); });
+    if (!used) { Ads.prepare(); $('#adBtn').addEventListener('click', () => { Sfx.tap(); Ads.show(); }); }
+  }
+  function closeMedals() {
+    const m = $('#modal'); m.hidden = true;
+    if (S.mode === 'play' && S.won && S.clearStars) showClear(S.clearStars, true);
+  }
+  function grantAd() {
+    const k = todayKey();
+    if (save.medals.ad[k]) return;
+    save.medals.ad[k] = AD_REWARD; persist();
+    Sfx.grant(AD_REWARD); refreshMedals(true);
+    toast(`メダル +${AD_REWARD}！ ありがとう`);
+    if (!$('#modal').hidden && $('#modal').querySelector('.medal-card')) showMedals();
+  }
+
+  // Rewarded ads: Google H5 Games Ads (Ad Placement API). Until the account is approved for it,
+  // no ad arrives and the promo video plays instead.
+  const Ads = (() => {
+    let showFn = null, asking = false;
+    function init() {
+      window.adsbygoogle = window.adsbygoogle || [];
+      window.adBreak = window.adConfig = function (o) { window.adsbygoogle.push(o); };
+      try {
+        const sc = document.createElement('script');
+        sc.async = true; sc.crossOrigin = 'anonymous';
+        sc.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + AD_CLIENT;
+        sc.setAttribute('data-ad-frequency-hint', '30s');
+        if (/[?&]adtest=1/.test(location.search)) sc.setAttribute('data-adbreak-test', 'on');
+        document.head.appendChild(sc);
+        window.adConfig({ preloadAdBreaks: 'on', sound: 'on' });
+      } catch (e) { /* ads unavailable */ }
+    }
+    function prepare() {
+      if (asking || showFn) return;
+      asking = true;
+      try {
+        window.adBreak({
+          type: 'reward', name: 'daily_medals',
+          beforeAd() { try { if (Snd.ac) Snd.ac.suspend(); } catch (e) { /* ignore */ } },
+          afterAd() { try { if (Snd.ac) Snd.ac.resume(); } catch (e) { /* ignore */ } },
+          beforeReward(fn) { showFn = fn; },
+          adDismissed() { toast('さいごまで 見ると メダルが もらえるよ'); },
+          adViewed() { grantAd(); },
+          adBreakDone() { asking = false; },
+        });
+      } catch (e) { asking = false; }
+    }
+    function show() {
+      if (save.medals.ad[todayKey()]) return;
+      if (showFn) { const fn = showFn; showFn = null; try { fn(); return; } catch (e) { /* fall back */ } }
+      Promo.open();
+    }
+    return { init, prepare, show };
+  })();
+  const Promo = {
+    wasMusic: false,
+    open() {
+      const v = $('#adVideo');
+      $('#adLayer').hidden = false;
+      $('#adMsg').textContent = `さいごまで 見ると メダル +${AD_REWARD}`;
+      this.wasMusic = Music.on; if (this.wasMusic) Music.stop();
+      v.src = 'pv.mp4'; v.controls = false;
+      v.onended = () => { this.close(); grantAd(); };
+      v.onerror = () => { $('#adMsg').textContent = 'どうがを よみこめませんでした。あとで もういちど ためしてね'; };
+      try { const pr = v.play(); if (pr && pr.catch) pr.catch(() => { v.controls = true; $('#adMsg').textContent = '▶ を おして さいせいしてね'; }); } catch (e) { v.controls = true; }
+    },
+    close() {
+      const v = $('#adVideo'); try { v.pause(); } catch (e) { /* ignore */ }
+      $('#adLayer').hidden = true;
+      if (this.wasMusic && save.music) Music.start();
+    },
+  };
+
+  function renderTabs() {
+    $('#tabStage').setAttribute('aria-selected', String(S.selTab === 'stage'));
+    $('#tabShop').setAttribute('aria-selected', String(S.selTab === 'shop'));
+    if (S.selTab === 'shop') renderShop(); else renderStages();
+  }
+  function buildSelect() { S.selTab = S.selTab || 'stage'; renderTabs(); refreshSound(); refreshMedals(); }
+  function renderStages() {
     const host = $('#worlds'); host.innerHTML = '';
+    const tot = document.createElement('div'); tot.className = 'stars-total';
+    tot.innerHTML = `${STAR_SVG(true)}<span>あつめた ほし <b>${totalStars()}</b> / ${LEVELS.length * 3}</span>`;
+    host.appendChild(tot);
     const daily = document.createElement('button');
     daily.className = 'daily-card'; daily.id = 'dailyCard';
     daily.innerHTML = `<div><b>きょうのおさんぽ</b><span>${dailyStatus()}・まいにち かわるよ</span></div><span class="go">あそぶ</span>`;
@@ -2243,12 +2649,12 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
         b.className = 'lv' + (open ? '' : ' locked') + (i === firstOpen ? ' next' : '');
         b.id = 'lv' + (i + 1);
         if (open) {
-          const sv = save.stars[i] || 0;
-          b.innerHTML = `<span>${i + 1}</span><span class="st">${[0, 1, 2].map(k => STAR_SVG(k < sv)).join('')}</span>`;
-          b.setAttribute('aria-label', `ステージ${i + 1} ${NAMES[i]} ほし${sv}`);
+          const sv = save.stars[i] || 0, hm = !!save.medals.hidden[i];
+          b.innerHTML = `<span>${i + 1}</span><span class="st">${[0, 1, 2].map(k => STAR_SVG(k < sv)).join('')}</span>${hm ? `<span class="hm" title="かくしメダル">${MEDAL_SVG}</span>` : ''}`;
+          b.setAttribute('aria-label', `ステージ${i + 1} ${NAMES[i]} ほし${sv}${hm ? ' かくしメダル あり' : ''}`);
           b.addEventListener('click', () => startLevel(i));
         } else {
-          b.innerHTML = LOCK_SVG; b.setAttribute('aria-label', `ステージ${i + 1} まだ あそべません`); b.disabled = false;
+          b.innerHTML = LOCK_SVG; b.setAttribute('aria-label', `ステージ${i + 1} まだ あそべません`);
           b.addEventListener('click', () => { Sfx.no(); toast('ひとつ前のステージを クリアしよう'); });
         }
         grid.appendChild(b);
@@ -2256,14 +2662,70 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
       sec.appendChild(grid);
       host.appendChild(sec);
     });
-    const head = document.querySelector('.sheet-head');
-    if (!$('#soundBtnSelect')) {
-      const wrap = document.createElement('div'); wrap.className = 'toggles';
-      const mb = document.createElement('button'); mb.className = 'btn round'; mb.id = 'musicBtnSelect'; mb.addEventListener('click', toggleMusic);
-      const sb = document.createElement('button'); sb.className = 'btn round'; sb.id = 'soundBtnSelect'; sb.addEventListener('click', toggleSound);
-      wrap.appendChild(mb); wrap.appendChild(sb); head.appendChild(wrap);
+  }
+  const SHOP_TABS = [['outfit', 'きせかえ'], ['pattern', 'もよう'], ['voice', 'こえ']];
+  function lookName() {
+    const nm = (k, id) => (SHOP[k].find(x => x.id === id) || SHOP[k][0]).name;
+    return `${nm('pattern', save.equip.pattern)}・${nm('outfit', save.equip.outfit)}・こえ「${nm('voice', save.equip.voice)}」`;
+  }
+  function renderShop() {
+    const host = $('#worlds'), keepScroll = host.scrollTop;
+    host.innerHTML = '';
+    const mc = medalCounts(), cat = S.shopCat || 'outfit';
+    const top = document.createElement('div'); top.className = 'shop-top';
+    top.innerHTML = `<canvas id="shopCat" width="240" height="240" aria-label="いまの ねこ"></canvas>
+      <div class="shop-info"><b>いまの ねこ</b><span class="now">${lookName()}</span>
+      <span class="have">${MEDAL_SVG}<b>${mc.total}</b> まい もってる</span>
+      <button class="btn" id="hearBtn">こえを きく</button></div>`;
+    host.appendChild(top);
+    const seg = document.createElement('div'); seg.className = 'seg'; seg.setAttribute('role', 'tablist');
+    for (const [k, label] of SHOP_TABS) {
+      const b = document.createElement('button'); b.className = 'seg-btn'; b.setAttribute('role', 'tab'); b.textContent = label;
+      b.setAttribute('aria-selected', String(cat === k));
+      b.addEventListener('click', () => { Sfx.tap(); S.shopCat = k; renderShop(); });
+      seg.appendChild(b);
     }
-    refreshSound();
+    host.appendChild(seg);
+    const grid = document.createElement('div'); grid.className = 'shop-grid';
+    for (const it of SHOP[cat]) {
+      const open = mc.total >= it.need, on = save.equip[cat] === it.id;
+      const b = document.createElement('button');
+      b.className = 'item' + (open ? '' : ' locked') + (on ? ' on' : '');
+      if (cat === 'voice') {
+        const pic = document.createElement('div'); pic.className = 'voice-pic'; pic.innerHTML = SOUND_ON; b.appendChild(pic);
+      } else {
+        const pic = document.createElement('canvas'); pic.width = 128; pic.height = 128;
+        const c2 = pic.getContext('2d'); c2.scale(2, 2);
+        drawCat(c2, 32, 60, 54, { face: 1, t: 0.4, look: Object.assign({}, save.equip, { [cat]: it.id }) });
+        b.appendChild(pic);
+      }
+      const nm = document.createElement('span'); nm.className = 'nm'; nm.textContent = it.name; b.appendChild(nm);
+      const st = document.createElement('span'); st.className = 'state';
+      st.innerHTML = on ? 'つかってる' : open ? 'つかう' : `${LOCK_SVG}<span>${it.need}まい</span>`;
+      b.appendChild(st);
+      b.setAttribute('aria-label', `${it.name}：${on ? 'つかっている' : open ? 'つかえる' : `メダル${it.need}まいで かいほう`}`);
+      b.addEventListener('click', () => {
+        if (cat === 'voice') Sfx.hear(it.id);
+        if (!open) { if (cat !== 'voice') Sfx.no(); toast(`メダルが ${it.need}まい あつまると つかえるよ（いま ${mc.total}まい）`); return; }
+        save.equip[cat] = it.id; persist(); S.shopHappy = 1.2;
+        if (cat !== 'voice') { Sfx.tap(); Sfx.meowWith(); }
+        renderShop();
+      });
+      grid.appendChild(b);
+    }
+    host.appendChild(grid);
+    const nx = nextUnlock(mc.total);
+    const tipP = document.createElement('p'); tipP.className = 'shop-note';
+    tipP.innerHTML = nx ? `つぎの ごほうび「${nx.name}」まで あと <b>${nx.need - mc.total}</b> まい。メダルは ステージクリア・かくしメダル・どうがボーナスで ふえるよ。` : 'ぜんぶ そろったよ！';
+    host.appendChild(tipP);
+    $('#hearBtn').addEventListener('click', () => { Sfx.hear(); S.shopHappy = 1.2; });
+    host.scrollTop = keepScroll;
+  }
+  function drawShopCat() {
+    const cvs = document.getElementById('shopCat'); if (!cvs) return;
+    const c2 = cvs.getContext('2d'); c2.setTransform(2, 0, 0, 2, 0, 0); c2.clearRect(0, 0, 120, 120);
+    c2.fillStyle = 'rgba(255,255,255,.7)'; ell(c2, 60, 104, 38, 8); c2.fill();
+    drawCat(c2, 60, 104, 96, { face: 1, t: S.time, blink: (S.time % 3.4) > 3.25, mood: S.shopHappy > 0 ? 'happy' : 'idle', look: save.equip });
   }
 
   function showTitle() {
@@ -2282,6 +2744,7 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
   }
   function startLevel(i) {
     Sfx.enter();
+    S.clearStars = 0;
     S.demo = null; S.daily = null; S.lvIndex = i; S.seedK = i + 1;
     const world = WORLDS[Math.floor(i / 10)];
     setupBoard(LEVELS[i], world.key, i + 1);
@@ -2291,6 +2754,7 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
   }
   function startDaily() {
     Sfx.enter();
+    S.clearStars = 0;
     const key = todayKey();
     const d = makeDaily(key);
     S.demo = null; S.lvIndex = -1; S.daily = { key, label: d.label }; S.seedK = 900 + (hash(key.length, Number(key.replace(/-/g, '')), 1) % 1000);
@@ -2350,7 +2814,7 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
     return `ひかげねこ きょうのおさんぽ ${S.daily.label}\n${'★'.repeat(st)}${'☆'.repeat(3 - st)} おひさま${steps}回（めやす${S.par}回）\n${seq}`;
   }
 
-  function showClear(stars) {
+  function showClear(stars, quiet) {
     const m = $('#modal');
     const isDaily = !!S.daily;
     const last = !isDaily && S.lvIndex === LEVELS.length - 1;
@@ -2363,6 +2827,7 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
       <h2>${title}</h2>
       <div class="stars">${[0, 1, 2].map(k => STAR_SVG(k < stars)).join('')}</div>
       <p class="stat">おひさまを うごかした回数 <b>${S.steps}</b> 回<br><span class="note">${note}</span></p>
+      <div class="medal-lines">${S.newMedal ? `<span class="medal-get">${MEDAL_SVG}<b>${isDaily ? 'きょうのおさんぽ' : 'クリア'} メダル +1</b></span>` : ''}${isDaily ? '' : `<span class="hidden-status">かくしメダル：${S.medalFound ? '<b>みつけた！</b>' : 'まだ みつけていない'}</span>`}</div>
       ${isDaily ? `<pre class="share-box" id="shareBox"></pre>` : ''}
       <div class="actions" id="clearActions"></div>
     </div>`;
@@ -2379,7 +2844,10 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
       if (!last) mk('つぎへ', 'primary', () => startLevel(S.lvIndex + 1), 'nextBtn');
     }
     m.hidden = false;
-    for (let k = 0; k < 3; k++) Sfx.star(k, k < stars, 0.28 + k * 0.15);
+    if (!quiet) {
+      for (let k = 0; k < 3; k++) Sfx.star(k, k < stars, 0.28 + k * 0.15);
+      if (S.newMedal) setTimeout(() => { refreshMedals(true); Sfx.coin(); }, 900);
+    } else { m.querySelectorAll('.card, .stars svg').forEach(el => { el.style.animation = 'none'; }); }
     const primary = act.querySelector('.primary'); if (primary) primary.focus({ preventScroll: true });
   }
   function copyShare() {
@@ -2398,6 +2866,12 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
   $('#selectBack').addEventListener('click', () => { Sfx.swish(); showTitle(); });
   $('#backBtn').addEventListener('click', () => { Sfx.swish(); showSelect(); });
   $('#undoBtn').addEventListener('click', doUndo);
+  $('#medalChip').addEventListener('click', () => { Sfx.unlock(); showMedals(); });
+  $('#tabStage').addEventListener('click', () => { if (S.selTab === 'stage') return; Sfx.tap(); S.selTab = 'stage'; $('#worlds').scrollTop = 0; renderTabs(); });
+  $('#tabShop').addEventListener('click', () => { if (S.selTab === 'shop') return; Sfx.tap(); S.selTab = 'shop'; $('#worlds').scrollTop = 0; renderTabs(); });
+  $('#musicBtnSelect').addEventListener('click', toggleMusic);
+  $('#soundBtnSelect').addEventListener('click', toggleSound);
+  $('#adClose').addEventListener('click', () => { Promo.close(); toast('さいごまで 見ると メダルが もらえるよ'); });
   $('#hintBtn').addEventListener('click', doHint);
   $('#resetBtn').addEventListener('click', doReset);
   window.addEventListener('resize', resize);
@@ -2409,8 +2883,12 @@ window.HIKAGE_LEVELS = [{"map":[".....","..G..","3....","..1..","..2..","...2S",
     const dt = Math.min(0.05, (now - last) / 1000); last = now;
     update(dt);
     render();
+    if (S.mode === 'select' && S.selTab === 'shop') drawShopCat();
     requestAnimationFrame(frame);
   }
+  Ads.init();
+  $('#medalChip .mi').innerHTML = MEDAL_SVG;
+  refreshMedals();
   startDemo();
   resize();
   setMode('title');

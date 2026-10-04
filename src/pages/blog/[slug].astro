@@ -4,6 +4,7 @@ import BlogPost from '../../layouts/BlogPost.astro';
 import { extractDescription } from '../../utils/text';
 import { isPublished, isIndexable } from '../../utils/publish';
 import { relatedPosts } from '../../utils/related';
+import { SITE } from '../../data/site';
 
 export async function getStaticPaths() {
   // 前後記事の判定用に古い順で並べる（prev=1つ古い記事、next=1つ新しい記事）。
@@ -36,6 +37,12 @@ const { post, prevPost, nextPost, related } = Astro.props;
 const { Content } = await render(post);
 
 const description = extractDescription(post.body ?? '');
+
+// OGP画像：frontmatterのimage → 本文の最初の画像（Markdown/HTMLどちらでも）→ 未指定（サイト共通）
+const firstImage = (post.body ?? '').match(/!\[[^\]]*\]\(\s*<?([^)\s>]+)/)?.[1]
+  ?? (post.body ?? '').match(/<img[^>]+src=["']([^"']+)["']/i)?.[1];
+const imageSrc = post.data.image ?? firstImage;
+const image = imageSrc ? new URL(imageSrc, SITE.url).toString() : undefined;
 ---
 
 <BlogPost
@@ -43,6 +50,7 @@ const description = extractDescription(post.body ?? '');
   date={post.data.date}
   categories={post.data.categories}
   description={description}
+  image={image}
   prevPost={prevPost}
   nextPost={nextPost}
   related={related}

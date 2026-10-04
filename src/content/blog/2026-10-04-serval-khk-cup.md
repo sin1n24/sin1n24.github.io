@@ -5,7 +5,7 @@ categories: ["かわロボ", "技術"]
 relatedProducts: ["B0H1M3D1BX", "B0F8BV5Z31", "B0G4RCWX4V", "B0773DZ3HS", "B07QQR6G5N"]
 ---
 
-10/3に開催されたKHK杯（[試合配信動画はこちら](https://www.youtube.com/watch?v=ivrE4JLai4Q&t=21714s)）で、自作のトーナメント管理システム「Serval」を使って頂きました。参加者は88名で、Servalを使った大会としては最大規模です。規模が大きくなったこともあり、準備の段階から手を入れる箇所がいくつか出てきました。
+10/3に開催された[KHK杯](https://www.khkgears.co.jp/about_khk/khkcup/)（[試合配信動画はこちら](https://www.youtube.com/watch?v=ivrE4JLai4Q&t=21714s)）で、自作のトーナメント管理システム「Serval」を使って頂きました。参加者は88名で、Servalを使った大会としては最大規模です。規模が大きくなったこともあり、準備の段階から手を入れる箇所がいくつか出てきました。
 
 ![KHK杯の会場。会場モニターと管理PCにServal、右のモニターは配信（OBS）](/img/blog/serval-khk-cup-2026.webp)
 

@@ -5,7 +5,7 @@ categories: ["ミニかわロボ"]
 relatedProducts: ["SS-9521", "SS-11122", "B0CXNY69DC", "B0C7KYYF5S", "B0CP36Z828"]
 ---
 
-#### [ミニかわロボの最新情報はこちら！](https://sin1.studio/MiniKawaRobo/)
+#### [ミニかわロボの最新情報は公式サイト！](https://sin1.studio/MiniKawaRobo/)
 
 10/3の[KHK杯](https://www.khkgears.co.jp/about_khk/khkcup/)で、**ミニかわロボの練習会**を実施しました！ご参加頂いた皆様、ありがとうございました。
 
@@ -61,4 +61,4 @@ relatedProducts: ["SS-9521", "SS-11122", "B0CXNY69DC", "B0C7KYYF5S", "B0CP36Z828
 - 顔面には配慮しますが、試合そのものは**撮影予定**です。NGの場合申告下さい  
 - 関連ツイートは **#ミニかわロボ** でタグ付けを是非お願いします！
 
-#### [ミニかわロボの最新情報はこちら！](https://sin1.studio/MiniKawaRobo/)
+#### [ミニかわロボの最新情報は公式サイト！](https://sin1.studio/MiniKawaRobo/)

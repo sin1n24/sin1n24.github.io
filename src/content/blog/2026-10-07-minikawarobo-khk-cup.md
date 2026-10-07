@@ -13,8 +13,9 @@ relatedProducts: ["B0CXNY69DC", "B0C7KYYF5S", "B0CP36Z828", "B085QK2T6V", "B0D3C
 
 是非この機会にロボットを製作して**バトル/交流**しましょう！厳密な規定はありませんので、是非**ゆるく**盛り上がって**楽しみましょう！**
 
-![KHK杯のミニかわロボ練習会。リングと集まったミニかわロボ](/img/blog/minikawarobo-khk-cup-2026.webp)  
-↑　KHK杯での練習会の様子
+![KHK杯のミニかわロボ練習会。リングと集まったミニかわロボ](/img/blog/minikawarobo-khk-cup-2026.webp)
+
+<p style="text-align:center;margin-top:-0.6rem">↑　KHK杯での練習会の様子</p>
 
 ## KHK杯での練習会の様子
 

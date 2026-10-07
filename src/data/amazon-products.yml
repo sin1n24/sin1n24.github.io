@@ -1,6 +1,8 @@
 # 記事の「関連商品」セクション・本文リンクカードで参照するAmazon商品マスタ。
 # キーはASIN。imageはAmazon商品ページ掲載画像のURL（m.media-amazon.com、ホットリンク）。
 # リンク先は https://www.amazon.co.jp/dp/{ASIN}/?tag=sin1n24-22 を各所で組み立てる。
+# 例外: urlを持つエントリはAmazon以外の商品（自作のスイッチサイエンス委託品など）で、
+# キーは "SS-{商品番号}"、リンク先はurlをそのまま使う。
 # 2026-09-17: 全記事展開の一次バッチで既存アフィリエイトリンク・頻出提案商品を一括登録。
 
 "4065128447":
@@ -418,3 +420,13 @@
 "B0H83WKJV9":
   title: "2S リポバッテリー 7.4V 3000mAh 35C XT60プラグ付き ラジコン用"
   image: "https://m.media-amazon.com/images/I/61-HHIMIDWL._AC_SX679_.jpg"
+
+"SS-9521":
+  title: "M5ATOM S3向小型ジョイスティックコントローラー（キット）"
+  image: "https://cdn.shopify.com/s/files/1/0514/0719/2262/files/8d5a489b-912f-4cc1-9934-9fd76dd6a394.jpg?v=1738289719"
+  url: "https://www.switch-science.com/products/9521"
+
+"SS-11122":
+  title: "M5ATOM向 4サーボ接続基板キット"
+  image: "https://cdn.shopify.com/s/files/1/0514/0719/2262/files/ceac9a39-f602-4385-ab1d-208291001fd3.jpg?v=1775179495"
+  url: "https://www.switch-science.com/products/11122"

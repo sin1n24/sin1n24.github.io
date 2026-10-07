@@ -1,6 +1,7 @@
 ---
 // 記事の「関連商品」セクション。frontmatterのrelatedProducts (ASIN配列) を
 // src/data/amazon-products.yml のマスタと突き合わせてカード表示する。
+// マスタ側にurlがあるエントリ（自作のスイッチサイエンス委託品など）はそのurlへ直接リンクする。
 // ここでは自動補完・ランダム選出は一切行わない（関連商品の選定は記事執筆時に
 // 内容を踏まえて明示的にfrontmatterへ書くこと。ルールはCLAUDE.md参照）。
 import amazonProducts from '../data/amazon-products.yml';
@@ -15,13 +16,14 @@ const AFFILIATE_TAG = 'sin1n24-22';
 
 const products = asins
   .map((asin) => {
-    const entry = (amazonProducts as Record<string, { title: string; image: string }>)[asin];
+    const entry = (amazonProducts as Record<string, { title: string; image: string; url?: string }>)[asin];
     if (!entry) return null;
     return {
       asin,
       title: entry.title,
       image: entry.image,
-      url: `https://www.amazon.co.jp/dp/${asin}/?tag=${AFFILIATE_TAG}`,
+      url: entry.url ?? `https://www.amazon.co.jp/dp/${asin}/?tag=${AFFILIATE_TAG}`,
+      affiliate: !entry.url,
     };
   })
   .filter((p): p is NonNullable<typeof p> => p !== null);
@@ -33,7 +35,7 @@ const products = asins
     <ul class="related-products-grid">
       {products.map((product) => (
         <li>
-          <a class="product-card" href={product.url} target="_blank" rel="noopener noreferrer sponsored">
+          <a class="product-card" href={product.url} target="_blank" rel={product.affiliate ? 'noopener noreferrer sponsored' : 'noopener noreferrer'}>
             <img class="product-card-image" src={product.image} alt="" loading="lazy" decoding="async" />
             <span class="product-card-title">{product.title}</span>
           </a>

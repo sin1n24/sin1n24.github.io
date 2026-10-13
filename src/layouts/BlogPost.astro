@@ -17,9 +17,11 @@ interface Props {
   related?: CollectionEntry<'blog'>[];
   relatedProducts?: string[];
   noindex?: boolean;
+  // 記事ファイル名（拡張子なし）。指定すると管理者のブラウザにだけ「編集」リンクを出す
+  editSlug?: string;
 }
 
-const { title, date, description, image, categories, prevPost, nextPost, related = [], relatedProducts = [], noindex = false } = Astro.props;
+const { title, date, description, image, categories, prevPost, nextPost, related = [], relatedProducts = [], noindex = false, editSlug } = Astro.props;
 
 // 現行サイト踏襲のフォーマット: YYYY年MM月DD日
 const y = date.getFullYear();
@@ -39,7 +41,21 @@ const xIcon = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><
   <article data-pagefind-body>
     <header class="post-header container">
       <h1 class="post-title-main">{title}</h1>
-      <p class="post-date-main">{dateLabel}</p>
+      <p class="post-date-main">
+        {dateLabel}
+        {editSlug && (
+          <a class="post-edit-link" href={`/admin/?edit=${encodeURIComponent(editSlug)}`} hidden data-pagefind-ignore>✎ 編集</a>
+        )}
+      </p>
+      <!-- /admin/ でGitHubトークンを保存済みのブラウザ（＝管理者本人）でだけ編集リンクを表示する。
+           リンク先の/admin/自体がトークン無しでは何もできないので、表示制御は利便性のためだけのもの -->
+      <script is:inline>
+        try {
+          var adminSettings = JSON.parse(localStorage.getItem('sin1studio_admin_settings_v1') || 'null');
+          var editLink = document.querySelector('.post-edit-link');
+          if (editLink && adminSettings && adminSettings.pat) editLink.hidden = false;
+        } catch (e) {}
+      </script>
       <CategoryTags categories={categories} class="post-categories-main" />
     </header>
     <div class="post-body container">

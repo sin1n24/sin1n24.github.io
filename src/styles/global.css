@@ -1104,6 +1104,20 @@ section + section {
   font-size: 0.9rem;
 }
 
+/* 管理者のブラウザでのみ表示される編集リンク（BlogPost.astroのインラインscriptがhiddenを外す） */
+.post-edit-link {
+  margin-left: 0.6rem;
+  padding: 0.15rem 0.6rem;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.post-edit-link[hidden] {
+  display: none;
+}
+
 .post-header .category-tags {
   margin-top: 0.9rem;
   justify-content: center;

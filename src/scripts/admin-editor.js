@@ -1282,16 +1282,30 @@ function wireArticleList() {
   });
 }
 
+// 記事ページの「編集」リンク（/admin/?edit=<ファイル名>）から来たとき、その記事を直接開く。
+async function openArticleFromQuery() {
+  const slug = new URLSearchParams(location.search).get('edit');
+  if (!slug || !/^[\w.-]+$/.test(slug)) return;
+  // 以降のリロードや別記事への切り替え後に同じ記事を読み直さないよう、クエリは消しておく
+  history.replaceState(null, '', location.pathname);
+  switchMode('edit');
+  if (!requireAuth()) return;
+  await selectArticleForEdit({ path: `${BLOG_DIR}/${slug}.md`, name: `${slug}.md` });
+  if (state.editingPath) document.getElementById('field-body').focus();
+}
+
 function init() {
   wireSettings();
   rememberCategories([]);
 
   const autosave = loadAutosave();
   const hasAutosaveContent = autosave && (autosave.title || (autosave.body || '').trim());
+  let restored = false;
   if (hasAutosaveContent) {
     const savedAt = new Date(autosave.savedAt || Date.now()).toLocaleString('ja-JP');
     if (confirm(`自動保存されたデータ（${savedAt}時点）があります。復元しますか？`)) {
       restoreAutosave(autosave);
+      restored = true;
     } else {
       clearAutosave();
       switchMode('new');
@@ -1299,6 +1313,7 @@ function init() {
   } else {
     switchMode('new');
   }
+  if (!restored) openArticleFromQuery();
 
   document.getElementById('tab-new').addEventListener('click', () => {
     if (!confirmDiscardIfDirty()) return;

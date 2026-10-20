@@ -23,6 +23,8 @@ const state = {
   mode: 'new',
   editingPath: null,
   editingSha: null,
+  // 編集画面に入力欄の無い frontmatter 行（image / relatedProducts など）。保存時にそのまま書き戻す
+  editingExtra: [],
   articles: [],
   categories: new Set(DEFAULT_CATEGORIES),
   // このセッション中にアップロードした画像（{ path, filename, url, sha }）。
@@ -95,6 +97,7 @@ function restoreAutosave(autosave) {
   state.mode = autosave.mode === 'edit' ? 'edit' : 'new';
   state.editingPath = autosave.editingPath || null;
   state.editingSha = autosave.editingSha || null;
+  state.editingExtra = autosave.extra || [];
   updateModeUI(state.mode);
   document.getElementById('field-title').value = autosave.title || '';
   document.getElementById('field-date').value = autosave.date || todayStr();
@@ -267,7 +270,7 @@ function unquoteYaml(str) {
   return s;
 }
 
-function buildFrontmatter({ title, date, categories, hatenaUrl, draft }) {
+function buildFrontmatter({ title, date, categories, hatenaUrl, draft, extra }) {
   const lines = ['---'];
   lines.push(`title: "${escapeYamlString(title)}"`);
   lines.push(`date: ${date}`);
@@ -281,6 +284,7 @@ function buildFrontmatter({ title, date, categories, hatenaUrl, draft }) {
   if (draft) {
     lines.push('draft: true');
   }
+  (extra || []).forEach((l) => lines.push(l));
   lines.push('---');
   return lines.join('\n');
 }
@@ -294,7 +298,7 @@ function buildMarkdownFile(data) {
 function parseFrontmatter(raw) {
   const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
   if (!match) {
-    return { title: '', date: '', categories: [], hatenaUrl: '', body: raw };
+    return { title: '', date: '', categories: [], hatenaUrl: '', extra: [], body: raw };
   }
   const fmText = match[1];
   const body = match[2].replace(/^\n+/, '');
@@ -304,6 +308,14 @@ function parseFrontmatter(raw) {
   const categoriesMatch = fmText.match(/^categories:\s*\[(.*)\]\s*$/m);
   const hatenaMatch = fmText.match(/^hatena_url:\s*(.*)$/m);
   const draftMatch = fmText.match(/^draft:\s*(true|false)\s*$/m);
+  // 入力欄の無い項目は行ごと保持する（以前は保存のたびに image / relatedProducts が消えていた）
+  const KNOWN = /^(title|date|categories|hatena_url|draft):/;
+  const extra = [];
+  fmText.split(/\r?\n/).forEach((l) => {
+    if (!l.trim()) return;
+    if (/^\s/.test(l) && extra.length) extra.push(l);   // 複数行の値の続き
+    else if (!KNOWN.test(l) && !/^\s/.test(l)) extra.push(l);
+  });
 
   return {
     title: titleMatch ? unquoteYaml(titleMatch[1]) : '',
@@ -316,6 +328,7 @@ function parseFrontmatter(raw) {
       : [],
     hatenaUrl: hatenaMatch ? unquoteYaml(hatenaMatch[1]) : '',
     draft: draftMatch ? draftMatch[1] === 'true' : false,
+    extra,
     body,
   };
 }
@@ -513,6 +526,7 @@ async function selectArticleForEdit(article) {
     const fm = parseFrontmatter(raw);
     state.editingPath = article.path;
     state.editingSha = data.sha;
+    state.editingExtra = fm.extra;
     document.getElementById('field-title').value = fm.title;
     document.getElementById('field-date').value = fm.date;
     document.getElementById('field-slug').value = article.name.replace(/\.md$/, '');
@@ -994,7 +1008,8 @@ function collectFormData() {
   const hatenaUrl = document.getElementById('field-hatena').value.trim();
   const draft = document.getElementById('field-draft').checked;
   const body = document.getElementById('field-body').value;
-  return { title, date, slug, categories, hatenaUrl, draft, body };
+  const extra = state.editingPath ? state.editingExtra : [];
+  return { title, date, slug, categories, hatenaUrl, draft, extra, body };
 }
 
 function validateForm(data) {
@@ -1121,6 +1136,7 @@ async function handleCheckSlug() {
 function resetFormForNew() {
   state.editingPath = null;
   state.editingSha = null;
+  state.editingExtra = [];
   slugManuallyEdited = false;
   document.getElementById('field-title').value = '';
   document.getElementById('field-date').value = todayStr();

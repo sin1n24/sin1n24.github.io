@@ -2,6 +2,7 @@
 title: "Servalアンケートありがとうございました！"
 date: 2026-10-13
 categories: ["かわロボ", "技術"]
+relatedProducts: ["B0H1M3D1BX", "B07H97RWH8", "B0F8BV5Z31"]
 ---
 
 [前回の記事](/blog/2026-10-04-serval-khk-cup/)でお願いしたServal（自作のトーナメント管理システム）のアンケートを締め切りました。ご回答頂いた皆様、ありがとうございました！

@@ -2,9 +2,15 @@
 title: "ThumbSorter for Autodesk® Fusion® の使い方 ― サムネイルを見ながらデータを仕分けるアドイン"
 date: 2026-10-20
 categories: ["技術"]
+image: "/img/blog/thumbsorter-main.webp"
+relatedProducts: ["4800713463", "4297147688", "B0CRYJBKQQ", "B0861QM12F"]
 ---
 
 Autodesk Fusion に溜まったデザインを、サムネイルを見ながら仕分けるアドイン「ThumbSorter」を作りました！この記事はその取扱説明書です。
+
+GitHub で公開しています（MIT ライセンス、無料）。導入方法は[下の「導入」](#導入)へ。
+
+**GitHub：[sin1n24/FusionSorter](https://github.com/sin1n24/FusionSorter)**
 
 ![ThumbSorter の画面。左に仕分け後のフォルダ一覧、右にサムネイル付きのカードが並ぶ](/img/blog/thumbsorter-main.webp)
 
@@ -27,6 +33,8 @@ Fusion の契約更新の際にファイルをいったん保存と整理した�
 **ファイルを削除する機能はありません。** 画面で「削除」にしたものは、最上位の `DEL` プロジェクトへ移動するだけです。中身を確かめてから、ご自身で消してください（怖いので）。
 
 ## 導入
+
+[GitHub の sin1n24/FusionSorter](https://github.com/sin1n24/FusionSorter) を開き、緑の「Code」ボタン →「Download ZIP」でダウンロードして展開します。フォルダ名が `FusionSorter-main` になっていたら `FusionSorter` に直してください。
 
 1. ThumbSorter のフォルダを、Fusion のアドインフォルダに置きます。
    - Windows：`%APPDATA%\Autodesk\Autodesk Fusion 360\API\AddIns\`
@@ -69,7 +77,11 @@ Fusion の契約更新の際にファイルをいったん保存と整理した�
 
 **同じハブの中で移動**
 
-「移動内容を確認」で一覧を見てから、「移動を実行」→「本当に〇件を移動する」と2回押します。移動の記録が残り、「直前の移動を元に戻す」で戻せます。
+「移動内容を確認」で一覧を見てから、「移動を実行」→「本当に〇件を移動する」と2回押します。
+
+仕分けただけでは画面上の予定なので、**「実行」するまでハブのファイルは動きません**。まだ移動していない予定があるあいだは、画面の右上に「まだ移動していません」と警告が出ます（押すと「実行」タブへ）。
+
+移動の記録が残り、「直前の移動を元に戻す」で戻せます。
 
 **パソコンに全部ダウンロード**
 

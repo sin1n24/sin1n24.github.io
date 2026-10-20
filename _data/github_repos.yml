@@ -22,6 +22,14 @@
   tags:
   - HTML
   updated_at: '2026-07-23'
+- title: FusionSorter
+  url: https://sin1.studio/blog/thumbsorter/
+  github_url: https://github.com/sin1n24/FusionSorter
+  image: https://opengraph.githubassets.com/1/sin1n24/FusionSorter
+  description: ThumbSorter for Autodesk® Fusion® — ハブのデザインをサムネイルを見ながら仕分けるアドイン
+  tags:
+  - Python
+  updated_at: '2026-10-20'
 - title: gas-stock-logger
   url: https://github.com/sin1n24/gas-stock-logger
   github_url: https://github.com/sin1n24/gas-stock-logger

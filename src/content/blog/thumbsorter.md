@@ -6,6 +6,13 @@ image: "/img/blog/thumbsorter-main.webp"
 relatedProducts: ["4800713463", "4297147688", "B0CRYJBKQQ", "B0861QM12F"]
 ---
 
+<p><strong style="color:#e11d48">【2026/10/21 更新】英語・中国語（簡体字）に対応しました！</strong></p>
+
+- 画面の言語は、Fusion の表示言語に合わせて自動で切り替わります。画面右上のプルダウンで「Auto / 日本語 / English / 中文」から選ぶこともできます。
+- 仕組みとしては、Fusion の API（外部から Fusion を操作するための公開された窓口）で「基本設定 → 一般 → ユーザー言語」の値（`generalPreferences.userLanguage`）を読み、日本語なら日本語、中国語なら中国語、それ以外は英語にしています。読めなかったときは、パソコンの言語設定で決めます。
+- プルダウンで選んだ言語は `ドキュメント\FusionSorter\settings.json` に保存され、次回もそのまま使われます。
+- 英語・中国語の「使い方」リンクは、GitHub の README（英語版）に飛びます。中国語の訳は Claude Code と作ったもので、ネイティブの確認はまだなので、おかしなところがあれば教えて頂けると助かります。
+
 Autodesk Fusion に溜まったデザインを、サムネイルを見ながら仕分けるアドイン「ThumbSorter」を作りました！この記事はその取扱説明書です。
 
 GitHub で公開しています（MIT ライセンス、無料）。導入方法は[下の「導入」](#導入)へ。

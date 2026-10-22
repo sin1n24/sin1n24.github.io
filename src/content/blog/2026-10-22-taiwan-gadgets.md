@@ -63,6 +63,36 @@ Even G2で一番使ったのは、周りの音声を翻訳して字幕として�
 
 前日に慌てて買った割には、2つとも旅行で十分活躍してくれました。Even G2は帰宅してすぐに開発環境も作ったので、自作アプリでの活用も追々書きたいと思います。
 
+## LT資料
+
+この内容は「【Lenovo Pro Community】ガジェット研究室＠秋葉原 #10」でLTとして発表しました。スライドは横にスクロールして見られます（全19枚。動画は会場のみの上映のため省略しています）。
+
+<div style="display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px">
+<img src="/img/blog/gadget-lab-10/p01.webp" alt="LT資料 1ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p02.webp" alt="LT資料 2ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p03.webp" alt="LT資料 3ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p04.webp" alt="LT資料 4ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p05.webp" alt="LT資料 5ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p06.webp" alt="LT資料 6ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p07.webp" alt="LT資料 7ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p08.webp" alt="LT資料 8ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p09.webp" alt="LT資料 9ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p10.webp" alt="LT資料 10ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p11.webp" alt="LT資料 11ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p12.webp" alt="LT資料 12ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p13.webp" alt="LT資料 13ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p14.webp" alt="LT資料 14ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p15.webp" alt="LT資料 15ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p16.webp" alt="LT資料 16ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p17.webp" alt="LT資料 17ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p18.webp" alt="LT資料 18ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p19.webp" alt="LT資料 19ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+</div>
+
+[PDFでダウンロード](/slides/2026-10-22-gadget-lab-10.pdf)
+
+LTの後半で話したAI秘書の話は「[AI秘書xangiで日用品の在庫管理をしてみる（予定）](/blog/2026-10-22-xangi-home-stock/)」にまとめています。
+
 <a class="link-card" href="https://www.amazon.co.jp/dp/B0D3WLV9Q1/?tag=sin1n24-22" target="_blank" rel="noopener noreferrer sponsored"><img class="link-card-image" src="https://m.media-amazon.com/images/I/71LY8Or+yuL._AC_UL320_.jpg" alt="" loading="lazy" /><span class="link-card-body"><span class="link-card-title">Insta360 GO 3S - 4K小型ウェアラブルVlogビデオカメラ、ハンズフリーPOV、どこでもマウント、手ブレ補正</span><span class="link-card-domain">amazon.co.jp</span></span></a>
 
 <a class="link-card" href="https://www.amazon.co.jp/dp/B0HHYRLG3P/?tag=sin1n24-22" target="_blank" rel="noopener noreferrer sponsored"><img class="link-card-image" src="https://m.media-amazon.com/images/I/31gbTWRxhOL._AC_UL320_.jpg" alt="" loading="lazy" /><span class="link-card-body"><span class="link-card-title">Even G2 A グレー 度なし 最新 AI スマートグラス リアルタイム翻訳 字幕 テレプロンプター ナビ機能搭載</span><span class="link-card-domain">amazon.co.jp</span></span></a>

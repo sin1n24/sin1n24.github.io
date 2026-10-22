@@ -70,4 +70,34 @@ Discordだけだと通知が流れてしまうので、キッチンの壁で一�
 
 まだ構築中ですが、「家のことを覚えていて、必要な時だけ声をかけてくれる秘書」ができたらかなり便利そうです。実際に運用してみて、どれくらい手間が減ったかはまた報告したいと思います。
 
+## LT資料
+
+この内容は「【Lenovo Pro Community】ガジェット研究室＠秋葉原 #10」でLTとして発表しました。スライドは横にスクロールして見られます（全19枚。動画は会場のみの上映のため省略しています）。
+
+<div style="display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px">
+<img src="/img/blog/gadget-lab-10/p01.webp" alt="LT資料 1ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p02.webp" alt="LT資料 2ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p03.webp" alt="LT資料 3ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p04.webp" alt="LT資料 4ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p05.webp" alt="LT資料 5ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p06.webp" alt="LT資料 6ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p07.webp" alt="LT資料 7ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p08.webp" alt="LT資料 8ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p09.webp" alt="LT資料 9ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p10.webp" alt="LT資料 10ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p11.webp" alt="LT資料 11ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p12.webp" alt="LT資料 12ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p13.webp" alt="LT資料 13ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p14.webp" alt="LT資料 14ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p15.webp" alt="LT資料 15ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p16.webp" alt="LT資料 16ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p17.webp" alt="LT資料 17ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p18.webp" alt="LT資料 18ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+<img src="/img/blog/gadget-lab-10/p19.webp" alt="LT資料 19ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />
+</div>
+
+[PDFでダウンロード](/slides/2026-10-22-gadget-lab-10.pdf)
+
+LTの前半で話したガジェットの話は「[台湾旅行の前日にGO 3SとEven G2を買って、旅行中に使ってみました](/blog/2026-10-22-taiwan-gadgets/)」にまとめています。
+
 <a class="link-card" href="https://www.amazon.co.jp/dp/B0GRXZJT9M/?tag=sin1n24-22" target="_blank" rel="noopener noreferrer sponsored"><img class="link-card-image" src="https://m.media-amazon.com/images/I/61NNJ+GVMxL._AC_UL320_.jpg" alt="" loading="lazy" /><span class="link-card-body"><span class="link-card-title">M5 Stack 公式 Tab5 IoTコントローラー 開発キット（ESP32-P4） バッテリーなし</span><span class="link-card-domain">amazon.co.jp</span></span></a>

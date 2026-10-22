@@ -77,7 +77,7 @@ Even G2で一番使ったのは、周りの音声を翻訳して字幕として�
 
 ## LT資料
 
-この内容は「【Lenovo Pro Community】ガジェット研究室＠秋葉原 #10」でLTとして発表しました。スライドは横にスクロールして見られます（全19枚。動画は会場のみの上映のため省略しています）。
+この内容は「[【Lenovo Pro Community】ガジェット研究室＠秋葉原 #10](https://lenovopro-comunity-gaget-lab.connpass.com/event/403148/)」でLTとして発表しました。スライドは横にスクロールして見られます（全19枚。動画は会場のみの上映のため省略しています）。
 
 <div style="display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px">
 <img src="/img/blog/gadget-lab-10/p01.webp" alt="LT資料 1ページ目" loading="lazy" style="flex:0 0 100%;width:100%;aspect-ratio:16/9;scroll-snap-align:start;border-radius:8px;border:1px solid #ddd" />

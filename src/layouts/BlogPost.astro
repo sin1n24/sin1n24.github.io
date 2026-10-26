@@ -44,16 +44,21 @@ const xIcon = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><
       <p class="post-date-main">
         {dateLabel}
         {editSlug && (
-          <a class="post-edit-link" href={`/admin/?edit=${encodeURIComponent(editSlug)}`} hidden data-pagefind-ignore>✎ 編集</a>
+          <a class="post-edit-link" data-edit-href={`/admin/?edit=${encodeURIComponent(editSlug)}`} hidden data-pagefind-ignore>✎ 編集</a>
         )}
       </p>
       <!-- /admin/ でGitHubトークンを保存済みのブラウザ（＝管理者本人）でだけ編集リンクを表示する。
-           リンク先の/admin/自体がトークン無しでは何もできないので、表示制御は利便性のためだけのもの -->
+           リンク先の/admin/自体がトークン無しでは何もできないので、表示制御は利便性のためだけのもの。
+           hrefは静的HTMLに出さずここで付与する（hiddenでもhrefがあるとGooglebotが/admin/?edit=を辿り
+           「robots.txtによりブロックされました」に計上されるため） -->
       <script is:inline>
         try {
           var adminSettings = JSON.parse(localStorage.getItem('sin1studio_admin_settings_v1') || 'null');
           var editLink = document.querySelector('.post-edit-link');
-          if (editLink && adminSettings && adminSettings.pat) editLink.hidden = false;
+          if (editLink && adminSettings && adminSettings.pat) {
+            editLink.href = editLink.dataset.editHref;
+            editLink.hidden = false;
+          }
         } catch (e) {}
       </script>
       <CategoryTags categories={categories} class="post-categories-main" />

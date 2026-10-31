@@ -86,3 +86,12 @@
   tags:
   - JavaScript
   updated_at: '2026-09-24'
+- title: pcb-mill-mach3
+  url: https://github.com/sin1n24/pcb-mill-mach3
+  github_url: https://github.com/sin1n24/pcb-mill-mach3
+  image: https://opengraph.githubassets.com/1/sin1n24/pcb-mill-mach3
+  description: Know-how and tools for milling single-sided PCBs with a small CNC and
+    Mach3 (isolation milling, .ncd generation and pre-cut checks)
+  tags:
+  - Python
+  updated_at: '2026-10-31'

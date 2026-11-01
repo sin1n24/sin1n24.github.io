@@ -3,7 +3,7 @@ title: "かわロボAdventカレンダー2026告知！"
 date: 2026-11-01
 categories: ["かわロボ", "ミニかわロボ", "お知らせ"]
 image: "/img/blog/kawarobo-advent-calendar-2025.webp"
-relatedProducts: ["SS-9521", "SS-11122", "B0CRYJBKQQ", "B0G8KLZ7JF", "4297147688"]
+relatedProducts: ["SS-9521", "B07FRPXV3N", "B0GGSK4J2N", "4295025488", "B0HKVFBHTJ"]
 ---
 
 今年も「**かわロボAdventカレンダー**」のエントリーが始まりました！

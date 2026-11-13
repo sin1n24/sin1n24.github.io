@@ -103,6 +103,14 @@
   description: "生まれ年を入力すると、同じ年に誕生した実在のロボットや架空のロボットを表示する診断サイト。"
   tags: ["Vanilla JS", "Web"]
 
+- title: "フィジカル投扇興"
+  category: software
+  url: "/blog/2026-11-13-tosenkyo/"
+  image: "/img/16_Tosenkyo.png"
+  description: "江戸の座敷遊び「投扇興」を物理演算で遊べるスマホ向け3Dゲーム。扇をふわりと投じて蝶を落とし、倒れた形に源氏物語の銘と点がつく。"
+  tags: ["Three.js", "cannon-es", "Game"]
+  try_url: "https://sin1.studio/tosenkyo/"
+
 - title: "かわロボアドベントカレンダー"
   category: planning
   url: "/blog/2025-12-25-233111/"

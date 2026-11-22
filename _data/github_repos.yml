@@ -47,14 +47,14 @@
   tags:
   - JavaScript
   updated_at: '2026-11-13'
-- title: DioramaTownTycoon
-  url: https://sin1.studio/DioramaTownTycoon/
-  github_url: https://github.com/sin1n24/DioramaTownTycoon
-  image: https://opengraph.githubassets.com/1/sin1n24/DioramaTownTycoon
+- title: diorama
+  url: http://sin1.studio/diorama/
+  github_url: https://github.com/sin1n24/diorama
+  image: https://opengraph.githubassets.com/1/sin1n24/diorama
   description: 中身は3D、見た目はドット絵。浮島の街づくりインクリメンタル・タイクーン（ブラウザで遊べる）
   tags:
-  - HTML
-  updated_at: '2026-11-21'
+  - JavaScript
+  updated_at: '2026-11-22'
 - title: gas-stock-logger
   url: https://github.com/sin1n24/gas-stock-logger
   github_url: https://github.com/sin1n24/gas-stock-logger
